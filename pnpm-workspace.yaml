@@ -1,0 +1,9 @@
+packages:
+  # Frontend applications
+  - 'apps/frontend'
+  
+  # Backend microservices
+  - 'apps/backend/*'
+  
+  # Shared packages
+  - 'packages/*'

@@ -1,0 +1,142 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  phone     String?
+  password  String
+  role      String   @default("USER") // USER, ADMIN, MODERATOR
+  isActive  Boolean  @default(true)
+  isVerified Boolean @default(false)
+  
+  // Profile information
+  avatar    String?
+  bio       String?
+  location  String?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  sessions     Session[]
+  vehicles     Vehicle[]
+  bids         Bid[]
+  auctions     Auction[]
+  notifications Notification[]
+  
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  refreshToken String?  @unique
+  expiresAt    DateTime
+  isActive     Boolean  @default(true)
+  userAgent    String?
+  ipAddress    String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("sessions")
+}
+
+model Vehicle {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  brand        String
+  model        String
+  year         Int
+  mileage      Int?
+  fuelType     String   // BENZIN, DIZEL, HIBRIT, ELEKTRIK, LPG, CNG
+  transmission String   // MANUEL, OTOMATIK, YARIMOTOMATIK, CVT
+  condition    String   // EXCELLENT, VERY_GOOD, GOOD, FAIR, POOR
+  status       String   @default("DRAFT") // DRAFT, PENDING_APPROVAL, APPROVED, REJECTED, ACTIVE, SOLD, ARCHIVED
+  images       String   // JSON string of image URLs
+  reservePrice Float?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  userId   String
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  auctions Auction[]
+
+  @@map("vehicles")
+}
+
+model Auction {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  startPrice   Float
+  reservePrice Float?
+  currentPrice Float    @default(0)
+  startTime    DateTime
+  endTime      DateTime
+  status       String   @default("SCHEDULED") // SCHEDULED, ACTIVE, ENDED, CANCELLED, COMPLETED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bids      Bid[]
+
+  @@map("auctions")
+}
+
+model Bid {
+  id        String @id @default(cuid())
+  auctionId String
+  bidderId  String
+  amount    Decimal
+  isActive  Boolean @default(true)
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  auction Auction @relation(fields: [auctionId], references: [id])
+  bidder  User    @relation(fields: [bidderId], references: [id])
+  
+  @@map("bids")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  type      String   // BID_PLACED, BID_OUTBID, AUCTION_WON, AUCTION_LOST, AUCTION_ENDING, VEHICLE_APPROVED, VEHICLE_REJECTED, SYSTEM
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+// Note: SQLite doesn't support enums, so we use String fields with comments indicating valid values

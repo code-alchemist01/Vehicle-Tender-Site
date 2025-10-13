@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  vehicles Vehicle[]
+
+  @@map("users")
+}
+
+model Vehicle {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  brand        String
+  model        String
+  year         Int
+  mileage      Int?
+  fuelType     String   // BENZIN, DIZEL, HIBRIT, ELEKTRIK, LPG, CNG
+  transmission String   // MANUEL, OTOMATIK, YARIMOTOMATIK, CVT
+  condition    String   // EXCELLENT, VERY_GOOD, GOOD, FAIR, POOR
+  status       String   @default("DRAFT") // DRAFT, PENDING_APPROVAL, APPROVED, REJECTED, ACTIVE, SOLD, ARCHIVED
+  images       String   // JSON string of image URLs
+  reservePrice Float?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  userId   String
+  user     User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("vehicles")
+}
+
+model Category {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String?
+  slug        String @unique
+  isActive    Boolean @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("categories")
+}

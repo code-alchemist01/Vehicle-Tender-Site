@@ -1,0 +1,269 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: vehicle-auction-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vehicle_auction
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infrastructure/docker/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
+    networks:
+      - vehicle-auction-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: vehicle-auction-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@vehicleauction.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: vehicle-auction-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - vehicle-auction-network
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: vehicle-auction-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infrastructure/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./infrastructure/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      - api-gateway
+      - frontend
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: .
+      dockerfile: apps/backend/api-gateway/Dockerfile
+    container_name: vehicle-auction-api-gateway
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - REDIS_URL=redis://redis:6379
+      - AUTH_SERVICE_URL=http://auth-service:4001
+      - VEHICLE_SERVICE_URL=http://vehicle-service:4002
+      - AUCTION_SERVICE_URL=http://auction-service:4003
+      - BID_SERVICE_URL=http://bid-service:4004
+      - PAYMENT_SERVICE_URL=http://payment-service:4005
+      - NOTIFICATION_SERVICE_URL=http://notification-service:4006
+    ports:
+      - "4000:4000"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+  # Auth Service
+  auth-service:
+    build:
+      context: .
+      dockerfile: apps/backend/auth-service/Dockerfile
+    container_name: vehicle-auction-auth-service
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=4001
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/auth_db
+      - JWT_SECRET=your-super-secret-jwt-key-here
+      - JWT_EXPIRES_IN=7d
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "4001:4001"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Vehicle Service
+  vehicle-service:
+    build:
+      context: .
+      dockerfile: apps/backend/vehicle-service/Dockerfile
+    container_name: vehicle-auction-vehicle-service
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=4002
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_db
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "4002:4002"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Auction Service
+  auction-service:
+    build:
+      context: .
+      dockerfile: apps/backend/auction-service/Dockerfile
+    container_name: vehicle-auction-auction-service
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=4003
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/auction_db
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "4003:4003"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Bid Service
+  bid-service:
+    build:
+      context: .
+      dockerfile: apps/backend/bid-service/Dockerfile
+    container_name: vehicle-auction-bid-service
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=4004
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/bid_db
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "4004:4004"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Payment Service
+  payment-service:
+    build:
+      context: .
+      dockerfile: apps/backend/payment-service/Dockerfile
+    container_name: vehicle-auction-payment-service
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=4005
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/payment_db
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "4005:4005"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Notification Service
+  notification-service:
+    build:
+      context: .
+      dockerfile: apps/backend/notification-service/Dockerfile
+    container_name: vehicle-auction-notification-service
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=4006
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/notification_db
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "4006:4006"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile
+    container_name: vehicle-auction-frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - NEXT_PUBLIC_WS_URL=ws://localhost:4000
+    ports:
+      - "3000:3000"
+    networks:
+      - vehicle-auction-network
+    depends_on:
+      - api-gateway
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  vehicle-auction-network:
+    driver: bridge
