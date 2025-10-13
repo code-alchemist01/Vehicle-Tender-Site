@@ -16,6 +16,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/vehicles/*": ["src/vehicles/*"],
+      "@/categories/*": ["src/categories/*"],
+      "@/auctions/*": ["src/auctions/*"],
+      "@/bids/*": ["src/bids/*"],
+      "@/common/*": ["src/common/*"],
+      "@/database/*": ["src/database/*"]
+    }
   }
 }
