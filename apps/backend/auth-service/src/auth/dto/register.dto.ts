@@ -1,4 +1,4 @@
-import { IsEmail, IsString, MinLength, IsOptional } from 'class-validator';
+import { IsEmail, IsString, MinLength, IsOptional, Matches } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class RegisterDto {
@@ -32,11 +32,14 @@ export class RegisterDto {
   phone?: string;
 
   @ApiProperty({
-    description: 'Kullanıcının şifresi (minimum 6 karakter)',
-    example: 'password123',
-    minLength: 6,
+    description: 'Kullanıcının şifresi (minimum 8 karakter, en az 1 büyük harf, 1 küçük harf ve 1 rakam)',
+    example: 'Password123',
+    minLength: 8,
   })
   @IsString({ message: 'Şifre alanı metin olmalıdır' })
-  @MinLength(6, { message: 'Şifre en az 6 karakter olmalıdır' })
+  @MinLength(8, { message: 'Şifre en az 8 karakter olmalıdır' })
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/, {
+    message: 'Şifre en az bir büyük harf, bir küçük harf ve bir rakam içermelidir',
+  })
   password: string;
 }

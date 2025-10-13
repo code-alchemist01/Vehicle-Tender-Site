@@ -10,6 +10,8 @@ import {
   Min,
   Max,
   MaxLength,
+  IsUrl,
+  Matches,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { FuelType, TransmissionType, VehicleCondition, VehicleStatus } from '@prisma/client';
@@ -105,7 +107,7 @@ export class CreateVehicleDto {
   })
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
+  @IsUrl({}, { each: true })
   images?: string[] = [];
 
   @ApiPropertyOptional({
@@ -122,74 +124,12 @@ export class CreateVehicleDto {
   engineSize?: number;
 
   @ApiPropertyOptional({
-    description: 'Vehicle horsepower',
-    example: 150,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Type(() => Number)
-  @Min(0)
-  horsePower?: number;
-
-  @ApiPropertyOptional({
-    description: 'Vehicle features',
-    example: ['Air Conditioning', 'GPS Navigation', 'Bluetooth'],
-    type: [String],
-  })
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  features?: string[] = [];
-
-  @ApiPropertyOptional({
-    description: 'Starting price for auction',
-    example: 15000,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Type(() => Number)
-  @IsPositive()
-  startingPrice?: number;
-
-  @ApiPropertyOptional({
-    description: 'Current price in auction',
-    example: 18000,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Type(() => Number)
-  @IsPositive()
-  currentPrice?: number;
-
-  @ApiPropertyOptional({
-    description: 'Buy now price',
-    example: 25000,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Type(() => Number)
-  @IsPositive()
-  buyNowPrice?: number;
-
-  @ApiPropertyOptional({
-    description: 'Whether the vehicle is active',
-    example: true,
-    default: true,
-  })
-  @IsOptional()
-  isActive?: boolean = true;
-
-  @ApiPropertyOptional({
     description: 'Vehicle color',
     example: 'Blue',
   })
   @IsOptional()
   @IsString()
-  @MaxLength(30)
+  @MaxLength(50)
   color?: string;
 
   @ApiPropertyOptional({
@@ -199,6 +139,9 @@ export class CreateVehicleDto {
   @IsOptional()
   @IsString()
   @MaxLength(17)
+  @Matches(/^[A-HJ-NPR-Z0-9]{17}$/, {
+    message: 'VIN must be exactly 17 characters and contain only valid VIN characters',
+  })
   vin?: string;
 
   @ApiPropertyOptional({
@@ -216,30 +159,10 @@ export class CreateVehicleDto {
   })
   @IsOptional()
   @IsString()
-  @MaxLength(100)
+  @MaxLength(200)
   location?: string;
 
-  @ApiPropertyOptional({
-    description: 'Estimated vehicle value',
-    example: 25000,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Type(() => Number)
-  @IsPositive()
-  estimatedValue?: number;
 
-  @ApiPropertyOptional({
-    description: 'Reserve price for auction',
-    example: 20000,
-    minimum: 0,
-  })
-  @IsOptional()
-  @IsNumber()
-  @Type(() => Number)
-  @IsPositive()
-  reservePrice?: number;
 
   @ApiProperty({
     description: 'Category ID',

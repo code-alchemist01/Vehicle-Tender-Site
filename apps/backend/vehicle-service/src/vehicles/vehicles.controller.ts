@@ -20,6 +20,7 @@ import { ThrottlerGuard } from '@nestjs/throttler';
 import { VehiclesService } from './vehicles.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
+import { VehicleFilterDto } from './dto/vehicle-filter.dto';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { ApiResponseDto } from '@/common/dto/response.dto';
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
@@ -47,7 +48,7 @@ export class VehiclesController {
     @Body() createVehicleDto: CreateVehicleDto,
     @CurrentUser() user: any,
   ) {
-    const vehicle = await this.vehiclesService.create(createVehicleDto, user.id);
+    const vehicle = await this.vehiclesService.create(createVehicleDto, user.sub);
     return new ApiResponseDto('Vehicle created successfully', vehicle);
   }
 
@@ -62,52 +63,43 @@ export class VehiclesController {
   @ApiQuery({ name: 'yearTo', required: false, type: Number })
   @ApiQuery({ name: 'mileageFrom', required: false, type: Number })
   @ApiQuery({ name: 'mileageTo', required: false, type: Number })
-  @ApiQuery({ name: 'priceFrom', required: false, type: Number })
-  @ApiQuery({ name: 'priceTo', required: false, type: Number })
-  @ApiQuery({ name: 'fuelType', required: false, enum: FuelType })
-  @ApiQuery({ name: 'transmission', required: false, enum: TransmissionType })
-  @ApiQuery({ name: 'condition', required: false, enum: VehicleCondition })
+  @ApiQuery({ name: 'fuelType', required: false, enum: ['GASOLINE', 'DIESEL', 'ELECTRIC', 'HYBRID'] })
+  @ApiQuery({ name: 'transmission', required: false, enum: ['MANUAL', 'AUTOMATIC', 'CVT'] })
+  @ApiQuery({ name: 'condition', required: false, enum: ['EXCELLENT', 'GOOD', 'FAIR', 'POOR'] })
   @ApiQuery({ name: 'categoryId', required: false, type: String })
   @ApiQuery({ name: 'location', required: false, type: String })
+  @ApiQuery({ name: 'status', required: false, enum: ['DRAFT', 'ACTIVE', 'SOLD', 'INACTIVE'] })
   @ApiResponse({
     status: 200,
     description: 'Vehicles retrieved successfully',
     type: ApiResponseDto,
   })
   async findAll(
-    @Query() paginationDto: PaginationDto,
-    @Query('make') make?: string,
-    @Query('model') model?: string,
-    @Query('yearFrom') yearFrom?: number,
-    @Query('yearTo') yearTo?: number,
-    @Query('mileageFrom') mileageFrom?: number,
-    @Query('mileageTo') mileageTo?: number,
-    @Query('priceFrom') priceFrom?: number,
-    @Query('priceTo') priceTo?: number,
-    @Query('fuelType') fuelType?: FuelType,
-    @Query('transmission') transmission?: TransmissionType,
-    @Query('condition') condition?: VehicleCondition,
-    @Query('categoryId') categoryId?: string,
-    @Query('location') location?: string,
+    @Query() filters: VehicleFilterDto,
   ) {
-    const filters = {
-      make,
-      model,
-      yearFrom,
-      yearTo,
-      mileageFrom,
-      mileageTo,
-      priceFrom,
-      priceTo,
-      fuelType,
-      transmission,
-      condition,
-      categoryId,
-      location,
-    };
-
-    const result = await this.vehiclesService.findAll(paginationDto, filters);
+    const result = await this.vehiclesService.findAll(filters);
     return new ApiResponseDto('Vehicles retrieved successfully', result);
+  }
+
+  @Get('search')
+  @Public()
+  @ApiOperation({ summary: 'Search vehicles by query' })
+  @ApiQuery({ name: 'q', required: true, type: String, description: 'Search query' })
+  @ApiQuery({ name: 'page', required: false, type: Number })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
+  @ApiResponse({
+    status: 200,
+    description: 'Vehicles search results',
+    type: ApiResponseDto,
+  })
+  async searchVehicles(
+    @Query('q') query: string,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+  ) {
+    const paginationDto = { page: page || 1, limit: limit || 10 };
+    const result = await this.vehiclesService.search(query, paginationDto);
+    return new ApiResponseDto('Vehicles search results', result);
   }
 
   @Get('my-vehicles')
@@ -125,7 +117,7 @@ export class VehiclesController {
     @Query() paginationDto: PaginationDto,
     @CurrentUser() user: any,
   ) {
-    const result = await this.vehiclesService.findByUser(user.id, paginationDto);
+    const result = await this.vehiclesService.findByUser(user.sub, paginationDto);
     return new ApiResponseDto('User vehicles retrieved successfully', result);
   }
 

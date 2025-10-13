@@ -6,6 +6,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { DatabaseModule } from '@/database/database.module';
 import { VehiclesModule } from '@/vehicles/vehicles.module';
 import { CategoriesModule } from '@/categories/categories.module';
+import { AuctionsModule } from '@/auctions/auctions.module';
+import { BidsModule } from '@/bids/bids.module';
+import { HealthModule } from '@/health/health.module';
 
 import { JwtStrategy } from '@/common/strategies/jwt.strategy';
 
@@ -37,6 +40,9 @@ import { JwtStrategy } from '@/common/strategies/jwt.strategy';
     // Feature modules
     VehiclesModule,
     CategoriesModule,
+    AuctionsModule,
+    BidsModule,
+    HealthModule,
   ],
   providers: [JwtStrategy],
 })

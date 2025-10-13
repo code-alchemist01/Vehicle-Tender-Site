@@ -6,6 +6,7 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  Req,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ThrottlerGuard } from '@nestjs/throttler';
@@ -40,8 +41,10 @@ export class AuthController {
   @ApiOperation({ summary: 'Kullanıcı girişi' })
   @ApiResponse({ status: 200, description: 'Giriş başarılı' })
   @ApiResponse({ status: 401, description: 'Geçersiz kimlik bilgileri' })
-  async login(@Body() loginDto: LoginDto) {
-    const result = await this.authService.login(loginDto);
+  async login(@Body() loginDto: LoginDto, @Req() req: any) {
+    const ipAddress = req.ip || req.connection?.remoteAddress;
+    const userAgent = req.headers['user-agent'];
+    const result = await this.authService.login(loginDto, ipAddress, userAgent);
     return new ApiResponseDto(true, 'Giriş başarılı', result);
   }
 
@@ -54,6 +57,19 @@ export class AuthController {
   async refreshToken(@Body() refreshTokenDto: RefreshTokenDto) {
     const result = await this.authService.refreshToken(refreshTokenDto.refreshToken);
     return new ApiResponseDto(true, 'Token başarıyla yenilendi', result);
+  }
+
+  @Post('logout')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Kullanıcı çıkışı' })
+  @ApiResponse({ status: 200, description: 'Çıkış başarılı' })
+  async logout(@Req() req: any, @Body() body?: { refreshToken?: string }) {
+    const userId = req.user.sub;
+    const refreshToken = body?.refreshToken;
+    const result = await this.authService.logout(refreshToken, userId);
+    return new ApiResponseDto(true, result.message);
   }
 
   @Get('profile')

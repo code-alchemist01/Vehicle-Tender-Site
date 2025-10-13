@@ -23,7 +23,8 @@
       "@/auctions/*": ["src/auctions/*"],
       "@/bids/*": ["src/bids/*"],
       "@/common/*": ["src/common/*"],
-      "@/database/*": ["src/database/*"]
+      "@/database/*": ["src/database/*"],
+      "@/health/*": ["src/health/*"]
     }
   }
 }

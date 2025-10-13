@@ -1,127 +1,134 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '@/database/prisma.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
+import { VehicleFilterDto } from './dto/vehicle-filter.dto';
 import { PaginationDto, PaginationMetaDto, PaginatedResponseDto } from '@/common/dto/pagination.dto';
 import { VehicleStatus, FuelType, TransmissionType, VehicleCondition } from '@prisma/client';
 
-interface VehicleFilters {
-  make?: string;
-  model?: string;
-  yearFrom?: number;
-  yearTo?: number;
-  mileageFrom?: number;
-  mileageTo?: number;
-  priceFrom?: number;
-  priceTo?: number;
-  fuelType?: FuelType;
-  transmission?: TransmissionType;
-  condition?: VehicleCondition;
-  categoryId?: string;
-  location?: string;
-  status?: VehicleStatus;
-}
+
 
 @Injectable()
 export class VehiclesService {
   constructor(private prisma: PrismaService) {}
 
   async create(createVehicleDto: CreateVehicleDto, userId: string) {
-    // Verify category exists
-    const category = await this.prisma.category.findUnique({
-      where: { id: createVehicleDto.categoryId },
-    });
+    // Validate business rules
+    this.validateVehicleData(createVehicleDto);
 
-    if (!category) {
-      throw new NotFoundException('Category not found');
-    }
+    return this.prisma.$transaction(async (tx) => {
+      // Verify category exists
+      const category = await tx.category.findUnique({
+        where: { id: createVehicleDto.categoryId },
+      });
 
-    return this.prisma.vehicle.create({
-      data: {
-        userId: userId,
-        categoryId: createVehicleDto.categoryId,
-        make: createVehicleDto.make,
-        model: createVehicleDto.model,
-        year: createVehicleDto.year,
-        fuelType: createVehicleDto.fuelType,
-        transmission: createVehicleDto.transmission,
-        mileage: createVehicleDto.mileage,
-        engineSize: createVehicleDto.engineSize,
-        condition: createVehicleDto.condition,
-        color: createVehicleDto.color,
-        description: createVehicleDto.description,
-        images: createVehicleDto.images || [],
-        status: createVehicleDto.status || VehicleStatus.DRAFT,
-        reservePrice: createVehicleDto.reservePrice,
-        location: createVehicleDto.location,
-        vin: createVehicleDto.vin,
-        licensePlate: createVehicleDto.licensePlate,
-        estimatedValue: createVehicleDto.estimatedValue,
-      },
-      include: {
-        category: true,
-      },
+      if (!category) {
+        throw new NotFoundException('Category not found');
+      }
+
+      // Check if VIN already exists (if provided)
+      if (createVehicleDto.vin) {
+        const existingVehicle = await tx.vehicle.findFirst({
+          where: { vin: createVehicleDto.vin },
+        });
+
+        if (existingVehicle) {
+          throw new ForbiddenException('Vehicle with this VIN already exists');
+        }
+      }
+
+      // Check if license plate already exists (if provided)
+      if (createVehicleDto.licensePlate) {
+        const existingPlate = await tx.vehicle.findFirst({
+          where: { licensePlate: createVehicleDto.licensePlate },
+        });
+
+        if (existingPlate) {
+          throw new ForbiddenException('Vehicle with this license plate already exists');
+        }
+      }
+
+      return tx.vehicle.create({
+        data: {
+          userId: userId,
+          categoryId: createVehicleDto.categoryId,
+          make: createVehicleDto.make,
+          model: createVehicleDto.model,
+          year: createVehicleDto.year,
+          fuelType: createVehicleDto.fuelType,
+          transmission: createVehicleDto.transmission,
+          mileage: createVehicleDto.mileage,
+          engineSize: createVehicleDto.engineSize,
+          condition: createVehicleDto.condition,
+          color: createVehicleDto.color,
+          description: createVehicleDto.description,
+          images: createVehicleDto.images || [],
+          status: createVehicleDto.status || VehicleStatus.DRAFT,
+          location: createVehicleDto.location,
+          vin: createVehicleDto.vin,
+          licensePlate: createVehicleDto.licensePlate,
+        },
+        include: {
+          category: true,
+        },
+      });
     });
   }
 
   async findAll(
-    paginationDto: PaginationDto,
-    filters: VehicleFilters = {},
+    filters: VehicleFilterDto,
   ): Promise<PaginatedResponseDto<any>> {
-    const { page, limit } = paginationDto;
+    const { page, limit, ...filterOptions } = filters;
     const skip = (page - 1) * limit;
 
     // Build where clause based on filters
     const where: any = {};
 
-    if (filters.make) {
-      where.make = { contains: filters.make, mode: 'insensitive' };
+    if (filterOptions.make) {
+      where.make = { contains: filterOptions.make, mode: 'insensitive' };
     }
 
-    if (filters.model) {
-      where.model = { contains: filters.model, mode: 'insensitive' };
+    if (filterOptions.model) {
+      where.model = { contains: filterOptions.model, mode: 'insensitive' };
     }
 
-    if (filters.yearFrom || filters.yearTo) {
+    if (filterOptions.yearFrom || filterOptions.yearTo) {
       where.year = {};
-      if (filters.yearFrom) where.year.gte = filters.yearFrom;
-      if (filters.yearTo) where.year.lte = filters.yearTo;
+      if (filterOptions.yearFrom) where.year.gte = filterOptions.yearFrom;
+      if (filterOptions.yearTo) where.year.lte = filterOptions.yearTo;
     }
 
-    if (filters.mileageFrom || filters.mileageTo) {
+    if (filterOptions.mileageFrom || filterOptions.mileageTo) {
       where.mileage = {};
-      if (filters.mileageFrom) where.mileage.gte = filters.mileageFrom;
-      if (filters.mileageTo) where.mileage.lte = filters.mileageTo;
+      if (filterOptions.mileageFrom) where.mileage.gte = filterOptions.mileageFrom;
+      if (filterOptions.mileageTo) where.mileage.lte = filterOptions.mileageTo;
     }
 
-    if (filters.priceFrom || filters.priceTo) {
-      where.estimatedValue = {};
-      if (filters.priceFrom) where.estimatedValue.gte = filters.priceFrom;
-      if (filters.priceTo) where.estimatedValue.lte = filters.priceTo;
+    // Note: Price filtering removed as estimatedValue field doesn't exist in schema
+    // Consider adding price filtering through auction data if needed
+
+    if (filterOptions.fuelType) {
+      where.fuelType = filterOptions.fuelType;
     }
 
-    if (filters.fuelType) {
-      where.fuelType = filters.fuelType;
+    if (filterOptions.transmission) {
+      where.transmission = filterOptions.transmission;
     }
 
-    if (filters.transmission) {
-      where.transmission = filters.transmission;
+    if (filterOptions.condition) {
+      where.condition = filterOptions.condition;
     }
 
-    if (filters.condition) {
-      where.condition = filters.condition;
+    if (filterOptions.categoryId) {
+      where.categoryId = filterOptions.categoryId;
     }
 
-    if (filters.categoryId) {
-      where.categoryId = filters.categoryId;
+    if (filterOptions.location) {
+      where.location = { contains: filterOptions.location, mode: 'insensitive' };
     }
 
-    if (filters.location) {
-      where.location = { contains: filters.location, mode: 'insensitive' };
-    }
-
-    if (filters.status) {
-      where.status = filters.status;
+    if (filterOptions.status) {
+      where.status = filterOptions.status;
     } else {
       // Default to only show active vehicles for public access
       where.status = { in: [VehicleStatus.ACTIVE] };
@@ -142,6 +149,37 @@ export class VehiclesService {
 
     const meta = new PaginationMetaDto(page, limit, total);
     return new PaginatedResponseDto(vehicles, meta);
+  }
+
+  private validateVehicleData(vehicleDto: CreateVehicleDto | UpdateVehicleDto): void {
+    const currentYear = new Date().getFullYear();
+    
+    // Validate year is not in the future
+    if (vehicleDto.year && vehicleDto.year > currentYear + 1) {
+      throw new BadRequestException('Vehicle year cannot be more than one year in the future');
+    }
+
+    // Validate mileage is reasonable for the year
+    if (vehicleDto.year && vehicleDto.mileage) {
+      const vehicleAge = currentYear - vehicleDto.year;
+      const maxReasonableMileage = vehicleAge * 50000; // 50k km per year max
+      
+      if (vehicleDto.mileage > maxReasonableMileage && vehicleAge > 0) {
+        throw new BadRequestException(
+          `Mileage seems unreasonably high for a ${vehicleDto.year} vehicle. Maximum expected: ${maxReasonableMileage} km`
+        );
+      }
+    }
+
+    // Validate engine size for fuel type
+    if (vehicleDto.engineSize && vehicleDto.fuelType === FuelType.ELECTRIC && vehicleDto.engineSize > 0) {
+      throw new BadRequestException('Electric vehicles should not have engine size specified');
+    }
+
+    // Validate images array
+    if (vehicleDto.images && vehicleDto.images.length > 10) {
+      throw new BadRequestException('Maximum 10 images allowed per vehicle');
+    }
   }
 
   async findByUser(
@@ -168,6 +206,102 @@ export class VehiclesService {
     return new PaginatedResponseDto(vehicles, meta);
   }
 
+  async search(
+    query: string,
+    paginationDto: PaginationDto,
+    filters: VehicleFilterDto = {},
+  ): Promise<PaginatedResponseDto<any>> {
+    const { page, limit } = paginationDto;
+    const skip = (page - 1) * limit;
+
+    // Build search conditions
+    const searchConditions = query
+      ? {
+          OR: [
+            { make: { contains: query, mode: 'insensitive' } },
+            { model: { contains: query, mode: 'insensitive' } },
+            { description: { contains: query, mode: 'insensitive' } },
+            { location: { contains: query, mode: 'insensitive' } },
+            { category: { name: { contains: query, mode: 'insensitive' } } },
+          ],
+        }
+      : {};
+
+    // Build filter conditions
+    const filterConditions: any = {};
+
+    if (filters.make) {
+      filterConditions.make = { contains: filters.make, mode: 'insensitive' };
+    }
+
+    if (filters.model) {
+      filterConditions.model = { contains: filters.model, mode: 'insensitive' };
+    }
+
+    if (filters.yearFrom || filters.yearTo) {
+      filterConditions.year = {};
+      if (filters.yearFrom) filterConditions.year.gte = filters.yearFrom;
+      if (filters.yearTo) filterConditions.year.lte = filters.yearTo;
+    }
+
+    if (filters.mileageFrom || filters.mileageTo) {
+      filterConditions.mileage = {};
+      if (filters.mileageFrom) filterConditions.mileage.gte = filters.mileageFrom;
+      if (filters.mileageTo) filterConditions.mileage.lte = filters.mileageTo;
+    }
+
+    if (filters.fuelType) {
+      filterConditions.fuelType = filters.fuelType;
+    }
+
+    if (filters.transmission) {
+      filterConditions.transmission = filters.transmission;
+    }
+
+    if (filters.condition) {
+      filterConditions.condition = filters.condition;
+    }
+
+    if (filters.categoryId) {
+      filterConditions.categoryId = filters.categoryId;
+    }
+
+    if (filters.location) {
+      filterConditions.location = { contains: filters.location, mode: 'insensitive' };
+    }
+
+    if (filters.status) {
+      filterConditions.status = filters.status;
+    } else {
+      // Default to only show active vehicles
+      filterConditions.status = { in: [VehicleStatus.ACTIVE] };
+    }
+
+    // Combine search and filter conditions
+    const where = {
+      ...searchConditions,
+      ...filterConditions,
+    };
+
+    const [vehicles, total] = await Promise.all([
+      this.prisma.vehicle.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: [
+          { createdAt: 'desc' },
+        ],
+        include: {
+          category: true,
+        },
+      }),
+      this.prisma.vehicle.count({ where }),
+    ]);
+
+    const meta = new PaginationMetaDto(page, limit, total);
+    return new PaginatedResponseDto(vehicles, meta);
+  }
+
   async findOne(id: string) {
     const vehicle = await this.prisma.vehicle.findUnique({
       where: { id },
@@ -184,30 +318,70 @@ export class VehiclesService {
   }
 
   async update(id: string, updateVehicleDto: UpdateVehicleDto, userId: string) {
-    const vehicle = await this.findOne(id);
+    // Validate business rules
+    this.validateVehicleData(updateVehicleDto);
 
-    // Check if user owns the vehicle
-    if (vehicle.userId !== userId) {
-      throw new ForbiddenException('You can only update your own vehicles');
-    }
-
-    // Verify category exists if being updated
-    if (updateVehicleDto.categoryId) {
-      const category = await this.prisma.category.findUnique({
-        where: { id: updateVehicleDto.categoryId },
+    return this.prisma.$transaction(async (tx) => {
+      const vehicle = await tx.vehicle.findUnique({
+        where: { id },
+        include: { category: true },
       });
 
-      if (!category) {
-        throw new NotFoundException('Category not found');
+      if (!vehicle) {
+        throw new NotFoundException('Vehicle not found');
       }
-    }
 
-    return this.prisma.vehicle.update({
-      where: { id },
-      data: updateVehicleDto,
-      include: {
-        category: true,
-      },
+      // Check if user owns the vehicle
+      if (vehicle.userId !== userId) {
+        throw new ForbiddenException('You can only update your own vehicles');
+      }
+
+      // Verify category exists if being updated
+      if (updateVehicleDto.categoryId) {
+        const category = await tx.category.findUnique({
+          where: { id: updateVehicleDto.categoryId },
+        });
+
+        if (!category) {
+          throw new NotFoundException('Category not found');
+        }
+      }
+
+      // Check if VIN already exists (if being updated and different from current)
+      if (updateVehicleDto.vin && updateVehicleDto.vin !== vehicle.vin) {
+        const existingVehicle = await tx.vehicle.findFirst({
+          where: { 
+            vin: updateVehicleDto.vin,
+            id: { not: id }
+          },
+        });
+
+        if (existingVehicle) {
+          throw new ForbiddenException('Vehicle with this VIN already exists');
+        }
+      }
+
+      // Check if license plate already exists (if being updated and different from current)
+      if (updateVehicleDto.licensePlate && updateVehicleDto.licensePlate !== vehicle.licensePlate) {
+        const existingPlate = await tx.vehicle.findFirst({
+          where: { 
+            licensePlate: updateVehicleDto.licensePlate,
+            id: { not: id }
+          },
+        });
+
+        if (existingPlate) {
+          throw new ForbiddenException('Vehicle with this license plate already exists');
+        }
+      }
+
+      return tx.vehicle.update({
+        where: { id },
+        data: updateVehicleDto,
+        include: {
+          category: true,
+        },
+      });
     });
   }
 

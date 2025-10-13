@@ -81,7 +81,7 @@ export class UsersService {
     return new PaginatedResponseDto(users, meta);
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, includePassword: boolean = false) {
     const user = await this.prisma.user.findUnique({
       where: { id },
       select: {
@@ -96,6 +96,7 @@ export class UsersService {
         lastLoginAt: true,
         createdAt: true,
         updatedAt: true,
+        password: includePassword,
       },
     });
 
@@ -162,9 +163,24 @@ export class UsersService {
   }
 
   async updateLastLogin(id: string) {
-    return this.prisma.user.update({
+    await this.prisma.user.update({
       where: { id },
       data: { lastLoginAt: new Date() },
+    });
+  }
+
+  async updatePassword(id: string, hashedPassword: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Kullanıcı bulunamadı');
+    }
+
+    await this.prisma.user.update({
+      where: { id },
+      data: { password: hashedPassword },
     });
   }
 }

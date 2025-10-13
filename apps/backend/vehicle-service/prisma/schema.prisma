@@ -9,49 +9,60 @@ datasource db {
 
 model Category {
   id          String    @id @default(cuid())
-  name        String    @unique
-  description String?
+  name        String    @unique @db.VarChar(100)
+  description String?   @db.Text
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   vehicles    Vehicle[]
 
+  @@index([isActive])
+  @@index([name])
   @@map("categories")
 }
 
 model Vehicle {
   id             String           @id @default(cuid())
-  make           String
-  model          String
+  make           String           @db.VarChar(50)
+  model          String           @db.VarChar(100)
   year           Int
   mileage        Int
   fuelType       FuelType
   transmission   TransmissionType
   condition      VehicleCondition
   status         VehicleStatus    @default(DRAFT)
-  description    String?
+  description    String?          @db.Text
   images         String[]         @default([])
   engineSize     Float?
-  color          String?
-  vin            String?          @unique
-  licensePlate   String?
-  location       String?
+  color          String?          @db.VarChar(50)
+  vin            String?          @unique @db.VarChar(17)
+  licensePlate   String?          @db.VarChar(20)
+  location       String?          @db.VarChar(200)
   estimatedValue Float?
   reservePrice   Float?
   userId         String
   categoryId     String
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
-  auctions       auctions?
-  category       Category         @relation(fields: [categoryId], references: [id])
+  auction        Auction?
+  category       Category         @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
+  @@index([make, model])
+  @@index([year])
+  @@index([status])
+  @@index([userId])
+  @@index([categoryId])
+  @@index([fuelType])
+  @@index([condition])
+  @@index([createdAt])
+  @@index([estimatedValue])
   @@map("vehicles")
 }
 
-model auctions {
-  id           String        @id
-  title        String
-  description  String?
+model Auction {
+  id           String        @id @default(cuid())
+  title        String        @db.VarChar(200)
+  description  String?       @db.Text
   startPrice   Float
   reservePrice Float?
   currentBid   Float?
@@ -62,18 +73,31 @@ model auctions {
   userId       String
   winnerId     String?
   createdAt    DateTime      @default(now())
-  updatedAt    DateTime
-  vehicles     Vehicle       @relation(fields: [vehicleId], references: [id])
-  bids         bids[]
+  updatedAt    DateTime      @updatedAt
+  vehicle      Vehicle       @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  bids         Bid[]
+
+  @@index([status])
+  @@index([userId])
+  @@index([startTime])
+  @@index([endTime])
+  @@index([currentBid])
+  @@map("auctions")
 }
 
-model bids {
-  id        String   @id
+model Bid {
+  id        String   @id @default(cuid())
   amount    Float
   userId    String
   auctionId String
   createdAt DateTime @default(now())
-  auctions  auctions @relation(fields: [auctionId], references: [id])
+  auction   Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+
+  @@index([auctionId])
+  @@index([userId])
+  @@index([amount])
+  @@index([createdAt])
+  @@map("bids")
 }
 
 enum FuelType {

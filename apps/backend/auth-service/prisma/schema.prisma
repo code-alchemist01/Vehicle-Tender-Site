@@ -27,7 +27,40 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Relations
+  refreshTokens RefreshToken[]
+  loginHistory  LoginHistory[]
+
   @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  isRevoked Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
+}
+
+model LoginHistory {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ipAddress String?
+  userAgent String?
+  success   Boolean
+  action    LoginAction @default(LOGIN)
+  createdAt DateTime    @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("login_history")
 }
 
 // Enums
@@ -35,4 +68,12 @@ enum UserRole {
   USER
   ADMIN
   MODERATOR
+}
+
+enum LoginAction {
+  LOGIN
+  LOGOUT
+  REGISTER
+  PASSWORD_CHANGE
+  TOKEN_REFRESH
 }
