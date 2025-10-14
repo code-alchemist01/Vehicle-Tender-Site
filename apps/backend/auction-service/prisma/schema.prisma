@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Auction {
+  id                String   @id @default(cuid())
+  title             String
+  description       String?
+  vehicleId         String   @unique
+  sellerId          String
+  startingPrice     Decimal  @db.Decimal(10, 2)
+  currentPrice      Decimal  @db.Decimal(10, 2)
+  reservePrice      Decimal? @db.Decimal(10, 2)
+  minBidIncrement   Decimal  @db.Decimal(10, 2) @default(100)
+  
+  // Timing
+  startTime         DateTime
+  endTime           DateTime
+  extendedEndTime   DateTime?
+  autoExtendMinutes Int      @default(5)
+  
+  // Status
+  status            AuctionStatus @default(SCHEDULED)
+  isActive          Boolean       @default(false)
+  isFeatured        Boolean       @default(false)
+  
+  // Bidding
+  totalBids         Int           @default(0)
+  highestBidderId   String?
+  
+  // Metadata
+  viewCount         Int           @default(0)
+  watchlistCount    Int           @default(0)
+  
+  // Timestamps
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  // Relations
+  bids              Bid[]
+  watchlists        Watchlist[]
+  
+  @@map("auctions")
+}
+
+model Bid {
+  id          String    @id @default(cuid())
+  auctionId   String
+  bidderId    String
+  amount      Decimal   @db.Decimal(10, 2)
+  isWinning   Boolean   @default(false)
+  isAutomatic Boolean   @default(false)
+  maxAmount   Decimal?  @db.Decimal(10, 2) // For automatic bidding
+  
+  // Timestamps
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations
+  auction     Auction   @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  
+  @@map("bids")
+  @@index([auctionId])
+  @@index([bidderId])
+  @@index([createdAt])
+}
+
+model Watchlist {
+  id        String   @id @default(cuid())
+  auctionId String
+  userId    String
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  // Relations
+  auction   Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  
+  @@unique([auctionId, userId])
+  @@map("watchlists")
+}
+
+model AuctionCategory {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String?
+  isActive    Boolean @default(true)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("auction_categories")
+}
+
+enum AuctionStatus {
+  SCHEDULED   // Açılış zamanı henüz gelmedi
+  ACTIVE      // Aktif olarak devam ediyor
+  EXTENDED    // Otomatik uzatıldı
+  ENDED       // Sona erdi
+  CANCELLED   // İptal edildi
+  SUSPENDED   // Askıya alındı
+}

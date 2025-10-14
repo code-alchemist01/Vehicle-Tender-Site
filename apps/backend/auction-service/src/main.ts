@@ -1,12 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
 
   // Global validation pipe
   app.useGlobalPipes(
@@ -14,25 +12,19 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
     }),
   );
 
   // CORS configuration
   app.enableCors({
-    origin: configService.get('CORS_ORIGIN') || 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || 'http://localhost:3001',
     credentials: true,
   });
 
-  // Global prefix
-  app.setGlobalPrefix('api/v1');
-
   // Swagger documentation
   const config = new DocumentBuilder()
-    .setTitle('Vehicle Auction Auth Service')
-    .setDescription('Authentication and user management service for vehicle auction platform')
+    .setTitle('Auction Service API')
+    .setDescription('Vehicle auction management service')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -40,12 +32,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  // Start server
-  const port = configService.get('PORT') || 3002;
+  const port = process.env.PORT || 4003;
   await app.listen(port);
   
-  console.log(`🚀 Auth Service is running on: http://localhost:${port}`);
-  console.log(`📚 Swagger documentation: http://localhost:${port}/api/docs`);
+  console.log(`🚀 Auction Service is running on: http://localhost:${port}`);
+  console.log(`📚 Swagger docs available at: http://localhost:${port}/api/docs`);
 }
 
 bootstrap();

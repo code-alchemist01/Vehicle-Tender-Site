@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Bid {
+  id          String   @id @default(cuid())
+  auctionId   String
+  bidderId    String
+  amount      Decimal  @db.Decimal(10, 2)
+  isAutomatic Boolean  @default(false)
+  maxAmount   Decimal? @db.Decimal(10, 2)
+  status      BidStatus @default(PENDING)
+  placedAt    DateTime @default(now())
+  processedAt DateTime?
+  failureReason String?
+  
+  // Metadata
+  ipAddress   String?
+  userAgent   String?
+  
+  @@map("bids")
+  @@index([auctionId])
+  @@index([bidderId])
+  @@index([placedAt])
+  @@index([status])
+}
+
+model BidHistory {
+  id        String   @id @default(cuid())
+  bidId     String
+  auctionId String
+  bidderId  String
+  amount    Decimal  @db.Decimal(10, 2)
+  timestamp DateTime @default(now())
+  action    BidAction
+  
+  @@map("bid_history")
+  @@index([bidId])
+  @@index([auctionId])
+  @@index([timestamp])
+}
+
+model AutoBid {
+  id          String   @id @default(cuid())
+  auctionId   String
+  bidderId    String
+  maxAmount   Decimal  @db.Decimal(10, 2)
+  increment   Decimal  @db.Decimal(10, 2)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("auto_bids")
+  @@unique([auctionId, bidderId])
+  @@index([auctionId])
+  @@index([bidderId])
+  @@index([isActive])
+}
+
+model BidValidation {
+  id          String   @id @default(cuid())
+  bidId       String   @unique
+  auctionId   String
+  bidderId    String
+  validations Json
+  isValid     Boolean
+  errors      String[]
+  createdAt   DateTime @default(now())
+  
+  @@map("bid_validations")
+  @@index([auctionId])
+  @@index([bidderId])
+  @@index([isValid])
+}
+
+enum BidStatus {
+  PENDING
+  PROCESSING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+  OUTBID
+}
+
+enum BidAction {
+  PLACED
+  ACCEPTED
+  REJECTED
+  CANCELLED
+  OUTBID
+  AUTO_BID_TRIGGERED
+}
