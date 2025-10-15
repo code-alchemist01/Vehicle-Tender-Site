@@ -212,3 +212,8 @@ router.get('/health', (req, res) => {
 });
 
 export default router;
+
+// Register WebSocket routes function
+export const registerWebSocketRoutes = () => {
+  console.log('✅ WebSocket routes registered');
+};

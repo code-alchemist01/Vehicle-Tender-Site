@@ -61,6 +61,11 @@ export const errorHandler = (
 };
 
 export const notFoundHandler = (req: Request, res: Response) => {
+  // Skip 404 handler for Socket.IO endpoints - they are handled by Socket.IO server
+  if (req.path.startsWith('/socket.io/')) {
+    return; // Let Socket.IO handle its own routes
+  }
+  
   const message = `Route ${req.method} ${req.url} not found`;
   
   logger.warn('Route not found:', {

@@ -10,10 +10,15 @@ export interface ServiceConfig {
 }
 
 export interface Config {
-  port: number;
-  host: string; // ✅ EKLE
+  server: {
+    PORT: number;
+    HOST: string;
+  };
   env: string;
   corsOrigins: string[];
+  cors: {
+    origins: string[];
+  };
   jwt: {
     secret: string;
     refreshSecret: string; // ✅ EKLE
@@ -46,10 +51,15 @@ export interface Config {
 }
 
 const config: Config = {
-  port: parseInt(process.env.PORT || '4000', 10),
-  host: process.env.HOST || '0.0.0.0', // ✅ EKLE
+  server: {
+    PORT: parseInt(process.env.PORT || '4000', 10),
+    HOST: process.env.HOST || '0.0.0.0',
+  },
   env: process.env.NODE_ENV || 'development',
   corsOrigins: process.env.CORS_ORIGINS?.split(',') || ['http://localhost:3000'],
+  cors: {
+    origins: process.env.CORS_ORIGINS?.split(',') || ['http://localhost:3000'],
+  },
   
   jwt: {
     secret: process.env.JWT_SECRET || 'your-secret-key',
@@ -72,13 +82,13 @@ const config: Config = {
     auth: {
       name: 'auth-service',
       url: process.env.AUTH_SERVICE_URL || 'http://localhost:4001',
-      healthPath: '/health',
+      healthPath: '/api/v1/auth/health',
       timeout: parseInt(process.env.SERVICE_TIMEOUT || '30000', 10),
     },
     auction: {
       name: 'auction-service',
       url: process.env.AUCTION_SERVICE_URL || 'http://localhost:4003',
-      healthPath: '/health',
+      healthPath: '/api/v1/health',
       timeout: parseInt(process.env.SERVICE_TIMEOUT || '30000', 10),
     },
     bid: {
@@ -96,13 +106,13 @@ const config: Config = {
     vehicle: {
       name: 'vehicle-service',
       url: process.env.VEHICLE_SERVICE_URL || 'http://localhost:4002',
-      healthPath: '/health',
+      healthPath: '/api/v1/health',
       timeout: parseInt(process.env.SERVICE_TIMEOUT || '30000', 10),
     },
     notification: {
       name: 'notification-service',
       url: process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:4006',
-      healthPath: '/health',
+      healthPath: '/notifications/health',
       timeout: parseInt(process.env.SERVICE_TIMEOUT || '30000', 10),
     },
   },
@@ -118,3 +128,4 @@ const config: Config = {
 };
 
 export default config;
+export { config };

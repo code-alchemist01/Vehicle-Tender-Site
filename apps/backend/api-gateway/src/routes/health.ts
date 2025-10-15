@@ -138,4 +138,25 @@ router.get('/live', (req, res) => {
   });
 });
 
+// Clear health cache
+router.post('/clear-cache', (req, res) => {
+  try {
+    healthChecker.clearCache();
+    logger.info('Health cache cleared');
+    res.json({
+      status: 'success',
+      message: 'Health cache cleared successfully',
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    logger.error('Failed to clear health cache:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to clear health cache',
+      error: error.message,
+      timestamp: new Date().toISOString(),
+    });
+  }
+});
+
 export default router;

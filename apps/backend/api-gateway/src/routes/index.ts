@@ -6,6 +6,7 @@ import paymentRoutes from './payment';
 import vehicleRoutes from './vehicle';
 import notificationRoutes from './notification';
 import healthRoutes from './health';
+import websocketRoutes from './websocket';
 
 const router = Router();
 
@@ -15,6 +16,10 @@ const API_VERSION = '/api/v1';
 // Health check routes (no versioning)
 router.use('/health', healthRoutes);
 router.use('/api/health', healthRoutes);
+
+// WebSocket routes
+router.use('/websocket', websocketRoutes);
+// ❌ REMOVED: router.use('/socket.io', websocketRoutes); - This conflicts with Socket.IO engine
 
 // Versioned API routes
 router.use(`${API_VERSION}/auth`, authRoutes);

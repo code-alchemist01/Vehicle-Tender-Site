@@ -46,21 +46,64 @@ export class WebSocketServer {
   private cleanupTimer?: NodeJS.Timeout;
 
   constructor(server: HttpServer) {
+    console.log('🔧 Creating Socket.IO server with explicit path configuration...');
+    
+    // ✅ YÖNTEM 2: Farklı path konfigürasyonu dene
     this.io = new SocketIOServer(server, {
+      path: '/ws/',  // Path'i değiştir
       cors: {
-        origin: config.frontend.url,
-        methods: ["GET", "POST"],
-        credentials: true
+        origin: (origin, callback) => {
+          console.log('🌐 CORS check for origin:', origin);
+          
+          // Development modunda tüm originlere izin ver
+          if (config.env === 'development') {
+            callback(null, true);
+            return;
+          }
+          
+          // Production'da whitelist kontrolü
+          const allowedOrigins = [
+            config.frontend.url,
+            ...config.corsOrigins
+          ];
+          
+          if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+          } else {
+            console.log('❌ CORS blocked:', origin);
+            callback(new Error('CORS not allowed'));
+          }
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["*"]
       },
-      transports: ['websocket', 'polling'],
+      transports: config.env === 'development' 
+        ? ['websocket', 'polling']  // Development: WebSocket öncelikli
+        : ['polling', 'websocket'], // Production: Polling öncelikli (uyumluluk)
       pingTimeout: 60000,
       pingInterval: 25000,
       connectTimeout: 45000,
-      maxHttpBufferSize: 1e6, // 1MB
+      maxHttpBufferSize: 1e6,
       allowEIO3: true,
+      serveClient: true,
+      allowRequest: (req, callback) => {
+        console.log('📥 Socket.IO request:', {
+          method: req.method,
+          url: req.url,
+          origin: req.headers.origin,
+          timestamp: new Date().toISOString()
+        });
+        callback(null, true);
+      }
     });
+    
+    console.log('✅ Socket.IO server created successfully');
+    console.log(`🔌 Socket.IO listening on path: /ws/`);
+    console.log(`🌐 CORS enabled for all origins (debug mode)`);
+    console.log(`🚀 Transports: polling, websocket`);
 
-    // Initialize Redis connections
+    // Initialize Redis with optimized configuration
     this.redis = this.createRedisClient('main');
     this.redisSubscriber = this.createRedisClient('subscriber');
     this.redisPub = this.createRedisClient('publisher');
@@ -71,36 +114,48 @@ export class WebSocketServer {
     this.startCleanupJob();
   }
 
+  // ✅ FIX 3: Better Redis client creation
   private createRedisClient(name: string): Redis {
+    console.log(`🔧 Creating Redis client: ${name}`);
+    
     const client = new Redis({
       host: config.redis.host,
       port: config.redis.port,
-      password: config.redis.password,
+      password: config.redis.password || undefined,
       retryStrategy: (times: number) => {
         const maxRetries = 10;
         if (times > maxRetries) {
-          console.error(`Redis ${name}: Max retries (${maxRetries}) reached`);
+          console.error(`❌ Redis ${name}: Max retries (${maxRetries}) reached`);
           return null;
         }
         const delay = Math.min(times * 1000, 10000);
-        console.log(`Redis ${name}: Retry attempt ${times} in ${delay}ms`);
+        console.log(`🔄 Redis ${name}: Retry ${times}/${maxRetries} in ${delay}ms`);
         return delay;
       },
       maxRetriesPerRequest: 3,
       enableReadyCheck: true,
       lazyConnect: false,
-      reconnectOnError: (err) => {
-        console.error(`Redis ${name} reconnectOnError:`, err.message);
-        return true;
-      },
+      enableOfflineQueue: true,
+      commandTimeout: 5000,
+      connectTimeout: 10000,
+      // Subscriber özel ayarları
+      ...(name.includes('sub') && {
+        enableOfflineQueue: false,
+        maxRetriesPerRequest: null,
+      }),
     });
 
     client.on('error', (err) => {
-      console.error(`Redis ${name} error:`, err);
+      // Bilinen hataları filtrele
+      const ignoredErrors = ['client|setinfo', 'READONLY', 'Connection is closed'];
+      if (ignoredErrors.some(msg => err.message.includes(msg))) {
+        return;
+      }
+      console.error(`❌ Redis ${name} error:`, err.message);
     });
 
     client.on('connect', () => {
-      console.log(`✅ Redis ${name} connected`);
+      console.log(`🔌 Redis ${name} connecting...`);
     });
 
     client.on('ready', () => {
@@ -115,49 +170,144 @@ export class WebSocketServer {
       console.log(`❌ Redis ${name} connection closed`);
     });
 
+    client.on('end', () => {
+      console.log(`🔚 Redis ${name} connection ended`);
+    });
+
     return client;
   }
 
+  // ✅ FIX 2: Better Redis adapter setup
   private setupRedisAdapter(): void {
-    // Use Redis adapter for horizontal scaling across multiple instances
-    const adapter = createAdapter(this.redisPub, this.redisSubscriber);
-    this.io.adapter(adapter);
-    console.log('✅ Redis adapter configured for Socket.IO');
+    // Development modunda Redis adapter'ı devre dışı bırak (opsiyonel)
+    if (config.env === 'development' && !process.env.FORCE_REDIS_ADAPTER) {
+      console.log('⚠️ Development mode: Redis adapter disabled (single instance)');
+      console.log('💡 Set FORCE_REDIS_ADAPTER=true to enable');
+      return;
+    }
+
+    try {
+      const pubClient = this.createRedisClient('adapter-pub');
+      const subClient = this.createRedisClient('adapter-sub');
+      
+      // ✅ Offline queue'yu enable et
+      pubClient.options.enableOfflineQueue = true;
+      subClient.options.enableOfflineQueue = true;
+      
+      // ✅ Connection error handling
+      let pubReady = false;
+      let subReady = false;
+      
+      pubClient.once('ready', () => {
+        pubReady = true;
+        console.log('✅ Redis pub client ready for adapter');
+        checkBothReady();
+      });
+      
+      subClient.once('ready', () => {
+        subReady = true;
+        console.log('✅ Redis sub client ready for adapter');
+        checkBothReady();
+      });
+      
+      const checkBothReady = () => {
+        if (pubReady && subReady) {
+          const adapter = createAdapter(pubClient, subClient, {
+            key: 'socket.io',
+            requestsTimeout: 5000,
+          });
+          
+          this.io.adapter(adapter);
+          console.log('✅ Redis adapter configured successfully');
+        }
+      };
+      
+      // Error handling
+      pubClient.on('error', (err) => {
+        if (!err.message.includes('READONLY')) {
+          console.error('❌ Redis pub error:', err.message);
+        }
+      });
+      
+      subClient.on('error', (err) => {
+        if (!err.message.includes('setinfo') && !err.message.includes('client')) {
+          console.error('❌ Redis sub error:', err.message);
+        }
+      });
+      
+      // Timeout fallback
+      setTimeout(() => {
+        if (!pubReady || !subReady) {
+          console.log('⚠️ Redis adapter timeout, falling back to memory adapter');
+          pubClient.disconnect();
+          subClient.disconnect();
+        }
+      }, 5000);
+      
+    } catch (error) {
+      console.error('❌ Redis adapter setup failed:', error);
+      console.log('⚠️ Falling back to in-memory adapter (single instance mode)');
+      // Continue without Redis adapter
+    }
   }
 
   private setupSocketHandlers(): void {
-    // Authentication middleware
     this.io.use(async (socket: AuthenticatedSocket, next) => {
+      console.log('🔐 Authentication attempt:', {
+        hasToken: !!socket.handshake.auth.token,
+        hasAuthHeader: !!socket.handshake.headers.authorization,
+        environment: config.env
+      });
+
+      // Development modunda auth'u bypass et
+      if (config.env === 'development') {
+        socket.userId = 'dev-user-' + socket.id.substring(0, 8);
+        socket.userRole = 'user';
+        console.log('✅ Development mode: Auth bypassed');
+        return next();
+      }
+
+      // Production modunda JWT kontrolü
       try {
         const token = socket.handshake.auth.token || 
                      socket.handshake.headers.authorization?.split(' ')[1];
         
         if (!token) {
+          console.log('❌ No token provided');
           return next(new Error('Authentication token required'));
         }
 
-        const decoded = jwt.verify(
-          token, 
-          config.jwt.secret
-        ) as any;
+        const decoded = jwt.verify(token, config.jwt.secret) as any;
         
-        if (!decoded.userId) {
+        if (!decoded.sub && !decoded.id) {
+          console.log('❌ Invalid token payload');
           return next(new Error('Invalid token payload'));
         }
 
-        socket.userId = decoded.userId;
-        socket.userRole = decoded.role;
+        socket.userId = decoded.sub || decoded.id;
+        socket.userRole = decoded.role || 'user';
         
+        console.log(`✅ Authenticated: User ${socket.userId}`);
         next();
       } catch (error) {
         const err = error as Error;
-        console.error('Auth middleware error:', err.message);
-        next(new Error('Invalid authentication token'));
+        console.error('❌ Auth error:', err.message);
+        next(new Error('Authentication failed'));
       }
     });
 
     this.io.on('connection', (socket: AuthenticatedSocket) => {
-      console.log(`✅ User ${socket.userId} connected with socket ${socket.id}`);
+      console.log('═══════════════════════════════════════');
+      console.log('✅ NEW CONNECTION');
+      console.log('═══════════════════════════════════════');
+      console.log('Socket ID:', socket.id);
+      console.log('User ID:', socket.userId);
+      console.log('User Role:', socket.userRole);
+      console.log('Transport:', socket.conn.transport.name);
+      console.log('IP Address:', socket.handshake.address);
+      console.log('User Agent:', socket.handshake.headers['user-agent']);
+      console.log('Time:', new Date().toISOString());
+      console.log('═══════════════════════════════════════\n');
       
       // Store user connection (disconnect old session if exists)
       if (socket.userId) {
@@ -168,6 +318,11 @@ export class WebSocketServer {
         }
         this.connectedUsers.set(socket.userId, socket.id);
       }
+
+      // ✅ FIX 4: Add ping/pong for connection testing
+      socket.on('ping', () => {
+        socket.emit('pong', { timestamp: Date.now() });
+      });
 
       // Handle joining auction rooms
       socket.on('join-auction', async (auctionId: string) => {
@@ -365,39 +520,49 @@ export class WebSocketServer {
     });
   }
 
+  // ✅ FIX 5: Better Redis subscription handling
   private setupRedisSubscriptions(): void {
     const channels = ['bid-placed', 'auction-updated', 'auction-ended', 'auction-starting-soon'];
     
+    // Wait for subscriber to be ready before subscribing
+    if (this.redisSubscriber.status === 'ready') {
+      this.subscribeToChannels(channels);
+    } else {
+      this.redisSubscriber.once('ready', () => {
+        this.subscribeToChannels(channels);
+      });
+    }
+
+    this.redisSubscriber.on('message', async (channel: string, message: string) => {
+      try {
+        const data = JSON.parse(message);
+        
+        switch (channel) {
+          case 'bid-placed':
+            this.io.to(`auction-${data.auctionId}`).emit('bid-placed', data);
+            break;
+          case 'auction-updated':
+            this.io.to(`auction-${data.auctionId}`).emit('auction-updated', data);
+            break;
+          case 'auction-ended':
+            this.io.to(`auction-${data.auctionId}`).emit('auction-ended', data);
+            break;
+          case 'auction-starting-soon':
+            this.io.emit('auction-starting-soon', data);
+            break;
+        }
+      } catch (error) {
+        console.error(`❌ Error processing Redis message:`, error);
+      }
+    });
+  }
+
+  private subscribeToChannels(channels: string[]): void {
     this.redisSubscriber.subscribe(...channels, (err, count) => {
       if (err) {
         console.error('❌ Redis subscription error:', err);
       } else {
         console.log(`✅ Subscribed to ${count} channels:`, channels.join(', '));
-      }
-    });
-
-    this.redisSubscriber.on('message', async (channel: string, message: string) => {
-      try {
-        const data = JSON.parse(message);
-
-        switch (channel) {
-          case 'bid-placed':
-            await this.handleBidPlaced(data);
-            break;
-          case 'auction-updated':
-            await this.handleAuctionUpdated(data);
-            break;
-          case 'auction-ended':
-            await this.handleAuctionEnded(data);
-            break;
-          case 'auction-starting-soon':
-            await this.handleAuctionStartingSoon(data);
-            break;
-          default:
-            console.warn(`⚠️  Unhandled channel: ${channel}`);
-        }
-      } catch (error) {
-        console.error(`❌ Error processing Redis message from ${channel}:`, error);
       }
     });
   }
@@ -756,6 +921,11 @@ export class WebSocketServer {
   // Public methods
   public getConnectedUsersCount(): number {
     return this.connectedUsers.size;
+  }
+
+  // ✅ NEW: Get Socket.IO instance for Express integration
+  public getSocketIOInstance() {
+    return this.io;
   }
 
   public getAuctionParticipants(auctionId: string): number {

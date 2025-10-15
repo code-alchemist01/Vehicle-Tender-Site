@@ -33,3 +33,141 @@
 {"level":"info","message":"::1 - - [14/Oct/2025:13:52:45 +0000] \"GET /health?ide_webview_request_time=1760449965019 HTTP/1.1\" 200 124 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36\"","service":"api-gateway","timestamp":"2025-10-14 16:52:45"}
 {"level":"info","message":"::1 - - [14/Oct/2025:13:53:40 +0000] \"GET /api?ide_webview_request_time=1760450020842 HTTP/1.1\" 200 447 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36\"","service":"api-gateway","timestamp":"2025-10-14 16:53:40"}
 {"level":"info","message":"::1 - - [14/Oct/2025:13:53:48 +0000] \"GET /?ide_webview_request_time=1760450028222 HTTP/1.1\" 200 172 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36\"","service":"api-gateway","timestamp":"2025-10-14 16:53:48"}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:31:40"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:31:40"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:31:40"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:31:40"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 16:31:40","totalConnections":0,"uptime":3.076023}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:39:27"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:39:27"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:39:27"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:39:27"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 16:39:27","totalConnections":0,"uptime":2.504405}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:40:28"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:40:28"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:40:28"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:40:28"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":24,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 16:40:28","totalConnections":0,"uptime":2.8464817}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:48:06"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:48:06"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:48:06"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:48:06"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 16:48:06","totalConnections":0,"uptime":2.6273388}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:51:28"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:51:28"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:51:28"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 16:51:28"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 16:51:28","totalConnections":0,"uptime":2.9207105}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:01:23"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:01:23"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:01:23"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:01:23"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:01:23","totalConnections":0,"uptime":2.5253316}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:24"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:24"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:24"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:24"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:15:24","totalConnections":0,"uptime":2.5069831}
+{"level":"info","message":"Graceful shutdown initiated","service":"api-gateway","signal":"SIGINT","timestamp":"2025-10-15 17:15:29"}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:33"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:33"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:33"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:33"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":28,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:15:33","totalConnections":0,"uptime":2.7146197}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:50"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:50"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:50"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:15:50"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:15:50","totalConnections":0,"uptime":2.4579398}
+{"level":"info","message":"Graceful shutdown initiated","service":"api-gateway","signal":"SIGINT","timestamp":"2025-10-15 17:15:58"}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:16:02"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:16:02"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:16:02"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:16:02"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:16:02","totalConnections":0,"uptime":2.8493002}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:02"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:02"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:02"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:02"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:18:02","totalConnections":0,"uptime":2.5456301}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:17"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:17"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:17"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:17"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:18:17","totalConnections":0,"uptime":2.5320465}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:45"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:45"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:45"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:18:45"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:18:45","totalConnections":0,"uptime":2.8918696}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:24:42"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:24:42"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:24:42"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:24:42"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:24:42","totalConnections":0,"uptime":2.564202}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:25:03"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:25:03"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:25:03"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:25:03"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:25:03","totalConnections":0,"uptime":2.7730473}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:33:20"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:33:20"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:33:20"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:33:20"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:33:20","totalConnections":0,"uptime":2.7948161}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:24"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:24"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:24"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:24"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:34:24","totalConnections":0,"uptime":2.5322974}
+{"level":"warn","message":"Service Auth Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:56"}
+{"level":"warn","message":"Service Vehicle Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:56"}
+{"level":"warn","message":"Service Auction Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:56"}
+{"level":"warn","message":"Service Notification Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:34:56"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:34:56","totalConnections":0,"uptime":2.7290783}
+{"level":"warn","message":"Service Bid Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:36:00"}
+{"level":"warn","message":"Service Payment Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:36:00"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:36:00","totalConnections":0,"uptime":2.6119529}
+{"level":"warn","message":"Service Bid Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:36:17"}
+{"level":"warn","message":"Service Payment Service is unhealthy","service":"api-gateway","status":404,"timestamp":"2025-10-15 17:36:17"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:36:17","totalConnections":0,"uptime":2.8759618}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:37:19","totalConnections":0,"uptime":2.66482}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:38:47","totalConnections":0,"uptime":2.8345607}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:42:05","totalConnections":0,"uptime":2.5697597}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:42:26","totalConnections":0,"uptime":2.9152013}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:45:12","totalConnections":0,"uptime":2.5509457}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:45:28","totalConnections":0,"uptime":2.8577813}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:47:41","totalConnections":0,"uptime":2.6403585}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:47:59","totalConnections":0,"uptime":2.9208915}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:57:24","totalConnections":0,"uptime":2.5804656}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:57:40","totalConnections":0,"uptime":2.8017025}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:58:31","totalConnections":0,"uptime":2.5760102}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 17:58:50","totalConnections":0,"uptime":2.739711}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:00:06","totalConnections":0,"uptime":2.524964}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:00:34","totalConnections":0,"uptime":4.426694}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:01:21","totalConnections":0,"uptime":2.6443474}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:01:37","totalConnections":0,"uptime":2.7249199}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:04:44","totalConnections":0,"uptime":2.6364941}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:05:01","totalConnections":0,"uptime":2.7829092}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:08:05","totalConnections":0,"uptime":2.7880166}
+{"level":"info","message":"Graceful shutdown initiated","service":"api-gateway","signal":"SIGINT","timestamp":"2025-10-15 18:09:55"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:09:59","totalConnections":0,"uptime":2.9028405}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:10:27","totalConnections":0,"uptime":2.5306948}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:10:50","totalConnections":0,"uptime":2.8291026}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:28:56","totalConnections":0,"uptime":2.8578858}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:35:13","totalConnections":0,"uptime":2.8746824}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:35:38","totalConnections":0,"uptime":2.5595225}
+{"level":"info","message":"Graceful shutdown initiated","service":"api-gateway","signal":"SIGINT","timestamp":"2025-10-15 18:35:58"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:36:04","totalConnections":0,"uptime":2.826202}
+{"level":"info","message":"Graceful shutdown initiated","service":"api-gateway","signal":"SIGINT","timestamp":"2025-10-15 18:41:11"}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 18:41:18","totalConnections":0,"uptime":3.0317967}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:35:06","totalConnections":0,"uptime":3.029453}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:43:53","totalConnections":0,"uptime":2.9160357}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:44:56","totalConnections":0,"uptime":2.6506269}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":27,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:45:17","totalConnections":0,"uptime":2.8278983}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:46:00","totalConnections":0,"uptime":2.5424815}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:46:27","totalConnections":0,"uptime":2.8788268}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:47:06","totalConnections":0,"uptime":2.4956817}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":25,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:48:15","totalConnections":0,"uptime":2.6009615}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:49:03","totalConnections":0,"uptime":2.5904738}
+{"activeAuctions":0,"connectedUsers":0,"level":"info","memoryUsageMB":26,"message":"WebSocket Statistics","rateLimitedUsers":0,"service":"api-gateway","timestamp":"2025-10-15 19:49:51","totalConnections":0,"uptime":2.6636911}
