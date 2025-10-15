@@ -1,0 +1,35 @@
+{"level":"info","message":"🚀 API Gateway started successfully!","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"📍 Server running on port 4000","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"🌍 Environment: development","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"🔗 Health check: http://localhost:4000/health","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"📚 API documentation: http://localhost:4000/api","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"📋 Configured microservices:","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"  • auth: http://localhost:4001","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"  • auction: http://localhost:4003","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"  • bid: http://localhost:4004","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"  • payment: http://localhost:4005","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"  • vehicle: http://localhost:4002","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"  • notification: http://localhost:4006","service":"api-gateway","timestamp":"2025-10-14 16:52:37"}
+{"level":"info","message":"🔍 Performing initial health check of microservices...","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"Service auth-service health check failed:","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"Service auction-service health check failed:","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"Service bid-service health check failed:","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"Service payment-service health check failed:","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"Service vehicle-service health check failed:","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"Service notification-service health check failed:","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"info","message":"  ❌ auth-service: unhealthy (63ms)","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"    Error: Error","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"info","message":"  ❌ auction-service: unhealthy (44ms)","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"    Error: Error","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"info","message":"  ❌ bid-service: unhealthy (43ms)","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"    Error: Error","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"info","message":"  ❌ payment-service: unhealthy (43ms)","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"    Error: Error","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"info","message":"  ❌ vehicle-service: unhealthy (43ms)","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"    Error: Error","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"info","message":"  ❌ notification-service: unhealthy (43ms)","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"    Error: Error","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"warn","message":"⚠️  0/6 microservices are healthy","service":"api-gateway","timestamp":"2025-10-14 16:52:39"}
+{"level":"info","message":"::1 - - [14/Oct/2025:13:52:45 +0000] \"GET /health?ide_webview_request_time=1760449965019 HTTP/1.1\" 200 124 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36\"","service":"api-gateway","timestamp":"2025-10-14 16:52:45"}
+{"level":"info","message":"::1 - - [14/Oct/2025:13:53:40 +0000] \"GET /api?ide_webview_request_time=1760450020842 HTTP/1.1\" 200 447 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36\"","service":"api-gateway","timestamp":"2025-10-14 16:53:40"}
+{"level":"info","message":"::1 - - [14/Oct/2025:13:53:48 +0000] \"GET /?ide_webview_request_time=1760450028222 HTTP/1.1\" 200 172 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36\"","service":"api-gateway","timestamp":"2025-10-14 16:53:48"}

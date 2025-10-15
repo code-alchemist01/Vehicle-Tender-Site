@@ -32,7 +32,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const port = process.env.PORT || 4004;
-  const host = process.env.HOST || 'localhost';
+  const host = process.env.HOST || '0.0.0.0';
   
   await app.listen(port, host);
   console.log(`🚀 Bid Service is running on: http://${host}:${port}`);

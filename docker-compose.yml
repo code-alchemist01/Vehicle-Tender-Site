@@ -75,7 +75,7 @@ services:
       - vehicle-auction-network
     depends_on:
       - api-gateway
-      - frontend
+      # - frontend  # temporarily disabled
 
   # API Gateway
   api-gateway:
@@ -114,7 +114,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4001
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/auth_db
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_auth
       - JWT_SECRET=your-super-secret-jwt-key-here
       - JWT_EXPIRES_IN=7d
       - REDIS_URL=redis://redis:6379
@@ -127,6 +127,12 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4001/api/v1/auth/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # Vehicle Service
   vehicle-service:
@@ -138,8 +144,9 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4002
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_db
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_vehicles
       - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=your-super-secret-jwt-key-here
     ports:
       - "4002:4002"
     networks:
@@ -149,6 +156,12 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:4002/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # Auction Service
   auction-service:
@@ -160,7 +173,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4003
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/auction_db
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_auction
       - REDIS_URL=redis://redis:6379
     ports:
       - "4003:4003"
@@ -182,7 +195,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4004
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/bid_db
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_bid
       - REDIS_URL=redis://redis:6379
     ports:
       - "4004:4004"
@@ -204,8 +217,9 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4005
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/payment_db
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_payment
       - REDIS_URL=redis://redis:6379
+      - STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key_here
     ports:
       - "4005:4005"
     networks:
@@ -226,7 +240,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=4006
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/notification_db
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_notification
       - REDIS_URL=redis://redis:6379
     ports:
       - "4006:4006"
@@ -237,24 +251,30 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:4006/notifications/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
-  # Frontend
-  frontend:
-    build:
-      context: .
-      dockerfile: apps/frontend/Dockerfile
-    container_name: vehicle-auction-frontend
-    restart: unless-stopped
-    environment:
-      - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=http://localhost:4000
-      - NEXT_PUBLIC_WS_URL=ws://localhost:4000
-    ports:
-      - "3000:3000"
-    networks:
-      - vehicle-auction-network
-    depends_on:
-      - api-gateway
+  # Frontend (temporarily disabled - needs setup)
+  # frontend:
+  #   build:
+  #     context: .
+  #     dockerfile: apps/frontend/Dockerfile
+  #   container_name: vehicle-auction-frontend
+  #   restart: unless-stopped
+  #   environment:
+  #     - NODE_ENV=development
+  #     - NEXT_PUBLIC_API_URL=http://localhost:4000
+  #     - NEXT_PUBLIC_WS_URL=ws://localhost:4000
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - vehicle-auction-network
+  #   depends_on:
+  #     - api-gateway
 
 volumes:
   postgres_data:

@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Payment {
+  id                String            @id @default(cuid())
+  auctionId         String
+  bidderId          String
+  amount            Int               // Amount in cents
+  currency          String            @default("USD")
+  status            PaymentStatus     @default(PENDING)
+  paymentMethod     PaymentMethodType
+  stripePaymentId   String?           @unique
+  stripeCustomerId  String?
+  metadata          Json?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  processedAt       DateTime?
+  
+  // Relations
+  paymentHistory    PaymentHistory[]
+  refunds           Refund[]
+
+  @@map("payments")
+  @@index([auctionId])
+  @@index([bidderId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model PaymentHistory {
+  id          String    @id @default(cuid())
+  paymentId   String
+  action      PaymentAction
+  status      PaymentStatus
+  amount      Int?      // Amount in cents
+  metadata    Json?
+  createdAt   DateTime  @default(now())
+  
+  // Relations
+  payment     Payment   @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@map("payment_history")
+  @@index([paymentId])
+  @@index([createdAt])
+}
+
+model Refund {
+  id                String        @id @default(cuid())
+  paymentId         String
+  amount            Int           // Amount in cents
+  reason            String
+  status            RefundStatus  @default(PENDING)
+  stripeRefundId    String?       @unique
+  metadata          Json?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  processedAt       DateTime?
+  
+  // Relations
+  payment           Payment       @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@map("refunds")
+  @@index([paymentId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model PaymentMethod {
+  id              String            @id @default(cuid())
+  userId          String
+  type            PaymentMethodType
+  stripeMethodId  String?           @unique
+  isDefault       Boolean           @default(false)
+  metadata        Json?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@map("payment_methods")
+  @@index([userId])
+  @@index([stripeMethodId])
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum PaymentMethodType {
+  CREDIT_CARD
+  DEBIT_CARD
+  BANK_TRANSFER
+  DIGITAL_WALLET
+}
+
+enum PaymentAction {
+  CREATED
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum RefundStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}

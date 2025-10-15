@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+const { PrismaClient, UserRole, LoginAction } = require('@prisma/client');
+const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,7 @@ async function main() {
       lastName: 'User',
       phone: '+90 555 123 4567',
       password: hashedPassword,
-      role: 'ADMIN',
+      role: UserRole.ADMIN,
       isActive: true,
       isEmailVerified: true,
     },
@@ -27,7 +27,7 @@ async function main() {
       lastName: 'Doe',
       phone: '+90 555 234 5678',
       password: hashedPassword,
-      role: 'USER',
+      role: UserRole.USER,
       isActive: true,
       isEmailVerified: true,
     },
@@ -37,7 +37,7 @@ async function main() {
       lastName: 'Smith',
       phone: '+90 555 345 6789',
       password: hashedPassword,
-      role: 'USER',
+      role: UserRole.USER,
       isActive: true,
       isEmailVerified: true,
     },
@@ -47,7 +47,7 @@ async function main() {
       lastName: 'User',
       phone: '+90 555 456 7890',
       password: hashedPassword,
-      role: 'MODERATOR',
+      role: UserRole.MODERATOR,
       isActive: true,
       isEmailVerified: true,
     },
@@ -57,7 +57,7 @@ async function main() {
       lastName: 'User',
       phone: '+90 555 567 8901',
       password: hashedPassword,
-      role: 'USER',
+      role: UserRole.USER,
       isActive: true,
       isEmailVerified: true,
     },
@@ -79,7 +79,7 @@ async function main() {
         ipAddress: '127.0.0.1',
         userAgent: 'Test Browser',
         success: true,
-        action: 'REGISTER',
+        action: LoginAction.REGISTER,
       },
     });
   }

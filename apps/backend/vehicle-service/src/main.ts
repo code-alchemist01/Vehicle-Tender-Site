@@ -52,7 +52,7 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
   
   const port = configService.get('PORT') || 3003;
-  const host = configService.get('HOST') || 'localhost';
+  const host = configService.get('HOST') || '0.0.0.0';
   
   await app.listen(port, host);
   

@@ -2,19 +2,19 @@
 set -e
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-    CREATE DATABASE auth_db;
-    CREATE DATABASE vehicle_db;
-    CREATE DATABASE auction_db;
-    CREATE DATABASE bid_db;
-    CREATE DATABASE payment_db;
-    CREATE DATABASE notification_db;
+    CREATE DATABASE vehicle_auction_auction;
+    CREATE DATABASE vehicle_auction_auth;
+    CREATE DATABASE vehicle_auction_vehicles;
+    CREATE DATABASE vehicle_auction_bid;
+    CREATE DATABASE vehicle_auction_payment;
+    CREATE DATABASE vehicle_auction_notification;
     
-    GRANT ALL PRIVILEGES ON DATABASE auth_db TO $POSTGRES_USER;
-    GRANT ALL PRIVILEGES ON DATABASE vehicle_db TO $POSTGRES_USER;
-    GRANT ALL PRIVILEGES ON DATABASE auction_db TO $POSTGRES_USER;
-    GRANT ALL PRIVILEGES ON DATABASE bid_db TO $POSTGRES_USER;
-    GRANT ALL PRIVILEGES ON DATABASE payment_db TO $POSTGRES_USER;
-    GRANT ALL PRIVILEGES ON DATABASE notification_db TO $POSTGRES_USER;
+    GRANT ALL PRIVILEGES ON DATABASE vehicle_auction_auction TO $POSTGRES_USER;
+    GRANT ALL PRIVILEGES ON DATABASE vehicle_auction_auth TO $POSTGRES_USER;
+    GRANT ALL PRIVILEGES ON DATABASE vehicle_auction_vehicles TO $POSTGRES_USER;
+    GRANT ALL PRIVILEGES ON DATABASE vehicle_auction_bid TO $POSTGRES_USER;
+    GRANT ALL PRIVILEGES ON DATABASE vehicle_auction_payment TO $POSTGRES_USER;
+    GRANT ALL PRIVILEGES ON DATABASE vehicle_auction_notification TO $POSTGRES_USER;
 EOSQL
 
 echo "All databases created successfully!"
