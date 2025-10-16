@@ -71,6 +71,13 @@ export class AuctionsController {
     return this.auctionsService.update(id, updateAuctionDto);
   }
 
+  @Post('update-statuses')
+  @ApiOperation({ summary: 'Manually update auction statuses' })
+  @ApiResponse({ status: 200, description: 'Auction statuses updated successfully' })
+  manualUpdateStatuses() {
+    return this.auctionsService.manualUpdateAuctionStatuses();
+  }
+
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete auction' })

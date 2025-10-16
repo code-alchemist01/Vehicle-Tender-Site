@@ -310,9 +310,10 @@ export class AuctionsService {
   @Cron(CronExpression.EVERY_MINUTE)
   async updateAuctionStatuses() {
     const now = new Date();
+    console.log(`🕐 Current time: ${now.toISOString()}`);
 
     // Start scheduled auctions
-    await this.prisma.auction.updateMany({
+    const startedAuctions = await this.prisma.auction.updateMany({
       where: {
         status: PrismaAuctionStatus.SCHEDULED,
         startTime: { lte: now },
@@ -324,7 +325,7 @@ export class AuctionsService {
     });
 
     // End active auctions
-    await this.prisma.auction.updateMany({
+    const endedAuctions = await this.prisma.auction.updateMany({
       where: {
         status: { in: [PrismaAuctionStatus.ACTIVE, PrismaAuctionStatus.EXTENDED] },
         OR: [
@@ -338,7 +339,12 @@ export class AuctionsService {
       },
     });
 
-    console.log(`🔄 Auction statuses updated at ${now.toISOString()}`);
+    console.log(`🔄 Auction statuses updated at ${now.toISOString()} - Started: ${startedAuctions.count}, Ended: ${endedAuctions.count}`);
+  }
+
+  // Manual method to update auction statuses for testing
+  async manualUpdateAuctionStatuses() {
+    return this.updateAuctionStatuses();
   }
 
   async getAuctionStats() {

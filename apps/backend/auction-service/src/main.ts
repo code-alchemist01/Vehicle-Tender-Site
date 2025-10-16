@@ -6,8 +6,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Set global prefix for API routes
-  app.setGlobalPrefix('api/v1');
+  // Global API prefix - removed to match other services
+  // app.setGlobalPrefix('api/v1');
 
   // Global validation pipe
   app.useGlobalPipes(
@@ -35,7 +35,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  const port = process.env.PORT || 4003;
+  const port = process.env.PORT || 4004;
   await app.listen(port);
   
   console.log(`🚀 Auction Service is running on: http://localhost:${port}`);

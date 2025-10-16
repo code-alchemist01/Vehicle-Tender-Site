@@ -14,12 +14,29 @@ export class BidValidationService {
   async validateBid(createBidDto: CreateBidDto): Promise<void> {
     const { auctionId, amount, bidderId } = createBidDto;
 
+    console.log(`[BID-VALIDATION] Starting validation for bid:`, {
+      auctionId,
+      amount,
+      bidderId
+    });
+
     // Get auction details from auction service
     const auction = await this.getAuctionDetails(auctionId);
     
+    console.log(`[BID-VALIDATION] Auction lookup result:`, auction ? 'Found' : 'Not found');
+    
     if (!auction) {
+      console.log(`[BID-VALIDATION] Throwing 'Auction not found' error for ID: ${auctionId}`);
       throw new BadRequestException('Auction not found');
     }
+
+    console.log(`[BID-VALIDATION] Auction details:`, {
+      id: auction.id,
+      status: auction.status,
+      endTime: auction.endTime,
+      sellerId: auction.sellerId,
+      currentPrice: auction.currentPrice
+    });
 
     // Check if auction is active
     if (auction.status !== 'ACTIVE') {
@@ -63,12 +80,27 @@ export class BidValidationService {
   private async getAuctionDetails(auctionId: string): Promise<any> {
     try {
       const auctionServiceUrl = process.env.AUCTION_SERVICE_URL || 'http://localhost:4003';
+      const fullUrl = `${auctionServiceUrl}/api/v1/auctions/${auctionId}`;
+      
+      console.log(`[BID-VALIDATION] Fetching auction details from: ${fullUrl}`);
+      console.log(`[BID-VALIDATION] Environment AUCTION_SERVICE_URL: ${process.env.AUCTION_SERVICE_URL}`);
+      
       const response = await firstValueFrom(
-        this.httpService.get(`${auctionServiceUrl}/auctions/${auctionId}`),
+        this.httpService.get(fullUrl),
       );
+      
+      console.log(`[BID-VALIDATION] Successfully fetched auction details. Status: ${response.status}`);
+      console.log(`[BID-VALIDATION] Auction data:`, JSON.stringify(response.data, null, 2));
+      
       return response.data;
     } catch (error) {
-      console.error('Error fetching auction details:', error);
+      console.error(`[BID-VALIDATION] Error fetching auction details for ID ${auctionId}:`, error.message);
+      console.error(`[BID-VALIDATION] Error details:`, {
+        url: `${process.env.AUCTION_SERVICE_URL || 'http://localhost:4003'}/api/v1/auctions/${auctionId}`,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data
+      });
       return null;
     }
   }

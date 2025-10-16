@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 import { ApiResponseDto } from '../common/dto/response.dto';
 import { Public } from '../common/decorators/public.decorator';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
@@ -81,6 +82,42 @@ export class AuthController {
   async getProfile(@CurrentUser() user: any) {
     const profile = await this.authService.getProfile(user.id);
     return new ApiResponseDto(true, 'Profil başarıyla getirildi', profile);
+  }
+
+  @Post('change-password')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Şifre değiştirme' })
+  @ApiResponse({ status: 200, description: 'Şifre başarıyla değiştirildi' })
+  @ApiResponse({ status: 400, description: 'Geçersiz şifre formatı' })
+  @ApiResponse({ status: 401, description: 'Mevcut şifre yanlış' })
+  async changePassword(
+    @CurrentUser() user: any,
+    @Body() changePasswordDto: ChangePasswordDto,
+    @Req() req: any,
+  ) {
+    const ipAddress = req.ip || req.connection?.remoteAddress;
+    const userAgent = req.headers['user-agent'];
+    const result = await this.authService.changePassword(
+      user.id,
+      changePasswordDto.currentPassword,
+      changePasswordDto.newPassword,
+      ipAddress,
+      userAgent,
+    );
+    return new ApiResponseDto(true, result.message);
+  }
+
+  @Get('login-history')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Kullanıcı giriş geçmişi' })
+  @ApiResponse({ status: 200, description: 'Giriş geçmişi başarıyla getirildi' })
+  @ApiResponse({ status: 401, description: 'Yetkisiz erişim' })
+  async getLoginHistory(@CurrentUser() user: any) {
+    const history = await this.authService.getLoginHistory(user.id);
+    return new ApiResponseDto(true, 'Giriş geçmişi başarıyla getirildi', history);
   }
 
   @Get('health')

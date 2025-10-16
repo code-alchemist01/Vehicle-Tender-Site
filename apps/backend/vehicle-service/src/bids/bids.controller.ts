@@ -34,7 +34,7 @@ export class BidsController {
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 404, description: 'Auction not found' })
   create(@Body() createBidDto: CreateBidDto, @Request() req) {
-    return this.bidsService.create(createBidDto, req.user.sub);
+    return this.bidsService.create(createBidDto, req.user.id);
   }
 
   @Get()
@@ -74,7 +74,7 @@ export class BidsController {
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page' })
   findByUser(@Query() paginationDto: PaginationDto, @Request() req) {
-    return this.bidsService.findByUser(req.user.sub, paginationDto);
+    return this.bidsService.findByUser(req.user.id, paginationDto);
   }
 
   @Get('my-winning-bids')
@@ -86,7 +86,7 @@ export class BidsController {
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page' })
   getWinningBids(@Query() paginationDto: PaginationDto, @Request() req) {
-    return this.bidsService.getWinningBids(req.user.sub, paginationDto);
+    return this.bidsService.getWinningBids(req.user.id, paginationDto);
   }
 
   @Get('auction/:auctionId')
@@ -134,7 +134,7 @@ export class BidsController {
     @Param('auctionId', ParseUUIDPipe) auctionId: string,
     @Request() req,
   ) {
-    return this.bidsService.getUserBidsForAuction(auctionId, req.user.sub);
+    return this.bidsService.getUserBidsForAuction(auctionId, req.user.id);
   }
 
   @Get(':id')
@@ -159,7 +159,7 @@ export class BidsController {
     @Body() updateBidDto: UpdateBidDto,
     @Request() req,
   ) {
-    return this.bidsService.update(id, updateBidDto, req.user.sub);
+    return this.bidsService.update(id, updateBidDto, req.user.id);
   }
 
   @Delete(':id')
@@ -172,6 +172,6 @@ export class BidsController {
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 404, description: 'Bid not found' })
   remove(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
-    return this.bidsService.remove(id, req.user.sub);
+    return this.bidsService.remove(id, req.user.id);
   }
 }

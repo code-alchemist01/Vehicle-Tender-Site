@@ -48,7 +48,7 @@ export class VehiclesController {
     @Body() createVehicleDto: CreateVehicleDto,
     @CurrentUser() user: any,
   ) {
-    const vehicle = await this.vehiclesService.create(createVehicleDto, user.sub);
+    const vehicle = await this.vehiclesService.create(createVehicleDto, user.id);
     return new ApiResponseDto('Vehicle created successfully', vehicle);
   }
 
@@ -117,7 +117,7 @@ export class VehiclesController {
     @Query() paginationDto: PaginationDto,
     @CurrentUser() user: any,
   ) {
-    const result = await this.vehiclesService.findByUser(user.sub, paginationDto);
+    const result = await this.vehiclesService.findByUser(user.id, paginationDto);
     return new ApiResponseDto('User vehicles retrieved successfully', result);
   }
 

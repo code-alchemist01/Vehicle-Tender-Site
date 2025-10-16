@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test - Vehicle Auction Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .connected { background-color: #d4edda; color: #155724; }
+        .disconnected { background-color: #f8d7da; color: #721c24; }
+        .connecting { background-color: #fff3cd; color: #856404; }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #6c757d; cursor: not-allowed; }
+        #messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f8f9fa;
+        }
+        .message {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid #007bff;
+            background-color: white;
+        }
+        .error { border-left-color: #dc3545; }
+        .success { border-left-color: #28a745; }
+        input[type="text"] {
+            width: 200px;
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔌 WebSocket Test - Vehicle Auction Platform</h1>
+        
+        <div id="status" class="status disconnected">
+            Bağlantı Durumu: Bağlı Değil ❌
+        </div>
+
+        <div style="background-color: #e7f3ff; padding: 10px; margin: 10px 0; border-radius: 4px; border-left: 4px solid #007bff;">
+            <strong>ℹ️ Bilgi:</strong> Development modunda authentication token olmadan da bağlanabilirsiniz. 
+            Production'da JWT token gereklidir.
+        </div>
+
+        <div>
+            <button id="connectBtn" onclick="connect()">🔗 Bağlan</button>
+            <button id="disconnectBtn" onclick="disconnect()" disabled>❌ Bağlantıyı Kes</button>
+        </div>
+
+        <div>
+            <h3>Test Mesajları</h3>
+            <button onclick="testJoinAuction()">Açık Artırmaya Katıl</button>
+            <button onclick="testLeaveAuction()">Açık Artırmadan Ayrıl</button>
+            <button onclick="testPlaceBid()">Teklif Ver</button>
+            <button onclick="testGetStats()">İstatistikleri Al</button>
+        </div>
+
+        <div>
+            <h3>Özel Mesaj Gönder</h3>
+            <input type="text" id="eventName" placeholder="Event adı" value="test-message">
+            <input type="text" id="eventData" placeholder="Veri (JSON)" value='{"message": "test"}'>
+            <button onclick="sendCustomMessage()">Gönder</button>
+        </div>
+
+        <div>
+            <h3>Mesaj Geçmişi</h3>
+            <div id="messages"></div>
+            <button onclick="clearMessages()">Temizle</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script>
+        let socket = null;
+        const statusDiv = document.getElementById('status');
+        const messagesDiv = document.getElementById('messages');
+        const connectBtn = document.getElementById('connectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+
+        function updateStatus(status, className) {
+            statusDiv.textContent = `Bağlantı Durumu: ${status}`;
+            statusDiv.className = `status ${className}`;
+        }
+
+        function addMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function connect() {
+            if (socket) {
+                socket.disconnect();
+            }
+
+            updateStatus('Bağlanıyor...', 'connecting');
+            connectBtn.disabled = true;
+
+            // Socket.IO bağlantısı
+            socket = io('http://localhost:4008', {
+                transports: ['websocket', 'polling'],
+                timeout: 5000,
+                forceNew: true
+            });
+
+            // Bağlantı olayları
+            socket.on('connect', () => {
+                updateStatus('Bağlı ✅', 'connected');
+                connectBtn.disabled = true;
+                disconnectBtn.disabled = false;
+                addMessage(`✅ Bağlantı kuruldu! Socket ID: ${socket.id}`, 'success');
+                addMessage(`🔓 Development modunda authentication bypass aktif`, 'info');
+            });
+
+            socket.on('disconnect', (reason) => {
+                updateStatus('Bağlantı Kesildi ❌', 'disconnected');
+                connectBtn.disabled = false;
+                disconnectBtn.disabled = true;
+                addMessage(`Bağlantı kesildi: ${reason}`, 'error');
+            });
+
+            socket.on('connect_error', (error) => {
+                updateStatus('Bağlantı Hatası ❌', 'disconnected');
+                connectBtn.disabled = false;
+                disconnectBtn.disabled = true;
+                addMessage(`Bağlantı hatası: ${error.message}`, 'error');
+            });
+
+            // Authentication event
+            socket.on('authenticated', (data) => {
+                console.log('Authentication response:', data);
+                if (data.mode === 'development') {
+                    addMessage(`🔓 Development Mode: ${data.isAuthenticated ? 'Authenticated' : 'Bypass Active'}`, 'info');
+                } else {
+                    addMessage(`🔐 Production Mode: Authenticated`, 'success');
+                }
+                addMessage(`👤 User ID: ${data.userId}`, 'info');
+            });
+
+            // Açık artırma olayları
+            socket.on('auction-update', (data) => {
+                addMessage(`Açık Artırma Güncellendi: ${JSON.stringify(data)}`, 'success');
+            });
+
+            socket.on('bid-accepted', (data) => {
+                addMessage(`Teklif Kabul Edildi: ${JSON.stringify(data)}`, 'success');
+            });
+
+            socket.on('bid-rejected', (data) => {
+                addMessage(`Teklif Reddedildi: ${JSON.stringify(data)}`, 'error');
+            });
+
+            socket.on('auction-ended', (data) => {
+                addMessage(`Açık Artırma Bitti: ${JSON.stringify(data)}`, 'success');
+            });
+
+            // Genel mesajlar
+            socket.on('message', (data) => {
+                addMessage(`Mesaj: ${JSON.stringify(data)}`, 'info');
+            });
+
+            socket.on('error', (error) => {
+                addMessage(`Hata: ${JSON.stringify(error)}`, 'error');
+            });
+
+            // Test yanıtları
+            socket.on('test-response', (data) => {
+                addMessage(`Test Yanıtı: ${JSON.stringify(data)}`, 'success');
+            });
+
+            socket.on('stats', (data) => {
+                addMessage(`İstatistikler: ${JSON.stringify(data)}`, 'info');
+            });
+        }
+
+        function disconnect() {
+            if (socket) {
+                socket.disconnect();
+                socket = null;
+            }
+        }
+
+        function testJoinAuction() {
+            if (!socket || !socket.connected) {
+                addMessage('Önce bağlantı kurmalısınız!', 'error');
+                return;
+            }
+            
+            const testData = {
+                auctionId: 'test-auction-123',
+                userId: 'test-user-456'
+            };
+            
+            socket.emit('join-auction', testData);
+            addMessage(`Açık artırmaya katılma isteği gönderildi: ${JSON.stringify(testData)}`, 'info');
+        }
+
+        function testLeaveAuction() {
+            if (!socket || !socket.connected) {
+                addMessage('Önce bağlantı kurmalısınız!', 'error');
+                return;
+            }
+            
+            const testData = {
+                auctionId: 'test-auction-123',
+                userId: 'test-user-456'
+            };
+            
+            socket.emit('leave-auction', testData);
+            addMessage(`Açık artırmadan ayrılma isteği gönderildi: ${JSON.stringify(testData)}`, 'info');
+        }
+
+        function testPlaceBid() {
+            if (!socket || !socket.connected) {
+                addMessage('Önce bağlantı kurmalısınız!', 'error');
+                return;
+            }
+            
+            const testData = {
+                auctionId: 'test-auction-123',
+                userId: 'test-user-456',
+                amount: 15000,
+                timestamp: new Date().toISOString()
+            };
+            
+            socket.emit('place-bid', testData);
+            addMessage(`Teklif verme isteği gönderildi: ${JSON.stringify(testData)}`, 'info');
+        }
+
+        function testGetStats() {
+            if (!socket || !socket.connected) {
+                addMessage('Önce bağlantı kurmalısınız!', 'error');
+                return;
+            }
+            
+            socket.emit('get-stats');
+            addMessage('İstatistik isteği gönderildi', 'info');
+        }
+
+        function sendCustomMessage() {
+            if (!socket || !socket.connected) {
+                addMessage('Önce bağlantı kurmalısınız!', 'error');
+                return;
+            }
+            
+            const eventName = document.getElementById('eventName').value;
+            const eventData = document.getElementById('eventData').value;
+            
+            try {
+                const data = JSON.parse(eventData);
+                socket.emit(eventName, data);
+                addMessage(`Özel mesaj gönderildi - Event: ${eventName}, Data: ${eventData}`, 'info');
+            } catch (e) {
+                addMessage(`JSON parse hatası: ${e.message}`, 'error');
+            }
+        }
+
+        function clearMessages() {
+            messagesDiv.innerHTML = '';
+        }
+
+        // Sayfa yüklendiğinde otomatik bağlan
+        window.addEventListener('load', () => {
+            addMessage('WebSocket test sayfası yüklendi. Bağlanmak için "Bağlan" butonuna tıklayın.', 'info');
+        });
+    </script>
+</body>
+</html>

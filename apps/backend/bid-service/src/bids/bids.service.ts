@@ -15,8 +15,12 @@ export class BidsService {
   ) {}
 
   async createBid(createBidDto: CreateBidDto) {
+    console.log(`[BIDS-SERVICE] Starting bid creation for:`, createBidDto);
+    
     // Validate bid
     await this.bidValidationService.validateBid(createBidDto);
+
+    console.log(`[BIDS-SERVICE] Bid validation passed, creating bid in database`);
 
     // Create bid with pending status
     const bid = await this.prisma.bid.create({
@@ -29,6 +33,8 @@ export class BidsService {
       },
     });
 
+    console.log(`[BIDS-SERVICE] Bid created with ID: ${bid.id}, adding to queue`);
+
     // Add to processing queue
     await this.bidQueue.add('process-bid', { bidId: bid.id }, {
       attempts: 3,
@@ -37,6 +43,8 @@ export class BidsService {
         delay: 2000,
       },
     });
+
+    console.log(`[BIDS-SERVICE] Bid ${bid.id} added to processing queue`);
 
     return bid;
   }

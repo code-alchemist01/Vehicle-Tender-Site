@@ -6,6 +6,12 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Request logging middleware
+  app.use((req, res, next) => {
+    console.log(`[REQUEST] ${req.method} ${req.url} - Body:`, req.body);
+    next();
+  });
+
   // Global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
@@ -31,7 +37,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  const port = process.env.PORT || 4004;
+  const port = process.env.PORT || 4007;
   const host = process.env.HOST || '0.0.0.0';
   
   await app.listen(port, host);

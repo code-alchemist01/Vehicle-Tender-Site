@@ -81,12 +81,12 @@ services:
   api-gateway:
     build:
       context: .
-      dockerfile: apps/backend/api-gateway/Dockerfile
+      dockerfile: apps/backend/api-gateway-backup/Dockerfile
     container_name: vehicle-auction-api-gateway
     restart: unless-stopped
     environment:
       - NODE_ENV=development
-      - PORT=4000
+      - PORT=4008
       - REDIS_URL=redis://redis:6379
       - AUTH_SERVICE_URL=http://auth-service:4001
       - VEHICLE_SERVICE_URL=http://vehicle-service:4002
@@ -95,7 +95,7 @@ services:
       - PAYMENT_SERVICE_URL=http://payment-service:4005
       - NOTIFICATION_SERVICE_URL=http://notification-service:4006
     ports:
-      - "4000:4000"
+      - "4008:4008"
     networks:
       - vehicle-auction-network
     depends_on:

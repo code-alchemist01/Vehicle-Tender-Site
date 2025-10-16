@@ -1,6 +1,5 @@
-import { IsNotEmpty, IsNumber, IsString, IsOptional, Min } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { IsNotEmpty, IsString, IsNumber, IsOptional, IsBoolean, Min } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateBidDto {
   @ApiProperty({ description: 'Auction ID' })
@@ -8,19 +7,29 @@ export class CreateBidDto {
   @IsString()
   auctionId: string;
 
-  @ApiProperty({ description: 'Bid amount', minimum: 0 })
+  @ApiProperty({ description: 'Bid amount' })
   @IsNotEmpty()
   @IsNumber()
-  @Type(() => Number)
   @Min(0)
   amount: number;
 
-  @ApiProperty({ description: 'Bidder ID' })
-  @IsNotEmpty()
+  @ApiPropertyOptional({ description: 'Bidder ID (automatically set from JWT token)' })
+  @IsOptional()
   @IsString()
-  bidderId: string;
+  bidderId?: string;
 
-  @ApiProperty({ description: 'Optional bid notes', required: false })
+  @ApiPropertyOptional({ description: 'Whether this is an automatic bid' })
+  @IsOptional()
+  @IsBoolean()
+  isAutomatic?: boolean;
+
+  @ApiPropertyOptional({ description: 'Maximum amount for auto-bidding' })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  maxAmount?: number;
+
+  @ApiPropertyOptional({ description: 'Notes for the bid' })
   @IsOptional()
   @IsString()
   notes?: string;

@@ -18,12 +18,23 @@ import {
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { PaymentsService } from './payments.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
+import { StripeService } from './stripe.service';
 
 @ApiTags('Payments')
 @Controller('payments')
 @UseGuards(ThrottlerGuard)
 export class PaymentsController {
-  constructor(private readonly paymentsService: PaymentsService) {}
+  constructor(
+    private readonly paymentsService: PaymentsService,
+    private readonly stripeService: StripeService,
+  ) {}
+
+  @Get('test-stripe')
+  @ApiOperation({ summary: 'Test Stripe connection' })
+  @ApiResponse({ status: 200, description: 'Stripe connection test result' })
+  async testStripeConnection() {
+    return this.stripeService.testStripeConnection();
+  }
 
   @Post()
   @ApiOperation({ summary: 'Create a new payment' })

@@ -1,0 +1,1 @@
+UPDATE auctions SET status = 'ACTIVE', "isActive" = true WHERE id = 'cmgsiwinv0001ucvbfrsu87y8';

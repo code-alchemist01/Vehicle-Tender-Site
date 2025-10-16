@@ -130,4 +130,36 @@ export class StripeService {
       throw new BadRequestException('Failed to detach payment method');
     }
   }
+
+  async testStripeConnection(): Promise<{ success: boolean; message: string; account?: any }> {
+    try {
+      if (!this.stripe) {
+        return {
+          success: false,
+          message: 'Stripe is not configured'
+        };
+      }
+
+      // Test Stripe connection by retrieving account information
+      const account = await this.stripe.accounts.retrieve();
+      
+      return {
+        success: true,
+        message: 'Stripe connection successful',
+        account: {
+          id: account.id,
+          country: account.country,
+          default_currency: account.default_currency,
+          email: account.email,
+          type: account.type
+        }
+      };
+    } catch (error) {
+      this.logger.error('Stripe connection test failed:', error);
+      return {
+        success: false,
+        message: `Stripe connection failed: ${error.message}`
+      };
+    }
+  }
 }

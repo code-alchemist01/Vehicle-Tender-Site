@@ -37,7 +37,7 @@ export class AuctionsController {
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 404, description: 'Vehicle not found' })
   create(@Body() createAuctionDto: CreateAuctionDto, @Request() req) {
-    return this.auctionsService.create(createAuctionDto, req.user.sub);
+    return this.auctionsService.create(createAuctionDto, req.user.id);
   }
 
   @Get()
@@ -117,7 +117,7 @@ export class AuctionsController {
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Items per page' })
   findByUser(@Query() paginationDto: PaginationDto, @Request() req) {
-    return this.auctionsService.findByUser(req.user.sub, paginationDto);
+    return this.auctionsService.findByUser(req.user.id, paginationDto);
   }
 
   @Get(':id')
@@ -142,7 +142,7 @@ export class AuctionsController {
     @Body() updateAuctionDto: UpdateAuctionDto,
     @Request() req,
   ) {
-    return this.auctionsService.update(id, updateAuctionDto, req.user.sub);
+    return this.auctionsService.update(id, updateAuctionDto, req.user.id);
   }
 
   @Delete(':id')
@@ -155,7 +155,7 @@ export class AuctionsController {
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @ApiResponse({ status: 404, description: 'Auction not found' })
   remove(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
-    return this.auctionsService.remove(id, req.user.sub);
+    return this.auctionsService.remove(id, req.user.id);
   }
 
   @Patch(':id/status')
@@ -172,6 +172,6 @@ export class AuctionsController {
     @Body('status', new ParseEnumPipe(AuctionStatus)) status: AuctionStatus,
     @Request() req,
   ) {
-    return this.auctionsService.updateStatus(id, status, req.user.sub);
+    return this.auctionsService.updateStatus(id, status, req.user.id);
   }
 }

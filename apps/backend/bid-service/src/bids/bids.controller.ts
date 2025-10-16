@@ -9,9 +9,11 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  Req,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { BidsService } from './bids.service';
 import { AutoBidService } from './auto-bid.service';
 import { CreateBidDto } from './dto/create-bid.dto';
@@ -34,7 +36,16 @@ export class BidsController {
   @ApiResponse({ status: 400, description: 'Invalid bid data' })
   @ApiResponse({ status: 429, description: 'Too many bids' })
   async createBid(@Body() createBidDto: CreateBidDto) {
-    return this.bidsService.createBid(createBidDto);
+    console.log(`[BIDS-CONTROLLER] Received bid request:`, createBidDto);
+    
+    try {
+      const result = await this.bidsService.createBid(createBidDto);
+      console.log(`[BIDS-CONTROLLER] Bid created successfully:`, result.id);
+      return result;
+    } catch (error) {
+      console.log(`[BIDS-CONTROLLER] Error creating bid:`, error.message);
+      throw error;
+    }
   }
 
   @Get()
