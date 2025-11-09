@@ -1,378 +1,607 @@
-# Vehicle Auction Platform
+# 🚗 Vehicle Auction Platform
 
-Enterprise-level vehicle auction web platform built with modern microservices architecture.
+Modern mikroservis mimarisi ile geliştirilmiş, enterprise seviyesinde araç açık artırma platformu.
 
-## 📊 Current Project Status
+## 📋 İçindekiler
 
-### ✅ Completed Components
+- [Proje Hakkında](#-proje-hakkında)
+- [Özellikler](#-özellikler)
+- [Teknoloji Stack](#-teknoloji-stack)
+- [Proje Yapısı](#-proje-yapısı)
+- [Kurulum ve Çalıştırma](#-kurulum-ve-çalıştırma)
+- [Servisler ve Portlar](#-servisler-ve-portlar)
+- [API Endpoint'leri](#-api-endpointleri)
+- [Veritabanı Yapısı](#-veritabanı-yapısı)
+- [Geliştirme Rehberi](#-geliştirme-rehberi)
+- [Sorun Giderme](#-sorun-giderme)
 
-**Backend Services:**
-- ✅ **Auth Service** - Fully implemented with JWT authentication, refresh tokens, password security
-- ✅ **Vehicle Service** - Complete CRUD operations with advanced filtering and pagination
-- ✅ **Database Schemas** - Prisma models for both auth and vehicle databases
-- ✅ **API Endpoints** - All endpoints tested and working with proper error handling
-- ✅ **Rate Limiting** - Implemented across all services for security
+---
 
-**Development Infrastructure:**
-- ✅ **Prisma ORM** - Database models and migrations configured
-- ✅ **Docker Configuration** - Development environment setup
-- ✅ **API Testing** - Comprehensive endpoint testing completed
-- ✅ **Error Handling** - Proper HTTP status codes and error responses
+## 🎯 Proje Hakkında
 
-### 🚧 In Progress
-- Frontend development (Next.js 14)
-- API Gateway implementation
-- Real-time bidding system
+Bu proje, kullanıcıların araçlarını açık artırmaya çıkarabildiği, diğer kullanıcıların bu araçlara teklif verebildiği bir web platformudur. Platform, modern mikroservis mimarisi kullanarak geliştirilmiştir ve ölçeklenebilir, güvenli ve performanslı bir yapıya sahiptir.
 
-### 📋 Upcoming Features
-- Auction management system
-- Payment processing
-- Real-time notifications
-- Admin dashboard
-- Mobile responsiveness
+### Ne İşe Yarar?
 
-## 🗺️ Development Roadmap
+1. **Kullanıcılar araç ekleyebilir**: Araç bilgilerini (marka, model, yıl, kilometre vb.) girerek platforma ekleyebilirler.
+2. **Açık artırma oluşturulabilir**: Eklenen araçlar için açık artırma başlatılabilir.
+3. **Teklif verilebilir**: Kullanıcılar açık artırmalara gerçek zamanlı teklif verebilir.
+4. **İzleme listesi**: İlginç bulunan açık artırmalar izleme listesine eklenebilir.
+5. **Ödeme işlemleri**: Kazanan teklifler için ödeme yapılabilir.
+6. **Bildirimler**: Önemli olaylar için kullanıcılara bildirim gönderilir.
 
-### Phase 1: Frontend Foundation (Next 2-3 weeks)
-**Priority: HIGH**
-- [ ] Next.js 14 project setup with App Router
-- [ ] Shadcn/ui component library integration
-- [ ] Authentication pages (Login, Register, Profile)
-- [ ] Vehicle listing and detail pages
-- [ ] Responsive design implementation
-- [ ] State management with Zustand
+---
 
-### Phase 2: Core Auction Features (3-4 weeks)
-**Priority: HIGH**
-- [ ] Real-time bidding system with Socket.io
-- [ ] Auction countdown timers
-- [ ] Bid history and notifications
-- [ ] Image upload and gallery
-- [ ] Search and filtering UI
-- [ ] User dashboard
+## ✨ Özellikler
 
-### Phase 3: Advanced Features (4-5 weeks)
-**Priority: MEDIUM**
-- [ ] Payment integration (Stripe/PayPal)
-- [ ] Email notifications
-- [ ] Admin panel for auction management
-- [ ] Advanced analytics and reporting
-- [ ] Mobile app development (React Native)
+### ✅ Tamamlanan Özellikler
 
-### Phase 4: Production & Optimization (2-3 weeks)
-**Priority: MEDIUM**
-- [ ] Performance optimization
-- [ ] Security hardening
-- [ ] CI/CD pipeline setup
-- [ ] Monitoring and logging
-- [ ] Load testing
-- [ ] Production deployment
+- ✅ **Kullanıcı Kimlik Doğrulama**: JWT tabanlı güvenli giriş/çıkış sistemi
+- ✅ **Araç Yönetimi**: Araç ekleme, düzenleme, silme ve listeleme
+- ✅ **Açık Artırma Sistemi**: Açık artırma oluşturma ve yönetme
+- ✅ **Teklif Verme**: Gerçek zamanlı teklif verme sistemi
+- ✅ **İzleme Listesi**: Açık artırmaları izleme listesine ekleme
+- ✅ **Ödeme Entegrasyonu**: Stripe ile ödeme işlemleri
+- ✅ **Bildirim Sistemi**: Kullanıcı bildirimleri
+- ✅ **Arama ve Filtreleme**: Gelişmiş arama ve filtreleme özellikleri
+- ✅ **Responsive Tasarım**: Mobil uyumlu arayüz
 
-## 🎯 Immediate Next Steps
+### 🚧 Geliştirme Aşamasında
 
-1. **Frontend Development Start**
-   - Set up Next.js 14 project structure
-   - Configure Tailwind CSS and Shadcn/ui
-   - Create authentication flow
+- 🔄 WebSocket ile gerçek zamanlı güncellemeler
+- 🔄 Admin paneli
+- 🔄 Gelişmiş analitik ve raporlama
 
-2. **API Gateway Implementation**
-   - Set up NestJS API Gateway
-   - Configure service routing
-   - Implement authentication middleware
+---
 
-3. **Real-time Features**
-   - Socket.io server setup
-   - Real-time bidding implementation
-   - Live auction updates
+## 🛠️ Teknoloji Stack
 
-## 🏗️ Architecture
+### Frontend
+- **React 18** - Kullanıcı arayüzü kütüphanesi
+- **TypeScript** - Tip güvenliği
+- **Vite** - Hızlı build tool
+- **React Router** - Sayfa yönlendirme
+- **Axios** - HTTP istekleri
+- **Zustand** - State yönetimi
+- **Socket.io Client** - Gerçek zamanlı iletişim
+- **Tailwind CSS** - Stil kütüphanesi
 
-This project uses a **monorepo** structure with **microservices** backend and **Next.js 14** frontend.
+### Backend
+- **NestJS** - Mikroservis framework'ü
+- **Prisma ORM** - Veritabanı yönetimi
+- **PostgreSQL** - Ana veritabanı
+- **Redis** - Cache ve session yönetimi
+- **JWT** - Kimlik doğrulama
+- **Socket.io** - Gerçek zamanlı iletişim
+- **Stripe** - Ödeme işlemleri
 
-### Tech Stack
+### DevOps
+- **Docker & Docker Compose** - Containerization
+- **Nginx** - Reverse proxy
+- **Turborepo** - Monorepo yönetimi
+- **PNPM** - Paket yöneticisi
 
-**Frontend:**
-- Next.js 14 (App Router)
-- React 18
-- TypeScript
-- Tailwind CSS
-- Shadcn/ui
-- Zustand (State Management)
-- React Query (Data Fetching)
-- Socket.io Client (Real-time)
+---
 
-**Backend:**
-- NestJS (Microservices)
-- Prisma ORM
-- PostgreSQL
-- Redis
-- Socket.io (Real-time)
-- Bull Queue (Job Processing)
-- JWT Authentication
-
-**DevOps:**
-- Docker & Docker Compose
-- Nginx (Reverse Proxy)
-- Turborepo (Monorepo Management)
-- PNPM Workspaces
-- GitHub Actions (CI/CD)
-
-## 🗃️ Database Schema
-
-### Auth Database Tables
-
-**users**
-- `id` (String, Primary Key)
-- `email` (String, Unique)
-- `firstName`, `lastName` (String)
-- `phone` (String, Optional)
-- `password` (String, Hashed)
-- `role` (Enum: USER, ADMIN, MODERATOR)
-- `isActive`, `isEmailVerified` (Boolean)
-- `emailVerificationToken`, `passwordResetToken` (String, Optional)
-- `passwordResetExpires`, `lastLoginAt` (DateTime, Optional)
-- `createdAt`, `updatedAt` (DateTime)
-
-**refresh_tokens**
-- `id` (String, Primary Key)
-- `token` (String, Unique)
-- `userId` (String, Foreign Key)
-- `expiresAt` (DateTime)
-- `isRevoked` (Boolean)
-- `createdAt` (DateTime)
-
-**login_history**
-- `id` (String, Primary Key)
-- `userId` (String, Foreign Key)
-- `ipAddress`, `userAgent` (String, Optional)
-- `success` (Boolean)
-- `action` (Enum: LOGIN, LOGOUT, REGISTER, PASSWORD_CHANGE, TOKEN_REFRESH)
-- `createdAt` (DateTime)
-
-### Vehicle Database Tables
-
-**categories**
-- `id` (String, Primary Key)
-- `name` (String, Unique)
-- `description` (String, Optional)
-- `isActive` (Boolean)
-- `createdAt`, `updatedAt` (DateTime)
-
-**vehicles**
-- `id` (String, Primary Key)
-- `make`, `model` (String)
-- `year`, `mileage` (Integer)
-- `fuelType` (Enum: GASOLINE, DIESEL, ELECTRIC, HYBRID, LPG, CNG)
-- `transmission` (Enum: MANUAL, AUTOMATIC, CVT, SEMI_AUTOMATIC)
-- `condition` (Enum: NEW, EXCELLENT, GOOD, FAIR, POOR)
-- `status` (Enum: ACTIVE, INACTIVE, SOLD, PENDING, DRAFT)
-- `description` (String, Optional)
-- `images` (String Array)
-- `engineSize` (Float, Optional)
-- `color`, `vin`, `licensePlate`, `location` (String, Optional)
-- `estimatedValue`, `reservePrice` (Float, Optional)
-- `userId`, `categoryId` (String, Foreign Keys)
-- `createdAt`, `updatedAt` (DateTime)
-
-**auctions**
-- `id` (String, Primary Key)
-- `title` (String)
-- `description` (String, Optional)
-- `startPrice`, `reservePrice`, `currentBid` (Float)
-- `startTime`, `endTime` (DateTime)
-- `status` (Enum: DRAFT, ACTIVE, ENDED, CANCELLED)
-- `vehicleId` (String, Unique Foreign Key)
-- `userId`, `winnerId` (String, Foreign Keys)
-- `createdAt`, `updatedAt` (DateTime)
-
-**bids**
-- `id` (String, Primary Key)
-- `amount` (Float)
-- `userId`, `auctionId` (String, Foreign Keys)
-- `createdAt` (DateTime)
-
-## 📁 Project Structure
+## 📁 Proje Yapısı
 
 ```
 vehicle-auction-platform/
 ├── apps/
-│   ├── frontend/                 # Next.js 14 Application
-│   └── backend/                  # Microservices
-│       ├── api-gateway/          # API Gateway Service
-│       ├── auth-service/         # Authentication Service ✅
-│       ├── vehicle-service/      # Vehicle Management Service ✅
-│       ├── auction-service/      # Auction Management Service
-│       ├── bid-service/          # Bidding Service
-│       ├── payment-service/      # Payment Processing Service
-│       └── notification-service/ # Notification Service
-├── packages/
-│   ├── types/                    # Shared TypeScript Types
-│   ├── utils/                    # Shared Utilities
-│   └── config/                   # Shared Configuration
-├── infrastructure/
-│   ├── docker/                   # Docker Configurations
-│   ├── kubernetes/               # Kubernetes Manifests
-│   └── nginx/                    # Nginx Configuration
-├── scripts/                      # Build & Deploy Scripts
-├── docs/                         # Documentation
-└── .github/workflows/            # CI/CD Workflows
+│   ├── frontend/                    # React frontend uygulaması
+│   │   ├── src/
+│   │   │   ├── pages/              # Sayfa bileşenleri
+│   │   │   ├── components/         # Yeniden kullanılabilir bileşenler
+│   │   │   ├── lib/                # API client'ları ve yardımcı fonksiyonlar
+│   │   │   ├── store/              # Zustand state yönetimi
+│   │   │   └── types/              # TypeScript tipleri
+│   │   └── package.json
+│   │
+│   └── backend/                     # Backend mikroservisler
+│       ├── api-gateway-backup/     # API Gateway (tüm istekleri yönlendirir)
+│       ├── auth-service/           # Kimlik doğrulama servisi
+│       ├── vehicle-service/        # Araç yönetimi servisi
+│       ├── auction-service/          # Açık artırma servisi
+│       ├── bid-service/           # Teklif servisi
+│       ├── payment-service/       # Ödeme servisi
+│       └── notification-service/  # Bildirim servisi
+│
+├── infrastructure/                   # Altyapı dosyaları
+│   ├── docker/                     # Docker konfigürasyonları
+│   └── nginx/                      # Nginx konfigürasyonları
+│
+├── docker-compose.yml              # Tüm servisleri çalıştıran Docker Compose dosyası
+└── README.md                       # Bu dosya
 ```
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
+## 🚀 Kurulum ve Çalıştırma
 
-- Node.js 20+
-- PNPM 8.12.0+
-- Docker Desktop
-- Git
+### Gereksinimler
 
-### Installation
+Aşağıdaki yazılımların sisteminizde yüklü olması gerekmektedir:
 
-1. **Clone the repository:**
+- **Node.js** 20 veya üzeri
+- **PNPM** 8.12.0 veya üzeri
+- **Docker Desktop** (Windows/Mac) veya **Docker** + **Docker Compose** (Linux)
+- **Git**
+
+### Adım 1: Projeyi İndirin
+
+```bash
+# GitHub'dan projeyi klonlayın
+git clone <repository-url>
+cd vehicle-auction-platform
+```
+
+### Adım 2: Bağımlılıkları Yükleyin
+
+```bash
+# Tüm bağımlılıkları yükleyin
+pnpm install
+```
+
+### Adım 3: Docker Servislerini Başlatın
+
+Bu komut, PostgreSQL, Redis ve tüm backend servislerini Docker container'larında başlatır:
+
+```bash
+# Docker servislerini başlat
+docker-compose up -d
+```
+
+**Ne Oluyor?**
+- PostgreSQL veritabanı başlatılıyor
+- Redis cache servisi başlatılıyor
+- Tüm backend servisleri (auth, vehicle, auction, bid, payment, notification) başlatılıyor
+- API Gateway başlatılıyor
+
+**Kontrol Etmek İçin:**
+```bash
+# Tüm container'ların çalıştığını kontrol edin
+docker-compose ps
+```
+
+### Adım 4: Veritabanı Migration'larını Çalıştırın
+
+Her servis kendi veritabanına sahiptir ve migration'lar otomatik olarak çalışır. Ancak manuel olarak çalıştırmak isterseniz:
+
+```bash
+# Her servis için migration'ları çalıştır
+cd apps/backend/auth-service && npx prisma migrate deploy
+cd apps/backend/vehicle-service && npx prisma migrate deploy
+cd apps/backend/auction-service && npx prisma migrate deploy
+cd apps/backend/bid-service && npx prisma migrate deploy
+cd apps/backend/payment-service && npx prisma migrate deploy
+cd apps/backend/notification-service && npx prisma migrate deploy
+```
+
+### Adım 5: Frontend'i Başlatın
+
+Yeni bir terminal penceresi açın ve:
+
+```bash
+# Frontend dizinine gidin
+cd apps/frontend
+
+# Frontend'i başlatın
+pnpm dev
+```
+
+Frontend şu adreste çalışacak: **http://localhost:3001**
+
+### Adım 6: Test Edin
+
+1. Tarayıcınızda **http://localhost:3001** adresine gidin
+2. Kayıt olun veya giriş yapın
+3. Araç ekleyin
+4. Açık artırma oluşturun
+5. Teklif verin
+
+---
+
+## 🌐 Servisler ve Portlar
+
+Platform, birbirinden bağımsız çalışan mikroservislerden oluşur. Her servis kendi portunda çalışır:
+
+| Servis | Port | Açıklama | Durum |
+|--------|------|----------|-------|
+| **Frontend** | 3001 | React uygulaması | ✅ Çalışıyor |
+| **API Gateway** | 4008 | Tüm istekleri yönlendiren gateway | ✅ Çalışıyor |
+| **Auth Service** | 4001 | Kullanıcı kimlik doğrulama | ✅ Çalışıyor |
+| **Vehicle Service** | 4002 | Araç yönetimi | ✅ Çalışıyor |
+| **Auction Service** | 4003 | Açık artırma yönetimi | ✅ Çalışıyor |
+| **Bid Service** | 4004 | Teklif yönetimi | ✅ Çalışıyor |
+| **Payment Service** | 4005 | Ödeme işlemleri | ✅ Çalışıyor |
+| **Notification Service** | 4006 | Bildirimler | ✅ Çalışıyor |
+| **PostgreSQL** | 5432 | Veritabanı | ✅ Çalışıyor |
+| **Redis** | 6379 | Cache | ✅ Çalışıyor |
+| **pgAdmin** | 5050 | Veritabanı yönetim arayüzü | ✅ Çalışıyor |
+
+### Servislerin Ne İşe Yaradığı
+
+#### 1. **Frontend (Port 3001)**
+- Kullanıcı arayüzü
+- Tüm sayfalar ve bileşenler
+- API istekleri buradan gönderilir
+
+#### 2. **API Gateway (Port 4008)**
+- Tüm istekleri alır ve ilgili servise yönlendirir
+- Authentication kontrolü yapar
+- Rate limiting uygular
+- WebSocket bağlantılarını yönetir
+
+#### 3. **Auth Service (Port 4001)**
+- Kullanıcı kaydı
+- Giriş/çıkış işlemleri
+- JWT token oluşturma ve doğrulama
+- Şifre sıfırlama
+- Profil yönetimi
+
+#### 4. **Vehicle Service (Port 4002)**
+- Araç ekleme, düzenleme, silme
+- Araç listeleme ve arama
+- Kategori yönetimi
+- Araç filtreleme
+
+#### 5. **Auction Service (Port 4003)**
+- Açık artırma oluşturma
+- Açık artırma listeleme
+- Açık artırma detayları
+- İzleme listesi yönetimi
+
+#### 6. **Bid Service (Port 4004)**
+- Teklif verme
+- Teklif geçmişi
+- En yüksek teklif bilgisi
+- Otomatik teklif sistemi
+
+#### 7. **Payment Service (Port 4005)**
+- Stripe entegrasyonu
+- Ödeme işlemleri
+- Ödeme geçmişi
+
+#### 8. **Notification Service (Port 4006)**
+- Kullanıcı bildirimleri
+- E-posta bildirimleri (gelecekte)
+- Push bildirimleri (gelecekte)
+
+---
+
+## 📡 API Endpoint'leri
+
+### Auth Service (Port 4001)
+
+**Base URL:** `http://localhost:4001/api/v1/auth`
+
+| Method | Endpoint | Açıklama | Auth Gerekli |
+|--------|----------|-----------|--------------|
+| POST | `/register` | Kullanıcı kaydı | ❌ |
+| POST | `/login` | Kullanıcı girişi | ❌ |
+| POST | `/logout` | Kullanıcı çıkışı | ✅ |
+| POST | `/refresh` | Token yenileme | ❌ |
+| GET | `/profile` | Kullanıcı profili | ✅ |
+| POST | `/change-password` | Şifre değiştirme | ✅ |
+| GET | `/login-history` | Giriş geçmişi | ✅ |
+
+**Örnek Kullanım:**
+```bash
+# Kayıt ol
+curl -X POST http://localhost:4001/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "SecurePass123!",
+    "firstName": "John",
+    "lastName": "Doe"
+  }'
+
+# Giriş yap
+curl -X POST http://localhost:4001/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "SecurePass123!"
+  }'
+```
+
+### Vehicle Service (Port 4002)
+
+**Base URL:** `http://localhost:4002/api/v1`
+
+| Method | Endpoint | Açıklama | Auth Gerekli |
+|--------|----------|-----------|--------------|
+| GET | `/vehicles` | Araç listesi | ❌ |
+| POST | `/vehicles` | Yeni araç ekle | ✅ |
+| GET | `/vehicles/:id` | Araç detayı | ❌ |
+| PATCH | `/vehicles/:id` | Araç güncelle | ✅ |
+| DELETE | `/vehicles/:id` | Araç sil | ✅ |
+| GET | `/vehicles/search` | Araç ara | ❌ |
+| GET | `/vehicles/my-vehicles` | Kullanıcının araçları | ✅ |
+| GET | `/categories` | Kategori listesi | ❌ |
+
+**Filtreleme Parametreleri:**
+```
+?page=1&limit=10&make=BMW&model=X5&yearFrom=2020&yearTo=2023
+&mileageFrom=10000&mileageTo=50000&fuelType=GASOLINE
+```
+
+**Örnek Kullanım:**
+```bash
+# Araç listesi
+curl http://localhost:4002/api/v1/vehicles?page=1&limit=10
+
+# Araç ekle
+curl -X POST http://localhost:4002/api/v1/vehicles \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -d '{
+    "make": "Toyota",
+    "model": "Camry",
+    "year": 2023,
+    "mileage": 15000,
+    "fuelType": "GASOLINE",
+    "transmission": "AUTOMATIC",
+    "condition": "EXCELLENT",
+    "categoryId": "category-id"
+  }'
+```
+
+### Auction Service (Port 4003)
+
+**Base URL:** `http://localhost:4003/api/v1/auctions`
+
+| Method | Endpoint | Açıklama | Auth Gerekli |
+|--------|----------|-----------|--------------|
+| GET | `/` | Açık artırma listesi | ❌ |
+| POST | `/` | Yeni açık artırma | ✅ |
+| GET | `/:id` | Açık artırma detayı | ❌ |
+| PATCH | `/:id` | Açık artırma güncelle | ✅ |
+| DELETE | `/:id` | Açık artırma sil | ✅ |
+| GET | `/watchlist/:userId` | Kullanıcının izleme listesi | ✅ |
+| POST | `/:id/watchlist` | İzleme listesine ekle | ✅ |
+| DELETE | `/:id/watchlist` | İzleme listesinden çıkar | ✅ |
+
+### Bid Service (Port 4004)
+
+**Base URL:** `http://localhost:4004/api/v1/bids`
+
+| Method | Endpoint | Açıklama | Auth Gerekli |
+|--------|----------|-----------|--------------|
+| POST | `/` | Teklif ver | ✅ |
+| GET | `/auction/:auctionId` | Açık artırma teklifleri | ❌ |
+| GET | `/auction/:auctionId/highest` | En yüksek teklif | ❌ |
+| GET | `/auction/:auctionId/my-bids` | Kullanıcının teklifleri | ✅ |
+
+---
+
+## 🗄️ Veritabanı Yapısı
+
+Platform, her servis için ayrı PostgreSQL veritabanı kullanır:
+
+### Auth Database (`vehicle_auction_auth`)
+
+**users** tablosu:
+- `id` - Kullanıcı ID'si
+- `email` - E-posta adresi (unique)
+- `firstName`, `lastName` - İsim ve soyisim
+- `password` - Hash'lenmiş şifre
+- `role` - Kullanıcı rolü (USER, ADMIN, MODERATOR)
+- `isActive` - Aktif mi?
+- `createdAt`, `updatedAt` - Oluşturulma ve güncellenme tarihleri
+
+**refresh_tokens** tablosu:
+- `id` - Token ID'si
+- `token` - Refresh token değeri
+- `userId` - Kullanıcı ID'si
+- `expiresAt` - Son kullanma tarihi
+- `isRevoked` - İptal edildi mi?
+
+### Vehicle Database (`vehicle_auction_vehicles`)
+
+**vehicles** tablosu:
+- `id` - Araç ID'si
+- `make`, `model` - Marka ve model
+- `year` - Yıl
+- `mileage` - Kilometre
+- `fuelType` - Yakıt tipi (GASOLINE, DIESEL, ELECTRIC, vb.)
+- `transmission` - Vites tipi (MANUAL, AUTOMATIC, vb.)
+- `condition` - Durum (NEW, EXCELLENT, GOOD, vb.)
+- `status` - Durum (ACTIVE, INACTIVE, SOLD, vb.)
+- `userId` - Araç sahibi ID'si
+- `categoryId` - Kategori ID'si
+
+**categories** tablosu:
+- `id` - Kategori ID'si
+- `name` - Kategori adı
+- `slug` - URL-friendly isim
+- `isActive` - Aktif mi?
+
+**auctions** tablosu:
+- `id` - Açık artırma ID'si
+- `vehicleId` - Araç ID'si
+- `title` - Başlık
+- `startPrice` - Başlangıç fiyatı
+- `currentBid` - Mevcut en yüksek teklif
+- `startTime`, `endTime` - Başlangıç ve bitiş zamanı
+- `status` - Durum (DRAFT, ACTIVE, ENDED, vb.)
+
+**bids** tablosu:
+- `id` - Teklif ID'si
+- `auctionId` - Açık artırma ID'si
+- `userId` - Teklif veren kullanıcı ID'si
+- `amount` - Teklif miktarı
+- `createdAt` - Teklif zamanı
+
+### Diğer Veritabanları
+
+- **auction** - Açık artırma servisi veritabanı
+- **bid** - Teklif servisi veritabanı
+- **payment** - Ödeme servisi veritabanı
+- **notification** - Bildirim servisi veritabanı
+
+---
+
+## 💻 Geliştirme Rehberi
+
+### Backend Geliştirme
+
+#### Yeni Bir Servis Ekleme
+
+1. `apps/backend/` dizininde yeni bir klasör oluşturun
+2. NestJS projesi oluşturun:
    ```bash
-   git clone <repository-url>
-   cd vehicle-auction-platform
+   cd apps/backend
+   nest new your-service-name
+   ```
+3. `docker-compose.yml` dosyasına servisi ekleyin
+4. Prisma schema oluşturun
+5. Migration'ları çalıştırın
+
+#### Servis Loglarını İzleme
+
+```bash
+# Belirli bir servisin loglarını izle
+docker-compose logs -f vehicle-service
+
+# Tüm servislerin loglarını izle
+docker-compose logs -f
+```
+
+#### Servisi Yeniden Build Etme
+
+```bash
+# Servisi yeniden build et
+docker-compose build vehicle-service
+
+# Servisi yeniden başlat
+docker-compose up -d vehicle-service
+```
+
+### Frontend Geliştirme
+
+#### Yeni Bir Sayfa Ekleme
+
+1. `apps/frontend/src/pages/` dizininde yeni bir dosya oluşturun
+2. `App.tsx` veya router dosyasına route ekleyin
+3. API client'ı güncelleyin (gerekirse)
+
+#### API Client Kullanımı
+
+```typescript
+import { vehicleApi } from '@/lib/api/vehicle'
+
+// Araç listesi
+const vehicles = await vehicleApi.getAll({ page: 1, limit: 10 })
+
+// Araç ekle
+const newVehicle = await vehicleApi.create({
+  make: 'Toyota',
+  model: 'Camry',
+  // ...
+})
+```
+
+---
+
+## 🔧 Sorun Giderme
+
+### Docker Container'lar Çalışmıyor
+
+```bash
+# Container'ların durumunu kontrol et
+docker-compose ps
+
+# Logları kontrol et
+docker-compose logs
+
+# Container'ları yeniden başlat
+docker-compose restart
+
+# Tüm container'ları durdur ve temizle
+docker-compose down
+docker-compose up -d
+```
+
+### Veritabanı Bağlantı Hatası
+
+1. PostgreSQL container'ının çalıştığını kontrol edin:
+   ```bash
+   docker-compose ps postgres
    ```
 
-2. **Install dependencies:**
+2. Veritabanının oluşturulduğunu kontrol edin:
    ```bash
-   pnpm install
+   docker-compose exec postgres psql -U postgres -l
    ```
 
-3. **Start infrastructure:**
-   ```bash
-   pnpm docker:up
-   ```
+3. Servislerin environment variable'larını kontrol edin
 
-4. **Run database migrations:**
-   ```bash
-   pnpm db:migrate
-   pnpm db:seed
-   ```
+### Port Çakışması
 
-5. **Start development servers:**
+Eğer bir port zaten kullanılıyorsa:
+
+1. Port'u kullanan process'i bulun:
    ```bash
-   # Start all services
-   pnpm dev
+   # Windows
+   netstat -ano | findstr :4002
    
-   # Or start individually
-   pnpm start:frontend
-   pnpm start:backend
+   # Linux/Mac
+   lsof -i :4002
    ```
 
-## 📋 Available Scripts
+2. Process'i sonlandırın veya `docker-compose.yml` dosyasında port'u değiştirin
 
-- `pnpm dev` - Start all services in development mode
-- `pnpm build` - Build all applications
-- `pnpm test` - Run all tests
-- `pnpm lint` - Lint all code
-- `pnpm docker:up` - Start Docker services
-- `pnpm docker:down` - Stop Docker services
-- `pnpm db:migrate` - Run database migrations
-- `pnpm db:seed` - Seed database with sample data
+### Frontend API İstekleri Çalışmıyor
 
-## 🌐 Services & Ports
+1. Backend servislerinin çalıştığını kontrol edin
+2. CORS ayarlarını kontrol edin
+3. API base URL'lerini kontrol edin (`apps/frontend/src/lib/api/config.ts`)
 
-- **Frontend:** http://localhost:3000
-- **API Gateway:** http://localhost:4000
-- **Auth Service:** http://localhost:3001 ✅
-- **Vehicle Service:** http://localhost:4002 ✅
-- **Auction Service:** http://localhost:4003
-- **Bid Service:** http://localhost:4004
-- **Payment Service:** http://localhost:4005
-- **Notification Service:** http://localhost:4006
-- **PostgreSQL:** localhost:5432
-- **Redis:** localhost:6379
-- **pgAdmin:** http://localhost:8080
+### JWT Token Hataları
 
-## 🔌 API Endpoints (Currently Working)
+1. Token'ın süresi dolmuş olabilir - yeniden giriş yapın
+2. `JWT_SECRET` environment variable'ının tüm servislerde aynı olduğundan emin olun
 
-> **📚 Detaylı API Dokümantasyonu:** [Backend API Dokümantasyonu](./docs/api/backend-api.md)
+---
 
-### Auth Service (Port 3001) ✅
-```bash
-POST /api/v1/auth/register        # Kullanıcı kaydı
-POST /api/v1/auth/login           # Kullanıcı girişi
-POST /api/v1/auth/refresh         # Access token yenileme
-POST /api/v1/auth/logout          # Kullanıcı çıkışı
-POST /api/v1/auth/change-password # Şifre değiştirme
-GET  /api/v1/auth/profile         # Kullanıcı profili
-GET  /api/v1/auth/login-history   # Giriş geçmişi
-```
+## 📝 Önemli Notlar
 
-### Vehicle Service (Port 4002) ✅
-```bash
-# Araçlar
-GET    /api/v1/vehicles           # Araç listesi (filtreleme ve sayfalama)
-POST   /api/v1/vehicles           # Yeni araç oluşturma
-GET    /api/v1/vehicles/:id       # Araç detayı
-PUT    /api/v1/vehicles/:id       # Araç güncelleme
-DELETE /api/v1/vehicles/:id       # Araç silme
-GET    /api/v1/vehicles/search    # Araç arama
-GET    /api/v1/vehicles/my-vehicles # Kullanıcının araçları
+### Environment Variables
 
-# Açık Artırmalar
-GET    /api/v1/auctions           # Açık artırma listesi
-POST   /api/v1/auctions           # Yeni açık artırma
-GET    /api/v1/auctions/:id       # Açık artırma detayı
-PUT    /api/v1/auctions/:id       # Açık artırma güncelleme
-DELETE /api/v1/auctions/:id       # Açık artırma silme
+Tüm servisler için `JWT_SECRET` aynı olmalıdır. `docker-compose.yml` dosyasında bu değerler tanımlıdır.
 
-# Teklifler
-GET    /api/v1/bids               # Teklif listesi
-POST   /api/v1/bids               # Yeni teklif verme
-GET    /api/v1/bids/:id           # Teklif detayı
+### Veritabanı Migration'ları
 
-# Kategoriler
-GET    /api/v1/categories         # Kategori listesi
-POST   /api/v1/categories         # Yeni kategori oluşturma
-PUT    /api/v1/categories/:id     # Kategori güncelleme
-DELETE /api/v1/categories/:id     # Kategori silme
-```
+Her servis kendi veritabanına sahiptir. Migration'lar container başlatıldığında otomatik çalışır.
 
-### Filtreleme ve Sayfalama Parametreleri ✅
-```bash
-# Araç Filtreleme
-?page=1&limit=10&make=BMW&model=X5&yearFrom=2020&yearTo=2023&mileageFrom=10000&mileageTo=50000&fuelType=GASOLINE
+### CORS Ayarları
 
-# Araç Arama
-?q=Toyota&page=1&limit=10
+Frontend'in çalıştığı port'lar (`http://localhost:3001`) backend servislerinin CORS ayarlarında tanımlı olmalıdır.
 
-# Açık Artırma Filtreleme
-?page=1&limit=10&status=ACTIVE&startPriceFrom=100000&startPriceTo=500000
+---
 
-# Teklif Filtreleme
-?page=1&limit=10&amountFrom=100000&amountTo=1000000&auctionId=auction-uuid
-```
+## 🤝 Katkıda Bulunma
 
-### Doğru Parametre İsimleri ⚠️
-- **Yıl filtreleme:** `yearFrom`, `yearTo` (~~minYear, maxYear değil~~)
-- **Kilometre filtreleme:** `mileageFrom`, `mileageTo`
-- **Fiyat filtreleme:** `startPriceFrom`, `startPriceTo`
-- **Teklif filtreleme:** `amountFrom`, `amountTo`
+1. Projeyi fork edin
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
+4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
+5. Pull Request oluşturun
 
-## 📚 Documentation
+---
 
-- **[Backend API Dokümantasyonu](./docs/api/backend-api.md)** - Kapsamlı API endpoint rehberi
-- [Development Guide](./docs/development/) - Geliştirme rehberi
-- [Deployment Guide](./docs/deployment/) - Deployment rehberi
+## 📄 Lisans
 
-### API Dokümantasyonu İçeriği
-- ✅ **Auth Service** - Kimlik doğrulama endpoint'leri
-- ✅ **Vehicle Service** - Araç yönetimi endpoint'leri
-- ✅ **Filtreleme Parametreleri** - Doğru parametre isimleri
-- ✅ **Hata Kodları** - HTTP status kodları ve hata mesajları
-- ✅ **Örnek İstekler** - Detaylı request/response örnekleri
+Bu proje MIT lisansı altında lisanslanmıştır.
 
-## 🤝 Contributing
+---
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## 📞 İletişim
 
-## 📄 License
+Sorularınız için issue açabilir veya proje sahibi ile iletişime geçebilirsiniz.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
+
+**Not:** Bu README dosyası projenin mevcut durumunu yansıtmaktadır. Proje geliştikçe güncellenecektir.
