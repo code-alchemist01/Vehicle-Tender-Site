@@ -14,14 +14,15 @@ export class AutoBidService {
   ) {}
 
   async createAutoBid(createAutoBidDto: CreateAutoBidDto) {
-    const { auctionId, bidderId, maxAmount, incrementAmount } = createAutoBidDto;
+    const { auctionId, bidderId, maxAmount, increment } = createAutoBidDto;
 
-    // Check if auto bid already exists for this user and auction
-    const existingAutoBid = await this.prisma.autoBid.findFirst({
+    // Check if auto bid already exists for this user and auction (unique constraint on auctionId + bidderId)
+    const existingAutoBid = await this.prisma.autoBid.findUnique({
       where: {
-        auctionId,
-        bidderId,
-        isActive: true,
+        auctionId_bidderId: {
+          auctionId,
+          bidderId,
+        },
       },
     });
 
@@ -31,7 +32,7 @@ export class AutoBidService {
         where: { id: existingAutoBid.id },
         data: {
           maxAmount,
-          increment: incrementAmount,
+          increment: increment,
         },
       });
     }
@@ -42,7 +43,7 @@ export class AutoBidService {
         auctionId,
         bidderId,
         maxAmount,
-        increment: incrementAmount,
+        increment: increment,
         isActive: true,
       },
     });

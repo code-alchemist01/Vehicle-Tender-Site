@@ -69,7 +69,7 @@ npm run start:prod
 
 | Değişken | Açıklama | Varsayılan |
 |----------|----------|------------|
-| `PORT` | Servis portu | 4007 |
+| `PORT` | Servis portu | 4004 |
 | `DATABASE_URL` | PostgreSQL bağlantı URL'i | - |
 | `REDIS_HOST` | Redis sunucu adresi | localhost |
 | `REDIS_PORT` | Redis portu | 6379 |
@@ -108,25 +108,32 @@ npm run start:prod
 
 ## 🔌 API Endpoints
 
+**Not:** Bid Service'de global prefix yoktur. Tüm endpoint'ler direkt `/bids` path'i ile başlar. Port: **4004**
+
+### Health Check
+- `GET /health` - Servis sağlık kontrolü
+
 ### Teklif İşlemleri
 - `POST /bids` - Yeni teklif ver
-- `GET /bids` - Kullanıcının tekliflerini listele
+- `GET /bids` - Tüm teklifleri listele (filtreleme ile)
 - `GET /bids/:id` - Belirli bir teklifi getir
-- `DELETE /bids/:id` - Teklifi iptal et
+- `DELETE /bids/:id/cancel/:bidderId` - Teklifi iptal et
 
-### Otomatik Teklif
-- `POST /bids/auto` - Otomatik teklif oluştur
-- `GET /bids/auto` - Otomatik teklifleri listele
-- `PUT /bids/auto/:id` - Otomatik teklifi güncelle
-- `DELETE /bids/auto/:id` - Otomatik teklifi sil
+### Kullanıcı Bazlı İşlemler
+- `GET /bids/user/:bidderId` - Kullanıcının tekliflerini listele
 
 ### Müzayede Bazlı İşlemler
 - `GET /bids/auction/:auctionId` - Müzayede tekliflerini listele
 - `GET /bids/auction/:auctionId/highest` - En yüksek teklifi getir
-- `GET /bids/auction/:auctionId/history` - Müzayede teklif geçmişi
 
-### Sistem
-- `GET /health` - Servis sağlık kontrolü
+### İstatistikler
+- `GET /bids/statistics` - Teklif istatistikleri
+  - Query Param: `auctionId` (opsiyonel) - Belirli müzayede için istatistikler
+
+### Otomatik Teklif
+- `POST /bids/auto` - Otomatik teklif oluştur
+- `GET /bids/auto/user/:bidderId` - Kullanıcının otomatik tekliflerini listele
+- `DELETE /bids/auto/:autoBidId/user/:bidderId` - Otomatik teklifi devre dışı bırak
 
 ## 🧪 Test
 

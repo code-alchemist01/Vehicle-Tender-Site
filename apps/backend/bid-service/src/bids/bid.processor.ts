@@ -87,7 +87,7 @@ export class BidProcessor {
 
   private async sendBidNotification(bid: any) {
     try {
-      const notificationServiceUrl = process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:4005';
+      const notificationServiceUrl = process.env.NOTIFICATION_SERVICE_URL || 'http://notification-service:4006';
       await firstValueFrom(
         this.httpService.post(`${notificationServiceUrl}/notifications`, {
           type: 'BID_PLACED',
@@ -100,7 +100,8 @@ export class BidProcessor {
         }),
       );
     } catch (error) {
-      this.logger.error('Error sending bid notification:', error);
+      // Log but don't fail if notification fails
+      this.logger.warn('Error sending bid notification (non-critical):', error.message);
     }
   }
 }

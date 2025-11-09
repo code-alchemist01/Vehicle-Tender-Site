@@ -1,0 +1,1841 @@
+﻿{
+    "Vehicle-Vehicles-List":  {
+                                  "Status":  "âœ…",
+                                  "Message":  "Success",
+                                  "StatusCode":  200,
+                                  "Data":  {
+                                               "success":  true,
+                                               "message":  "Vehicles retrieved successfully",
+                                               "data":  {
+                                                            "data":  [
+                                                                         {
+                                                                             "id":  "cmgr60w9v000a6uexkcbc8ibl",
+                                                                             "make":  "Yamaha",
+                                                                             "model":  "MT-07",
+                                                                             "year":  2021,
+                                                                             "mileage":  8500,
+                                                                             "fuelType":  "GASOLINE",
+                                                                             "transmission":  "MANUAL",
+                                                                             "condition":  "EXCELLENT",
+                                                                             "status":  "ACTIVE",
+                                                                             "description":  "Yamaha MT-07 naked bike. Az kullanılmış, temiz.",
+                                                                             "images":  [
+                                                                                            "https://example.com/yamaha-1.jpg",
+                                                                                            "https://example.com/yamaha-2.jpg"
+                                                                                        ],
+                                                                             "engineSize":  0.689,
+                                                                             "color":  "Mavi",
+                                                                             "vin":  null,
+                                                                             "licensePlate":  null,
+                                                                             "location":  "İzmir",
+                                                                             "estimatedValue":  85000,
+                                                                             "reservePrice":  null,
+                                                                             "userId":  "user-3",
+                                                                             "categoryId":  "cmgr60w8z00016uex5b1emw37",
+                                                                             "createdAt":  "2025-10-14T23:00:33.763Z",
+                                                                             "updatedAt":  "2025-10-14T23:00:33.763Z",
+                                                                             "category":  {
+                                                                                              "id":  "cmgr60w8z00016uex5b1emw37",
+                                                                                              "name":  "Motosiklet",
+                                                                                              "description":  "Motosikletler ve scooterlar",
+                                                                                              "isActive":  true,
+                                                                                              "createdAt":  "2025-10-14T23:00:33.731Z",
+                                                                                              "updatedAt":  "2025-10-14T23:00:33.731Z"
+                                                                                          }
+                                                                         },
+                                                                         {
+                                                                             "id":  "cmgr60w9r00086uexaaltnwii",
+                                                                             "make":  "Mercedes",
+                                                                             "model":  "C200",
+                                                                             "year":  2019,
+                                                                             "mileage":  52000,
+                                                                             "fuelType":  "GASOLINE",
+                                                                             "transmission":  "AUTOMATIC",
+                                                                             "condition":  "GOOD",
+                                                                             "status":  "ACTIVE",
+                                                                             "description":  "Mercedes C200 AMG Line. Garaj çıkışlı, bakımlı.",
+                                                                             "images":  [
+                                                                                            "https://example.com/mercedes-1.jpg",
+                                                                                            "https://example.com/mercedes-2.jpg"
+                                                                                        ],
+                                                                             "engineSize":  1.5,
+                                                                             "color":  "Siyah",
+                                                                             "vin":  null,
+                                                                             "licensePlate":  null,
+                                                                             "location":  "Ankara",
+                                                                             "estimatedValue":  520000,
+                                                                             "reservePrice":  null,
+                                                                             "userId":  "user-2",
+                                                                             "categoryId":  "cmgr60w8h00006uexzrc8p00y",
+                                                                             "createdAt":  "2025-10-14T23:00:33.759Z",
+                                                                             "updatedAt":  "2025-10-14T23:00:33.759Z",
+                                                                             "category":  {
+                                                                                              "id":  "cmgr60w8h00006uexzrc8p00y",
+                                                                                              "name":  "Otomobil",
+                                                                                              "description":  "Binek araçlar ve otomobiller",
+                                                                                              "isActive":  true,
+                                                                                              "createdAt":  "2025-10-14T23:00:33.713Z",
+                                                                                              "updatedAt":  "2025-10-14T23:00:33.713Z"
+                                                                                          }
+                                                                         },
+                                                                         {
+                                                                             "id":  "cmgr60w9h00066uexs4d839vh",
+                                                                             "make":  "BMW",
+                                                                             "model":  "3 Serisi 320i",
+                                                                             "year":  2020,
+                                                                             "mileage":  45000,
+                                                                             "fuelType":  "GASOLINE",
+                                                                             "transmission":  "AUTOMATIC",
+                                                                             "condition":  "EXCELLENT",
+                                                                             "status":  "ACTIVE",
+                                                                             "description":  "Temiz, bakımlı BMW 3 Serisi. Tek elden, hasarsız.",
+                                                                             "images":  [
+                                                                                            "https://example.com/bmw-1.jpg",
+                                                                                            "https://example.com/bmw-2.jpg"
+                                                                                        ],
+                                                                             "engineSize":  2,
+                                                                             "color":  "Beyaz",
+                                                                             "vin":  null,
+                                                                             "licensePlate":  null,
+                                                                             "location":  "İstanbul",
+                                                                             "estimatedValue":  450000,
+                                                                             "reservePrice":  null,
+                                                                             "userId":  "user-1",
+                                                                             "categoryId":  "cmgr60w8h00006uexzrc8p00y",
+                                                                             "createdAt":  "2025-10-14T23:00:33.750Z",
+                                                                             "updatedAt":  "2025-10-14T23:00:33.750Z",
+                                                                             "category":  {
+                                                                                              "id":  "cmgr60w8h00006uexzrc8p00y",
+                                                                                              "name":  "Otomobil",
+                                                                                              "description":  "Binek araçlar ve otomobiller",
+                                                                                              "isActive":  true,
+                                                                                              "createdAt":  "2025-10-14T23:00:33.713Z",
+                                                                                              "updatedAt":  "2025-10-14T23:00:33.713Z"
+                                                                                          }
+                                                                         }
+                                                                     ],
+                                                            "meta":  {
+                                                                         "page":  1,
+                                                                         "limit":  10,
+                                                                         "total":  3,
+                                                                         "totalPages":  1,
+                                                                         "hasNextPage":  false,
+                                                                         "hasPreviousPage":  false
+                                                                     }
+                                                        },
+                                               "timestamp":  "2025-11-09T12:28:01.854Z"
+                                           }
+                              },
+    "Auction-Auctions-Stats":  {
+                                   "Status":  "âœ…",
+                                   "Message":  "Success",
+                                   "StatusCode":  200,
+                                   "Data":  {
+                                                "total":  4,
+                                                "active":  1,
+                                                "scheduled":  0,
+                                                "ended":  3
+                                            }
+                               },
+    "Bid-Bids-Highest":  {
+                             "Status":  "âœ…",
+                             "Message":  "Success",
+                             "StatusCode":  200,
+                             "Data":  {
+                                          "id":  "cmhrnm5an00065fk2g39c595c",
+                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                          "amount":  "51000",
+                                          "isAutomatic":  false,
+                                          "maxAmount":  null,
+                                          "status":  "ACCEPTED",
+                                          "placedAt":  "2025-11-09T11:52:41.038Z",
+                                          "processedAt":  "2025-11-09T11:52:41.061Z",
+                                          "failureReason":  null,
+                                          "ipAddress":  null,
+                                          "userAgent":  null
+                                      }
+                         },
+    "Bid-Bids-GetById":  {
+                             "Status":  "âœ…",
+                             "Message":  "Success",
+                             "StatusCode":  200,
+                             "Data":  {
+                                          "id":  "cmhrnq4pa00095fk2mhvb9asz",
+                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                          "amount":  "48000",
+                                          "isAutomatic":  false,
+                                          "maxAmount":  null,
+                                          "status":  "ACCEPTED",
+                                          "placedAt":  "2025-11-09T11:55:46.894Z",
+                                          "processedAt":  "2025-11-09T11:55:46.935Z",
+                                          "failureReason":  null,
+                                          "ipAddress":  null,
+                                          "userAgent":  null
+                                      }
+                         },
+    "Notification-Notifications-GetAll":  {
+                                              "Status":  "âœ…",
+                                              "Message":  "Success",
+                                              "StatusCode":  200,
+                                              "Data":  {
+                                                           "value":  [
+                                                                         {
+                                                                             "id":  "cmhroln5x000110nhx15wm87v",
+                                                                             "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                             "type":  "BID_PLACED",
+                                                                             "title":  "Test Notification",
+                                                                             "message":  "This is a test notification",
+                                                                             "data":  {
+                                                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                                                          "bidAmount":  150000
+                                                                                      },
+                                                                             "read":  true,
+                                                                             "createdAt":  "2025-11-09T12:20:17.157Z",
+                                                                             "updatedAt":  "2025-11-09T12:20:17.177Z"
+                                                                         },
+                                                                         {
+                                                                             "id":  "cmhro4z87000010nh8x3zzj9z",
+                                                                             "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                             "type":  "BID_PLACED",
+                                                                             "title":  "Test Notification",
+                                                                             "message":  "This is a test notification",
+                                                                             "data":  {
+                                                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                                                          "bidAmount":  150000
+                                                                                      },
+                                                                             "read":  true,
+                                                                             "createdAt":  "2025-11-09T12:07:19.640Z",
+                                                                             "updatedAt":  "2025-11-09T12:07:19.660Z"
+                                                                         }
+                                                                     ],
+                                                           "Count":  2
+                                                       }
+                                          },
+    "Auction-Health":  {
+                           "Status":  "âœ…",
+                           "Message":  "Success",
+                           "StatusCode":  200,
+                           "Data":  {
+                                        "status":  "ok",
+                                        "service":  "auction-service",
+                                        "timestamp":  "2025-11-09T12:28:01.985Z",
+                                        "uptime":  1104.643807013
+                                    }
+                       },
+    "Vehicle-Categories-GetAll":  {
+                                      "Status":  "âœ…",
+                                      "Message":  "Success",
+                                      "StatusCode":  200,
+                                      "Data":  {
+                                                   "success":  true,
+                                                   "message":  "Categories retrieved successfully",
+                                                   "data":  {
+                                                                "data":  [
+                                                                             {
+                                                                                 "id":  "cmgr60w9c00046uexndvqj55c",
+                                                                                 "name":  "Klasik Araç",
+                                                                                 "description":  "Klasik ve koleksiyon araçları",
+                                                                                 "isActive":  true,
+                                                                                 "createdAt":  "2025-10-14T23:00:33.745Z",
+                                                                                 "updatedAt":  "2025-10-14T23:00:33.745Z",
+                                                                                 "_count":  {
+                                                                                                "vehicles":  5
+                                                                                            }
+                                                                             },
+                                                                             {
+                                                                                 "id":  "cmgr60w9800036uexeukbxnv7",
+                                                                                 "name":  "SUV",
+                                                                                 "description":  "Sport Utility Vehicle araçlar",
+                                                                                 "isActive":  true,
+                                                                                 "createdAt":  "2025-10-14T23:00:33.740Z",
+                                                                                 "updatedAt":  "2025-10-14T23:00:33.740Z",
+                                                                                 "_count":  {
+                                                                                                "vehicles":  0
+                                                                                            }
+                                                                             },
+                                                                             {
+                                                                                 "id":  "cmgr60w9300026uexkk3bfqwi",
+                                                                                 "name":  "Ticari Araç",
+                                                                                 "description":  "Kamyonet, kamyon ve ticari araçlar",
+                                                                                 "isActive":  true,
+                                                                                 "createdAt":  "2025-10-14T23:00:33.735Z",
+                                                                                 "updatedAt":  "2025-10-14T23:00:33.735Z",
+                                                                                 "_count":  {
+                                                                                                "vehicles":  0
+                                                                                            }
+                                                                             },
+                                                                             {
+                                                                                 "id":  "cmgr60w8z00016uex5b1emw37",
+                                                                                 "name":  "Motosiklet",
+                                                                                 "description":  "Motosikletler ve scooterlar",
+                                                                                 "isActive":  true,
+                                                                                 "createdAt":  "2025-10-14T23:00:33.731Z",
+                                                                                 "updatedAt":  "2025-10-14T23:00:33.731Z",
+                                                                                 "_count":  {
+                                                                                                "vehicles":  1
+                                                                                            }
+                                                                             },
+                                                                             {
+                                                                                 "id":  "cmgr60w8h00006uexzrc8p00y",
+                                                                                 "name":  "Otomobil",
+                                                                                 "description":  "Binek araçlar ve otomobiller",
+                                                                                 "isActive":  true,
+                                                                                 "createdAt":  "2025-10-14T23:00:33.713Z",
+                                                                                 "updatedAt":  "2025-10-14T23:00:33.713Z",
+                                                                                 "_count":  {
+                                                                                                "vehicles":  6
+                                                                                            }
+                                                                             }
+                                                                         ],
+                                                                "meta":  {
+                                                                             "page":  1,
+                                                                             "limit":  10,
+                                                                             "total":  5,
+                                                                             "totalPages":  1,
+                                                                             "hasNextPage":  false,
+                                                                             "hasPreviousPage":  false
+                                                                         }
+                                                            },
+                                                   "timestamp":  "2025-11-09T12:28:01.830Z"
+                                               }
+                                  },
+    "Payment-Payments-GetByAuction":  {
+                                          "Status":  "âœ…",
+                                          "Message":  "Success",
+                                          "StatusCode":  200,
+                                          "Data":  {
+                                                       "value":  [
+
+                                                                 ],
+                                                       "Count":  0
+                                                   }
+                                      },
+    "Notification-Notifications-MarkAllRead":  {
+                                                   "Status":  "âœ…",
+                                                   "Message":  "Success",
+                                                   "StatusCode":  200,
+                                                   "Data":  {
+                                                                "count":  1
+                                                            }
+                                               },
+    "Notification-Health":  {
+                                "Status":  "âœ…",
+                                "Message":  "Success",
+                                "StatusCode":  200,
+                                "Data":  {
+                                             "status":  "ok",
+                                             "timestamp":  "2025-11-09T12:28:03.062Z",
+                                             "service":  "notification-service"
+                                         }
+                            },
+    "Payment-Payments-ByAuction":  {
+                                       "Status":  "âœ…",
+                                       "Message":  "Success",
+                                       "StatusCode":  200,
+                                       "Data":  {
+                                                    "value":  [
+
+                                                              ],
+                                                    "Count":  0
+                                                }
+                                   },
+    "Auth-Health":  {
+                        "Status":  "âœ…",
+                        "Message":  "Success",
+                        "StatusCode":  200,
+                        "Data":  {
+                                     "success":  true,
+                                     "message":  "Auth Service çalışıyor",
+                                     "data":  {
+                                                  "status":  "healthy",
+                                                  "timestamp":  "2025-11-09T12:28:00.704Z",
+                                                  "service":  "auth-service",
+                                                  "version":  "1.0.0"
+                                              },
+                                     "timestamp":  "2025-11-09T12:28:00.704Z"
+                                 }
+                    },
+    "Bid-Bids-Statistics":  {
+                                "Status":  "âœ…",
+                                "Message":  "Success",
+                                "StatusCode":  200,
+                                "Data":  {
+                                             "totalBids":  5,
+                                             "activeBids":  4,
+                                             "pendingBids":  1,
+                                             "averageBidAmount":  "48000"
+                                         }
+                            },
+    "Bid-Bids-ByAuction":  {
+                               "Status":  "âœ…",
+                               "Message":  "Success",
+                               "StatusCode":  200,
+                               "Data":  {
+                                            "data":  [
+                                                         {
+                                                             "id":  "cmhrnm5an00065fk2g39c595c",
+                                                             "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                             "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                             "amount":  "51000",
+                                                             "isAutomatic":  false,
+                                                             "maxAmount":  null,
+                                                             "status":  "ACCEPTED",
+                                                             "placedAt":  "2025-11-09T11:52:41.038Z",
+                                                             "processedAt":  "2025-11-09T11:52:41.061Z",
+                                                             "failureReason":  null,
+                                                             "ipAddress":  null,
+                                                             "userAgent":  null
+                                                         },
+                                                         {
+                                                             "id":  "cmhrnq4pa00095fk2mhvb9asz",
+                                                             "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                             "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                             "amount":  "48000",
+                                                             "isAutomatic":  false,
+                                                             "maxAmount":  null,
+                                                             "status":  "ACCEPTED",
+                                                             "placedAt":  "2025-11-09T11:55:46.894Z",
+                                                             "processedAt":  "2025-11-09T11:55:46.935Z",
+                                                             "failureReason":  null,
+                                                             "ipAddress":  null,
+                                                             "userAgent":  null
+                                                         },
+                                                         {
+                                                             "id":  "cmhrnllqz00035fk22h2poleo",
+                                                             "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                             "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                             "amount":  "47000",
+                                                             "isAutomatic":  false,
+                                                             "maxAmount":  null,
+                                                             "status":  "ACCEPTED",
+                                                             "placedAt":  "2025-11-09T11:52:15.706Z",
+                                                             "processedAt":  "2025-11-09T11:52:15.731Z",
+                                                             "failureReason":  null,
+                                                             "ipAddress":  null,
+                                                             "userAgent":  null
+                                                         },
+                                                         {
+                                                             "id":  "cmhrnkx6c00005fk236aytzxm",
+                                                             "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                             "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                             "amount":  "46000",
+                                                             "isAutomatic":  false,
+                                                             "maxAmount":  null,
+                                                             "status":  "ACCEPTED",
+                                                             "placedAt":  "2025-11-09T11:51:43.859Z",
+                                                             "processedAt":  "2025-11-09T11:51:43.901Z",
+                                                             "failureReason":  null,
+                                                             "ipAddress":  null,
+                                                             "userAgent":  null
+                                                         }
+                                                     ],
+                                            "meta":  {
+                                                         "total":  4,
+                                                         "page":  1,
+                                                         "limit":  10,
+                                                         "totalPages":  1
+                                                     }
+                                        }
+                           },
+    "Bid-Bids-ByUser":  {
+                            "Status":  "âœ…",
+                            "Message":  "Success",
+                            "StatusCode":  200,
+                            "Data":  {
+                                         "data":  [
+                                                      {
+                                                          "id":  "cmhrnq4pa00095fk2mhvb9asz",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "48000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:55:46.894Z",
+                                                          "processedAt":  "2025-11-09T11:55:46.935Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrnm5an00065fk2g39c595c",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "51000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:52:41.038Z",
+                                                          "processedAt":  "2025-11-09T11:52:41.061Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrnllqz00035fk22h2poleo",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "47000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:52:15.706Z",
+                                                          "processedAt":  "2025-11-09T11:52:15.731Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrnkx6c00005fk236aytzxm",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "46000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:51:43.859Z",
+                                                          "processedAt":  "2025-11-09T11:51:43.901Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrmsf5j0001guhdg50y5sx1",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "46000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "PENDING",
+                                                          "placedAt":  "2025-11-09T11:29:34.135Z",
+                                                          "processedAt":  null,
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      }
+                                                  ],
+                                         "meta":  {
+                                                      "total":  5,
+                                                      "page":  1,
+                                                      "limit":  10,
+                                                      "totalPages":  1
+                                                  }
+                                     }
+                        },
+    "Vehicle-Vehicles-Search":  {
+                                    "Status":  "âœ…",
+                                    "Message":  "Success",
+                                    "StatusCode":  200,
+                                    "Data":  {
+                                                 "success":  true,
+                                                 "message":  "Vehicles search results",
+                                                 "data":  {
+                                                              "data":  [
+
+                                                                       ],
+                                                              "meta":  {
+                                                                           "page":  1,
+                                                                           "limit":  10,
+                                                                           "total":  0,
+                                                                           "totalPages":  0,
+                                                                           "hasNextPage":  false,
+                                                                           "hasPreviousPage":  false
+                                                                       }
+                                                          },
+                                                 "timestamp":  "2025-11-09T12:28:01.874Z"
+                                             }
+                                },
+    "Auth-Profile":  {
+                         "Status":  "âœ…",
+                         "Message":  "Success",
+                         "StatusCode":  200,
+                         "Data":  {
+                                      "success":  true,
+                                      "message":  "Profil başarıyla getirildi",
+                                      "data":  {
+                                                   "id":  "cmhr4hweq002f2a2lcali879d",
+                                                   "email":  "admin@vehicleauction.com",
+                                                   "firstName":  "Admin",
+                                                   "lastName":  "User",
+                                                   "phone":  "+905551234567",
+                                                   "role":  "ADMIN",
+                                                   "isActive":  true,
+                                                   "isEmailVerified":  false,
+                                                   "lastLoginAt":  "2025-11-09T12:02:54.134Z",
+                                                   "createdAt":  "2025-11-09T02:57:30.194Z",
+                                                   "updatedAt":  "2025-11-09T12:02:54.136Z"
+                                               },
+                                      "timestamp":  "2025-11-09T12:28:01.024Z"
+                                  }
+                     },
+    "Notification-Notifications-Create":  {
+                                              "Status":  "âœ…",
+                                              "Message":  "Success",
+                                              "StatusCode":  200,
+                                              "Data":  {
+                                                           "id":  "cmhrovmqs000210nhcr907xzg",
+                                                           "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                           "type":  "BID_PLACED",
+                                                           "title":  "Test Notification",
+                                                           "message":  "This is a test notification",
+                                                           "data":  {
+                                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                                        "bidAmount":  150000
+                                                                    },
+                                                           "read":  false,
+                                                           "createdAt":  "2025-11-09T12:28:03.172Z",
+                                                           "updatedAt":  "2025-11-09T12:28:03.172Z"
+                                                       }
+                                          },
+    "Bid-Bids-AutoBids":  {
+                              "Status":  "âœ…",
+                              "Message":  "Success",
+                              "StatusCode":  200,
+                              "Data":  {
+                                           "value":  [
+
+                                                     ],
+                                           "Count":  0
+                                       }
+                          },
+    "Bid-Bids-AutoBid-Create":  {
+                                    "Status":  "âŒ",
+                                    "Message":  "Uzak sunucu hata döndürdü: (400) Hatalı İstek.",
+                                    "StatusCode":  400
+                                },
+    "Notification-Notifications-List":  {
+                                            "Status":  "âœ…",
+                                            "Message":  "Success",
+                                            "StatusCode":  200,
+                                            "Data":  {
+                                                         "value":  [
+                                                                       {
+                                                                           "id":  "cmhroln5x000110nhx15wm87v",
+                                                                           "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                           "type":  "BID_PLACED",
+                                                                           "title":  "Test Notification",
+                                                                           "message":  "This is a test notification",
+                                                                           "data":  {
+                                                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                                                        "bidAmount":  150000
+                                                                                    },
+                                                                           "read":  true,
+                                                                           "createdAt":  "2025-11-09T12:20:17.157Z",
+                                                                           "updatedAt":  "2025-11-09T12:20:17.177Z"
+                                                                       },
+                                                                       {
+                                                                           "id":  "cmhro4z87000010nh8x3zzj9z",
+                                                                           "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                           "type":  "BID_PLACED",
+                                                                           "title":  "Test Notification",
+                                                                           "message":  "This is a test notification",
+                                                                           "data":  {
+                                                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                                                        "bidAmount":  150000
+                                                                                    },
+                                                                           "read":  true,
+                                                                           "createdAt":  "2025-11-09T12:07:19.640Z",
+                                                                           "updatedAt":  "2025-11-09T12:07:19.660Z"
+                                                                       }
+                                                                   ],
+                                                         "Count":  2
+                                                     }
+                                        },
+    "Auth-ChangePassword":  {
+                                "Status":  "âŒ",
+                                "Message":  "Uzak sunucu hata döndürdü: (400) Hatalı İstek.",
+                                "StatusCode":  400
+                            },
+    "Vehicle-Categories-List":  {
+                                    "Status":  "âœ…",
+                                    "Message":  "Success",
+                                    "StatusCode":  200,
+                                    "Data":  {
+                                                 "success":  true,
+                                                 "message":  "Categories retrieved successfully",
+                                                 "data":  {
+                                                              "data":  [
+                                                                           {
+                                                                               "id":  "cmgr60w9c00046uexndvqj55c",
+                                                                               "name":  "Klasik Araç",
+                                                                               "description":  "Klasik ve koleksiyon araçları",
+                                                                               "isActive":  true,
+                                                                               "createdAt":  "2025-10-14T23:00:33.745Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.745Z",
+                                                                               "_count":  {
+                                                                                              "vehicles":  5
+                                                                                          }
+                                                                           },
+                                                                           {
+                                                                               "id":  "cmgr60w9800036uexeukbxnv7",
+                                                                               "name":  "SUV",
+                                                                               "description":  "Sport Utility Vehicle araçlar",
+                                                                               "isActive":  true,
+                                                                               "createdAt":  "2025-10-14T23:00:33.740Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.740Z",
+                                                                               "_count":  {
+                                                                                              "vehicles":  0
+                                                                                          }
+                                                                           },
+                                                                           {
+                                                                               "id":  "cmgr60w9300026uexkk3bfqwi",
+                                                                               "name":  "Ticari Araç",
+                                                                               "description":  "Kamyonet, kamyon ve ticari araçlar",
+                                                                               "isActive":  true,
+                                                                               "createdAt":  "2025-10-14T23:00:33.735Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.735Z",
+                                                                               "_count":  {
+                                                                                              "vehicles":  0
+                                                                                          }
+                                                                           },
+                                                                           {
+                                                                               "id":  "cmgr60w8z00016uex5b1emw37",
+                                                                               "name":  "Motosiklet",
+                                                                               "description":  "Motosikletler ve scooterlar",
+                                                                               "isActive":  true,
+                                                                               "createdAt":  "2025-10-14T23:00:33.731Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.731Z",
+                                                                               "_count":  {
+                                                                                              "vehicles":  1
+                                                                                          }
+                                                                           },
+                                                                           {
+                                                                               "id":  "cmgr60w8h00006uexzrc8p00y",
+                                                                               "name":  "Otomobil",
+                                                                               "description":  "Binek araçlar ve otomobiller",
+                                                                               "isActive":  true,
+                                                                               "createdAt":  "2025-10-14T23:00:33.713Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.713Z",
+                                                                               "_count":  {
+                                                                                              "vehicles":  6
+                                                                                          }
+                                                                           }
+                                                                       ],
+                                                              "meta":  {
+                                                                           "page":  1,
+                                                                           "limit":  10,
+                                                                           "total":  5,
+                                                                           "totalPages":  1,
+                                                                           "hasNextPage":  false,
+                                                                           "hasPreviousPage":  false
+                                                                       }
+                                                          },
+                                                 "timestamp":  "2025-11-09T12:28:01.820Z"
+                                             }
+                                },
+    "Vehicle-Vehicles-GetAll":  {
+                                    "Status":  "âœ…",
+                                    "Message":  "Success",
+                                    "StatusCode":  200,
+                                    "Data":  {
+                                                 "success":  true,
+                                                 "message":  "Vehicles retrieved successfully",
+                                                 "data":  {
+                                                              "data":  [
+                                                                           {
+                                                                               "id":  "cmgr60w9v000a6uexkcbc8ibl",
+                                                                               "make":  "Yamaha",
+                                                                               "model":  "MT-07",
+                                                                               "year":  2021,
+                                                                               "mileage":  8500,
+                                                                               "fuelType":  "GASOLINE",
+                                                                               "transmission":  "MANUAL",
+                                                                               "condition":  "EXCELLENT",
+                                                                               "status":  "ACTIVE",
+                                                                               "description":  "Yamaha MT-07 naked bike. Az kullanılmış, temiz.",
+                                                                               "images":  [
+                                                                                              "https://example.com/yamaha-1.jpg",
+                                                                                              "https://example.com/yamaha-2.jpg"
+                                                                                          ],
+                                                                               "engineSize":  0.689,
+                                                                               "color":  "Mavi",
+                                                                               "vin":  null,
+                                                                               "licensePlate":  null,
+                                                                               "location":  "İzmir",
+                                                                               "estimatedValue":  85000,
+                                                                               "reservePrice":  null,
+                                                                               "userId":  "user-3",
+                                                                               "categoryId":  "cmgr60w8z00016uex5b1emw37",
+                                                                               "createdAt":  "2025-10-14T23:00:33.763Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.763Z",
+                                                                               "category":  {
+                                                                                                "id":  "cmgr60w8z00016uex5b1emw37",
+                                                                                                "name":  "Motosiklet",
+                                                                                                "description":  "Motosikletler ve scooterlar",
+                                                                                                "isActive":  true,
+                                                                                                "createdAt":  "2025-10-14T23:00:33.731Z",
+                                                                                                "updatedAt":  "2025-10-14T23:00:33.731Z"
+                                                                                            }
+                                                                           },
+                                                                           {
+                                                                               "id":  "cmgr60w9r00086uexaaltnwii",
+                                                                               "make":  "Mercedes",
+                                                                               "model":  "C200",
+                                                                               "year":  2019,
+                                                                               "mileage":  52000,
+                                                                               "fuelType":  "GASOLINE",
+                                                                               "transmission":  "AUTOMATIC",
+                                                                               "condition":  "GOOD",
+                                                                               "status":  "ACTIVE",
+                                                                               "description":  "Mercedes C200 AMG Line. Garaj çıkışlı, bakımlı.",
+                                                                               "images":  [
+                                                                                              "https://example.com/mercedes-1.jpg",
+                                                                                              "https://example.com/mercedes-2.jpg"
+                                                                                          ],
+                                                                               "engineSize":  1.5,
+                                                                               "color":  "Siyah",
+                                                                               "vin":  null,
+                                                                               "licensePlate":  null,
+                                                                               "location":  "Ankara",
+                                                                               "estimatedValue":  520000,
+                                                                               "reservePrice":  null,
+                                                                               "userId":  "user-2",
+                                                                               "categoryId":  "cmgr60w8h00006uexzrc8p00y",
+                                                                               "createdAt":  "2025-10-14T23:00:33.759Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.759Z",
+                                                                               "category":  {
+                                                                                                "id":  "cmgr60w8h00006uexzrc8p00y",
+                                                                                                "name":  "Otomobil",
+                                                                                                "description":  "Binek araçlar ve otomobiller",
+                                                                                                "isActive":  true,
+                                                                                                "createdAt":  "2025-10-14T23:00:33.713Z",
+                                                                                                "updatedAt":  "2025-10-14T23:00:33.713Z"
+                                                                                            }
+                                                                           },
+                                                                           {
+                                                                               "id":  "cmgr60w9h00066uexs4d839vh",
+                                                                               "make":  "BMW",
+                                                                               "model":  "3 Serisi 320i",
+                                                                               "year":  2020,
+                                                                               "mileage":  45000,
+                                                                               "fuelType":  "GASOLINE",
+                                                                               "transmission":  "AUTOMATIC",
+                                                                               "condition":  "EXCELLENT",
+                                                                               "status":  "ACTIVE",
+                                                                               "description":  "Temiz, bakımlı BMW 3 Serisi. Tek elden, hasarsız.",
+                                                                               "images":  [
+                                                                                              "https://example.com/bmw-1.jpg",
+                                                                                              "https://example.com/bmw-2.jpg"
+                                                                                          ],
+                                                                               "engineSize":  2,
+                                                                               "color":  "Beyaz",
+                                                                               "vin":  null,
+                                                                               "licensePlate":  null,
+                                                                               "location":  "İstanbul",
+                                                                               "estimatedValue":  450000,
+                                                                               "reservePrice":  null,
+                                                                               "userId":  "user-1",
+                                                                               "categoryId":  "cmgr60w8h00006uexzrc8p00y",
+                                                                               "createdAt":  "2025-10-14T23:00:33.750Z",
+                                                                               "updatedAt":  "2025-10-14T23:00:33.750Z",
+                                                                               "category":  {
+                                                                                                "id":  "cmgr60w8h00006uexzrc8p00y",
+                                                                                                "name":  "Otomobil",
+                                                                                                "description":  "Binek araçlar ve otomobiller",
+                                                                                                "isActive":  true,
+                                                                                                "createdAt":  "2025-10-14T23:00:33.713Z",
+                                                                                                "updatedAt":  "2025-10-14T23:00:33.713Z"
+                                                                                            }
+                                                                           }
+                                                                       ],
+                                                              "meta":  {
+                                                                           "page":  1,
+                                                                           "limit":  10,
+                                                                           "total":  3,
+                                                                           "totalPages":  1,
+                                                                           "hasNextPage":  false,
+                                                                           "hasPreviousPage":  false
+                                                                       }
+                                                          },
+                                                 "timestamp":  "2025-11-09T12:28:01.886Z"
+                                             }
+                                },
+    "Bid-Health":  {
+                       "Status":  "âœ…",
+                       "Message":  "Success",
+                       "StatusCode":  200,
+                       "Data":  {
+                                    "status":  "ok",
+                                    "service":  "bid-service",
+                                    "timestamp":  "2025-11-09T12:28:02.143Z",
+                                    "uptime":  1103.691318011
+                                }
+                   },
+    "Auth-Register":  {
+                          "Status":  "âŒ",
+                          "Message":  "Uzak sunucu hata döndürdü: (400) Hatalı İstek.",
+                          "StatusCode":  400
+                      },
+    "Bid-Bids-List":  {
+                          "Status":  "âœ…",
+                          "Message":  "Success",
+                          "StatusCode":  200,
+                          "Data":  {
+                                       "data":  [
+                                                    {
+                                                        "id":  "cmhrnq4pa00095fk2mhvb9asz",
+                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                        "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                        "amount":  "48000",
+                                                        "isAutomatic":  false,
+                                                        "maxAmount":  null,
+                                                        "status":  "ACCEPTED",
+                                                        "placedAt":  "2025-11-09T11:55:46.894Z",
+                                                        "processedAt":  "2025-11-09T11:55:46.935Z",
+                                                        "failureReason":  null,
+                                                        "ipAddress":  null,
+                                                        "userAgent":  null
+                                                    },
+                                                    {
+                                                        "id":  "cmhrnm5an00065fk2g39c595c",
+                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                        "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                        "amount":  "51000",
+                                                        "isAutomatic":  false,
+                                                        "maxAmount":  null,
+                                                        "status":  "ACCEPTED",
+                                                        "placedAt":  "2025-11-09T11:52:41.038Z",
+                                                        "processedAt":  "2025-11-09T11:52:41.061Z",
+                                                        "failureReason":  null,
+                                                        "ipAddress":  null,
+                                                        "userAgent":  null
+                                                    },
+                                                    {
+                                                        "id":  "cmhrnllqz00035fk22h2poleo",
+                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                        "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                        "amount":  "47000",
+                                                        "isAutomatic":  false,
+                                                        "maxAmount":  null,
+                                                        "status":  "ACCEPTED",
+                                                        "placedAt":  "2025-11-09T11:52:15.706Z",
+                                                        "processedAt":  "2025-11-09T11:52:15.731Z",
+                                                        "failureReason":  null,
+                                                        "ipAddress":  null,
+                                                        "userAgent":  null
+                                                    },
+                                                    {
+                                                        "id":  "cmhrnkx6c00005fk236aytzxm",
+                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                        "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                        "amount":  "46000",
+                                                        "isAutomatic":  false,
+                                                        "maxAmount":  null,
+                                                        "status":  "ACCEPTED",
+                                                        "placedAt":  "2025-11-09T11:51:43.859Z",
+                                                        "processedAt":  "2025-11-09T11:51:43.901Z",
+                                                        "failureReason":  null,
+                                                        "ipAddress":  null,
+                                                        "userAgent":  null
+                                                    },
+                                                    {
+                                                        "id":  "cmhrmsf5j0001guhdg50y5sx1",
+                                                        "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                        "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                        "amount":  "46000",
+                                                        "isAutomatic":  false,
+                                                        "maxAmount":  null,
+                                                        "status":  "PENDING",
+                                                        "placedAt":  "2025-11-09T11:29:34.135Z",
+                                                        "processedAt":  null,
+                                                        "failureReason":  null,
+                                                        "ipAddress":  null,
+                                                        "userAgent":  null
+                                                    }
+                                                ],
+                                       "meta":  {
+                                                    "total":  5,
+                                                    "page":  1,
+                                                    "limit":  10,
+                                                    "totalPages":  1
+                                                }
+                                   }
+                      },
+    "Bid-Bids-GetAll":  {
+                            "Status":  "âœ…",
+                            "Message":  "Success",
+                            "StatusCode":  200,
+                            "Data":  {
+                                         "data":  [
+                                                      {
+                                                          "id":  "cmhrnq4pa00095fk2mhvb9asz",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "48000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:55:46.894Z",
+                                                          "processedAt":  "2025-11-09T11:55:46.935Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrnm5an00065fk2g39c595c",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "51000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:52:41.038Z",
+                                                          "processedAt":  "2025-11-09T11:52:41.061Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrnllqz00035fk22h2poleo",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "47000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:52:15.706Z",
+                                                          "processedAt":  "2025-11-09T11:52:15.731Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrnkx6c00005fk236aytzxm",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "46000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "ACCEPTED",
+                                                          "placedAt":  "2025-11-09T11:51:43.859Z",
+                                                          "processedAt":  "2025-11-09T11:51:43.901Z",
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      },
+                                                      {
+                                                          "id":  "cmhrmsf5j0001guhdg50y5sx1",
+                                                          "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                          "bidderId":  "cmhr4hweq002f2a2lcali879d",
+                                                          "amount":  "46000",
+                                                          "isAutomatic":  false,
+                                                          "maxAmount":  null,
+                                                          "status":  "PENDING",
+                                                          "placedAt":  "2025-11-09T11:29:34.135Z",
+                                                          "processedAt":  null,
+                                                          "failureReason":  null,
+                                                          "ipAddress":  null,
+                                                          "userAgent":  null
+                                                      }
+                                                  ],
+                                         "meta":  {
+                                                      "total":  5,
+                                                      "page":  1,
+                                                      "limit":  10,
+                                                      "totalPages":  1
+                                                  }
+                                     }
+                        },
+    "Auction-Auctions-UpdateStatuses":  {
+                                            "Status":  "âœ…",
+                                            "Message":  "Success",
+                                            "StatusCode":  200,
+                                            "Data":  ""
+                                        },
+    "Notification-Notifications-UnreadCount":  {
+                                                   "Status":  "âœ…",
+                                                   "Message":  "Success",
+                                                   "StatusCode":  200,
+                                                   "Data":  0
+                                               },
+    "Auth-LoginHistory":  {
+                              "Status":  "âœ…",
+                              "Message":  "Success",
+                              "StatusCode":  200,
+                              "Data":  {
+                                           "success":  true,
+                                           "message":  "Giriş geçmişi başarıyla getirildi",
+                                           "data":  [
+                                                        {
+                                                            "id":  "cmhrnzadn003c2a2lrq3rgwh9",
+                                                            "ipAddress":  "::ffff:172.18.0.1",
+                                                            "userAgent":  "Mozilla/5.0 (Windows NT; Windows NT 10.0; tr-TR) WindowsPowerShell/5.1.26100.7019",
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T12:02:54.155Z"
+                                                        },
+                                                        {
+                                                            "id":  "cmhrlsqch00372a2ltrkazzx6",
+                                                            "ipAddress":  "::ffff:172.18.0.1",
+                                                            "userAgent":  "Mozilla/5.0 (Windows NT; Windows NT 10.0; tr-TR) WindowsPowerShell/5.1.26100.7019",
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T11:01:49.026Z"
+                                                        },
+                                                        {
+                                                            "id":  "cmhrlqzhe00332a2lf5yzw30k",
+                                                            "ipAddress":  "::ffff:172.18.0.1",
+                                                            "userAgent":  "Mozilla/5.0 (Windows NT; Windows NT 10.0; tr-TR) WindowsPowerShell/5.1.26100.7019",
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T11:00:27.554Z"
+                                                        },
+                                                        {
+                                                            "id":  "cmhr4rs9t002z2a2lnc8gjnqh",
+                                                            "ipAddress":  "::ffff:172.18.0.1",
+                                                            "userAgent":  "Mozilla/5.0 (Windows NT; Windows NT 10.0; tr-TR) WindowsPowerShell/5.1.26100.7019",
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T03:05:11.393Z"
+                                                        },
+                                                        {
+                                                            "id":  "cmhr4pr6y002v2a2lfzjed190",
+                                                            "ipAddress":  "::ffff:172.18.0.1",
+                                                            "userAgent":  "Mozilla/5.0 (Windows NT; Windows NT 10.0; tr-TR) WindowsPowerShell/5.1.26100.7019",
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T03:03:36.682Z"
+                                                        },
+                                                        {
+                                                            "id":  "cmhr4i26f002r2a2lr4lmyz7o",
+                                                            "ipAddress":  "::ffff:172.18.0.1",
+                                                            "userAgent":  "Mozilla/5.0 (Windows NT; Windows NT 10.0; tr-TR) WindowsPowerShell/5.1.26100.7019",
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T02:57:37.671Z"
+                                                        },
+                                                        {
+                                                            "id":  "cmhr4hwma002n2a2lvgb8ddo4",
+                                                            "ipAddress":  "::ffff:172.18.0.1",
+                                                            "userAgent":  "Mozilla/5.0 (Windows NT; Windows NT 10.0; tr-TR) WindowsPowerShell/5.1.26100.7019",
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T02:57:30.467Z"
+                                                        },
+                                                        {
+                                                            "id":  "cmhr4hwf7002j2a2l1006cvke",
+                                                            "ipAddress":  null,
+                                                            "userAgent":  null,
+                                                            "success":  true,
+                                                            "createdAt":  "2025-11-09T02:57:30.211Z"
+                                                        }
+                                                    ],
+                                           "timestamp":  "2025-11-09T12:28:01.037Z"
+                                       }
+                          },
+    "Auth-Users-List":  {
+                            "Status":  "âœ…",
+                            "Message":  "Success",
+                            "StatusCode":  200,
+                            "Data":  {
+                                         "success":  true,
+                                         "message":  "Kullanıcılar başarıyla listelendi",
+                                         "data":  {
+                                                      "data":  [
+                                                                   {
+                                                                       "id":  "cmhr4hweq002f2a2lcali879d",
+                                                                       "email":  "admin@vehicleauction.com",
+                                                                       "firstName":  "Admin",
+                                                                       "lastName":  "User",
+                                                                       "phone":  "+905551234567",
+                                                                       "role":  "ADMIN",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-11-09T12:02:54.134Z",
+                                                                       "createdAt":  "2025-11-09T02:57:30.194Z",
+                                                                       "updatedAt":  "2025-11-09T12:02:54.136Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmhr1yl8000002a2l6ds3r07i",
+                                                                       "email":  "newtestuser1285824156@example.com",
+                                                                       "firstName":  "Test",
+                                                                       "lastName":  "User",
+                                                                       "phone":  "+905551234567",
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-11-09T02:08:53.943Z",
+                                                                       "createdAt":  "2025-11-09T01:46:30.000Z",
+                                                                       "updatedAt":  "2025-11-09T02:08:53.944Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgtqwrov00109x1n0xca2ct8",
+                                                                       "email":  "freshuser@example.com",
+                                                                       "firstName":  "Fresh",
+                                                                       "lastName":  "User",
+                                                                       "phone":  null,
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  null,
+                                                                       "createdAt":  "2025-10-16T18:20:45.487Z",
+                                                                       "updatedAt":  "2025-10-16T18:20:45.487Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgtqfsnx000v9x1numezbhre",
+                                                                       "email":  "testuser@example.com",
+                                                                       "firstName":  "Test",
+                                                                       "lastName":  "User",
+                                                                       "phone":  null,
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-10-16T18:37:09.129Z",
+                                                                       "createdAt":  "2025-10-16T18:07:33.598Z",
+                                                                       "updatedAt":  "2025-10-16T18:37:09.130Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgtofhsi000i9x1n2armxzrh",
+                                                                       "email":  "testuser230398244@example.com",
+                                                                       "firstName":  "Test",
+                                                                       "lastName":  "User",
+                                                                       "phone":  "+90 555 123 4567",
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-10-16T17:11:37.758Z",
+                                                                       "createdAt":  "2025-10-16T17:11:20.275Z",
+                                                                       "updatedAt":  "2025-10-16T17:11:37.759Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgskhmyc000mx66qqq02bu1u",
+                                                                       "email":  "bidder2@example.com",
+                                                                       "firstName":  "Bid",
+                                                                       "lastName":  "User",
+                                                                       "phone":  null,
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-10-15T22:37:02.555Z",
+                                                                       "createdAt":  "2025-10-15T22:33:15.636Z",
+                                                                       "updatedAt":  "2025-10-15T22:37:02.556Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgskhe4h000hx66q2errm1cy",
+                                                                       "email":  "bidder@example.com",
+                                                                       "firstName":  "Bid",
+                                                                       "lastName":  "User",
+                                                                       "phone":  null,
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  null,
+                                                                       "createdAt":  "2025-10-15T22:33:04.194Z",
+                                                                       "updatedAt":  "2025-10-15T22:33:04.194Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgskcme90002x66q8qoqqvhm",
+                                                                       "email":  "newuser@example.com",
+                                                                       "firstName":  "New",
+                                                                       "lastName":  "User",
+                                                                       "phone":  "9876543210",
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-10-15T22:29:46.980Z",
+                                                                       "createdAt":  "2025-10-15T22:29:21.634Z",
+                                                                       "updatedAt":  "2025-10-15T22:29:46.981Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgsdmk700005122k4ii1v1mo",
+                                                                       "email":  "newuser2024@example.com",
+                                                                       "firstName":  "New",
+                                                                       "lastName":  "User",
+                                                                       "phone":  null,
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-10-15T19:31:21.150Z",
+                                                                       "createdAt":  "2025-10-15T19:21:08.028Z",
+                                                                       "updatedAt":  "2025-10-15T19:31:21.151Z"
+                                                                   },
+                                                                   {
+                                                                       "id":  "cmgsdfiws0000122kgsldu2qf",
+                                                                       "email":  "testuser2024@example.com",
+                                                                       "firstName":  "Test",
+                                                                       "lastName":  "User",
+                                                                       "phone":  null,
+                                                                       "role":  "USER",
+                                                                       "isActive":  true,
+                                                                       "isEmailVerified":  false,
+                                                                       "lastLoginAt":  "2025-10-15T19:56:29.706Z",
+                                                                       "createdAt":  "2025-10-15T19:15:39.772Z",
+                                                                       "updatedAt":  "2025-10-15T19:56:29.707Z"
+                                                                   }
+                                                               ],
+                                                      "meta":  {
+                                                                   "page":  1,
+                                                                   "limit":  10,
+                                                                   "total":  16,
+                                                                   "totalPages":  2,
+                                                                   "hasNextPage":  true,
+                                                                   "hasPreviousPage":  false
+                                                               }
+                                                  },
+                                         "timestamp":  "2025-11-09T12:28:01.726Z"
+                                     }
+                        },
+    "Vehicle-Vehicles-MyVehicles":  {
+                                        "Status":  "âœ…",
+                                        "Message":  "Success",
+                                        "StatusCode":  200,
+                                        "Data":  {
+                                                     "success":  true,
+                                                     "message":  "User vehicles retrieved successfully",
+                                                     "data":  {
+                                                                  "data":  [
+                                                                               {
+                                                                                   "id":  "cmhrno9yy000avphujdmvkxrk",
+                                                                                   "make":  "Honda",
+                                                                                   "model":  "Civic",
+                                                                                   "year":  2023,
+                                                                                   "mileage":  5000,
+                                                                                   "fuelType":  "GASOLINE",
+                                                                                   "transmission":  "AUTOMATIC",
+                                                                                   "condition":  "EXCELLENT",
+                                                                                   "status":  "DRAFT",
+                                                                                   "description":  "Test vehicle for payment",
+                                                                                   "images":  [
+
+                                                                                              ],
+                                                                                   "engineSize":  null,
+                                                                                   "color":  null,
+                                                                                   "vin":  null,
+                                                                                   "licensePlate":  null,
+                                                                                   "location":  null,
+                                                                                   "estimatedValue":  null,
+                                                                                   "reservePrice":  null,
+                                                                                   "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                                   "categoryId":  "cmgr60w9c00046uexndvqj55c",
+                                                                                   "createdAt":  "2025-11-09T11:54:20.410Z",
+                                                                                   "updatedAt":  "2025-11-09T11:54:20.410Z",
+                                                                                   "category":  {
+                                                                                                    "id":  "cmgr60w9c00046uexndvqj55c",
+                                                                                                    "name":  "Klasik Araç",
+                                                                                                    "description":  "Klasik ve koleksiyon araçları",
+                                                                                                    "isActive":  true,
+                                                                                                    "createdAt":  "2025-10-14T23:00:33.745Z",
+                                                                                                    "updatedAt":  "2025-10-14T23:00:33.745Z"
+                                                                                                }
+                                                                               },
+                                                                               {
+                                                                                   "id":  "cmhrlwo810007vphu2ft62352",
+                                                                                   "make":  "Toyota",
+                                                                                   "model":  "Camry",
+                                                                                   "year":  2024,
+                                                                                   "mileage":  10000,
+                                                                                   "fuelType":  "GASOLINE",
+                                                                                   "transmission":  "AUTOMATIC",
+                                                                                   "condition":  "GOOD",
+                                                                                   "status":  "DRAFT",
+                                                                                   "description":  "Test vehicle",
+                                                                                   "images":  [
+
+                                                                                              ],
+                                                                                   "engineSize":  null,
+                                                                                   "color":  null,
+                                                                                   "vin":  null,
+                                                                                   "licensePlate":  null,
+                                                                                   "location":  null,
+                                                                                   "estimatedValue":  null,
+                                                                                   "reservePrice":  null,
+                                                                                   "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                                   "categoryId":  "cmgr60w9c00046uexndvqj55c",
+                                                                                   "createdAt":  "2025-11-09T11:04:52.897Z",
+                                                                                   "updatedAt":  "2025-11-09T11:04:52.897Z",
+                                                                                   "category":  {
+                                                                                                    "id":  "cmgr60w9c00046uexndvqj55c",
+                                                                                                    "name":  "Klasik Araç",
+                                                                                                    "description":  "Klasik ve koleksiyon araçları",
+                                                                                                    "isActive":  true,
+                                                                                                    "createdAt":  "2025-10-14T23:00:33.745Z",
+                                                                                                    "updatedAt":  "2025-10-14T23:00:33.745Z"
+                                                                                                }
+                                                                               }
+                                                                           ],
+                                                                  "meta":  {
+                                                                               "page":  1,
+                                                                               "limit":  10,
+                                                                               "total":  2,
+                                                                               "totalPages":  1,
+                                                                               "hasNextPage":  false,
+                                                                               "hasPreviousPage":  false
+                                                                           }
+                                                              },
+                                                     "timestamp":  "2025-11-09T12:28:01.909Z"
+                                                 }
+                                    },
+    "Auction-Auctions-List":  {
+                                  "Status":  "âœ…",
+                                  "Message":  "Success",
+                                  "StatusCode":  200,
+                                  "Data":  {
+                                               "data":  [
+                                                            {
+                                                                "id":  "cmhr27whr0000tfae8h4cjuui",
+                                                                "title":  "Updated Test Auction - Toyota Camry",
+                                                                "description":  "Updated description for test auction",
+                                                                "vehicleId":  "cmhr20eym0003vphu3r8sbc2d",
+                                                                "sellerId":  "cmhr1yl8000002a2l6ds3r07i",
+                                                                "startingPrice":  "45000",
+                                                                "currentPrice":  "45000",
+                                                                "reservePrice":  "50000",
+                                                                "minBidIncrement":  "1000",
+                                                                "startTime":  "2025-11-09T05:53:44.459Z",
+                                                                "endTime":  "2025-11-16T04:53:44.463Z",
+                                                                "extendedEndTime":  null,
+                                                                "autoExtendMinutes":  5,
+                                                                "status":  "ACTIVE",
+                                                                "isActive":  true,
+                                                                "isFeatured":  false,
+                                                                "totalBids":  0,
+                                                                "highestBidderId":  null,
+                                                                "viewCount":  19,
+                                                                "watchlistCount":  0,
+                                                                "createdAt":  "2025-11-09T01:53:44.512Z",
+                                                                "updatedAt":  "2025-11-09T12:20:16.266Z",
+                                                                "bids":  [
+
+                                                                         ],
+                                                                "_count":  {
+                                                                               "bids":  0,
+                                                                               "watchlists":  0
+                                                                           }
+                                                            },
+                                                            {
+                                                                "id":  "cmgtp4nyo0001k0qy18f74xbp",
+                                                                "title":  "BMW X5 2022 M�zayedesi",
+                                                                "description":  "M�kemmel durumda BMW X5 2022 model",
+                                                                "vehicleId":  "cmgtp4av7000d149oe2vd2h77",
+                                                                "sellerId":  "cmgr5p0v500034t7bes97xwal",
+                                                                "startingPrice":  "500000",
+                                                                "currentPrice":  "500000",
+                                                                "reservePrice":  "600000",
+                                                                "minBidIncrement":  "5000",
+                                                                "startTime":  "2025-10-16T16:00:00.000Z",
+                                                                "endTime":  "2025-10-16T22:30:54.514Z",
+                                                                "extendedEndTime":  null,
+                                                                "autoExtendMinutes":  5,
+                                                                "status":  "ENDED",
+                                                                "isActive":  false,
+                                                                "isFeatured":  false,
+                                                                "totalBids":  0,
+                                                                "highestBidderId":  null,
+                                                                "viewCount":  8,
+                                                                "watchlistCount":  0,
+                                                                "createdAt":  "2025-10-16T17:30:54.672Z",
+                                                                "updatedAt":  "2025-10-16T23:55:00.038Z",
+                                                                "bids":  [
+
+                                                                         ],
+                                                                "_count":  {
+                                                                               "bids":  0,
+                                                                               "watchlists":  0
+                                                                           }
+                                                            },
+                                                            {
+                                                                "id":  "cmgsmiamz0000fe3u6cml5yn9",
+                                                                "title":  "Test Auction",
+                                                                "description":  "Test auction for bid testing",
+                                                                "vehicleId":  "test-vehicle-123",
+                                                                "sellerId":  "test-seller-123",
+                                                                "startingPrice":  "10000",
+                                                                "currentPrice":  "10000",
+                                                                "reservePrice":  "15000",
+                                                                "minBidIncrement":  "100",
+                                                                "startTime":  "2025-10-16T02:34:45.326Z",
+                                                                "endTime":  "2025-10-17T02:29:45.326Z",
+                                                                "extendedEndTime":  null,
+                                                                "autoExtendMinutes":  5,
+                                                                "status":  "ENDED",
+                                                                "isActive":  false,
+                                                                "isFeatured":  false,
+                                                                "totalBids":  0,
+                                                                "highestBidderId":  null,
+                                                                "viewCount":  0,
+                                                                "watchlistCount":  0,
+                                                                "createdAt":  "2025-10-15T23:29:45.563Z",
+                                                                "updatedAt":  "2025-10-17T03:31:05.269Z",
+                                                                "bids":  [
+
+                                                                         ],
+                                                                "_count":  {
+                                                                               "bids":  0,
+                                                                               "watchlists":  0
+                                                                           }
+                                                            },
+                                                            {
+                                                                "id":  "cmgse35j600001nqu9u517yit",
+                                                                "title":  "Toyota Corolla 2022 Auction",
+                                                                "description":  "Updated auction description for Toyota Corolla 2022 - Excellent condition",
+                                                                "vehicleId":  "cmgsdpabd0002ci4cc9eiapic",
+                                                                "sellerId":  "cmgsdmk700005122k4ii1v1mo",
+                                                                "startingPrice":  "20000",
+                                                                "currentPrice":  "20000",
+                                                                "reservePrice":  "30000",
+                                                                "minBidIncrement":  "100",
+                                                                "startTime":  "2025-10-15T19:30:00.000Z",
+                                                                "endTime":  "2025-10-20T18:00:00.000Z",
+                                                                "extendedEndTime":  null,
+                                                                "autoExtendMinutes":  5,
+                                                                "status":  "ENDED",
+                                                                "isActive":  false,
+                                                                "isFeatured":  false,
+                                                                "totalBids":  0,
+                                                                "highestBidderId":  null,
+                                                                "viewCount":  11,
+                                                                "watchlistCount":  0,
+                                                                "createdAt":  "2025-10-15T19:34:02.178Z",
+                                                                "updatedAt":  "2025-11-04T12:10:00.051Z",
+                                                                "bids":  [
+
+                                                                         ],
+                                                                "_count":  {
+                                                                               "bids":  0,
+                                                                               "watchlists":  0
+                                                                           }
+                                                            }
+                                                        ],
+                                               "meta":  {
+                                                            "total":  4,
+                                                            "page":  1,
+                                                            "limit":  10,
+                                                            "totalPages":  1
+                                                        }
+                                           }
+                              },
+    "Vehicle-Health":  {
+                           "Status":  "âœ…",
+                           "Message":  "Success",
+                           "StatusCode":  200,
+                           "Data":  {
+                                        "status":  "ok",
+                                        "timestamp":  "2025-11-09T12:28:01.794Z",
+                                        "service":  "vehicle-service",
+                                        "database":  "connected",
+                                        "uptime":  21.729155332,
+                                        "memory":  {
+                                                       "rss":  99094528,
+                                                       "heapTotal":  27860992,
+                                                       "heapUsed":  24653104,
+                                                       "external":  1242192,
+                                                       "arrayBuffers":  49354
+                                                   }
+                                    }
+                       },
+    "Bid-Bids-Create":  {
+                            "Status":  "âš ï¸",
+                            "Message":  "Auction is not ACTIVE",
+                            "StatusCode":  "SKIPPED"
+                        },
+    "Payment-Test-Stripe":  {
+                                "Status":  "âœ…",
+                                "Message":  "Success",
+                                "StatusCode":  200,
+                                "Data":  {
+                                             "success":  false,
+                                             "message":  "Stripe connection failed: Invalid API Key provided: sk_test_***********************here"
+                                         }
+                            },
+    "Payment-Payments-ByBidder":  {
+                                      "Status":  "âœ…",
+                                      "Message":  "Success",
+                                      "StatusCode":  200,
+                                      "Data":  {
+                                                   "value":  [
+
+                                                             ],
+                                                   "Count":  0
+                                               }
+                                  },
+    "Payment-Payments-Statistics":  {
+                                        "Status":  "âœ…",
+                                        "Message":  "Success",
+                                        "StatusCode":  200,
+                                        "Data":  {
+                                                     "totalPayments":  0,
+                                                     "completedPayments":  0,
+                                                     "pendingPayments":  0,
+                                                     "failedPayments":  0,
+                                                     "totalAmount":  0
+                                                 }
+                                    },
+    "Vehicle-Categories-Create":  {
+                                      "Status":  "âŒ",
+                                      "Message":  "Uzak sunucu hata döndürdü: (500) İç Sunucu Hatası.",
+                                      "StatusCode":  500
+                                  },
+    "Auth-Users-GetById":  {
+                               "Status":  "âœ…",
+                               "Message":  "Success",
+                               "StatusCode":  200,
+                               "Data":  {
+                                            "success":  true,
+                                            "message":  "Kullanıcı başarıyla getirildi",
+                                            "data":  {
+                                                         "id":  "cmhr4hweq002f2a2lcali879d",
+                                                         "email":  "admin@vehicleauction.com",
+                                                         "firstName":  "Admin",
+                                                         "lastName":  "User",
+                                                         "phone":  "+905551234567",
+                                                         "role":  "ADMIN",
+                                                         "isActive":  true,
+                                                         "isEmailVerified":  false,
+                                                         "lastLoginAt":  "2025-11-09T12:02:54.134Z",
+                                                         "createdAt":  "2025-11-09T02:57:30.194Z",
+                                                         "updatedAt":  "2025-11-09T12:02:54.136Z"
+                                                     },
+                                            "timestamp":  "2025-11-09T12:28:01.757Z"
+                                        }
+                           },
+    "Auction-Auctions-GetAll":  {
+                                    "Status":  "âœ…",
+                                    "Message":  "Success",
+                                    "StatusCode":  200,
+                                    "Data":  {
+                                                 "data":  [
+                                                              {
+                                                                  "id":  "cmhr27whr0000tfae8h4cjuui",
+                                                                  "title":  "Updated Test Auction - Toyota Camry",
+                                                                  "description":  "Updated description for test auction",
+                                                                  "vehicleId":  "cmhr20eym0003vphu3r8sbc2d",
+                                                                  "sellerId":  "cmhr1yl8000002a2l6ds3r07i",
+                                                                  "startingPrice":  "45000",
+                                                                  "currentPrice":  "45000",
+                                                                  "reservePrice":  "50000",
+                                                                  "minBidIncrement":  "1000",
+                                                                  "startTime":  "2025-11-09T05:53:44.459Z",
+                                                                  "endTime":  "2025-11-16T04:53:44.463Z",
+                                                                  "extendedEndTime":  null,
+                                                                  "autoExtendMinutes":  5,
+                                                                  "status":  "ACTIVE",
+                                                                  "isActive":  true,
+                                                                  "isFeatured":  false,
+                                                                  "totalBids":  0,
+                                                                  "highestBidderId":  null,
+                                                                  "viewCount":  19,
+                                                                  "watchlistCount":  0,
+                                                                  "createdAt":  "2025-11-09T01:53:44.512Z",
+                                                                  "updatedAt":  "2025-11-09T12:20:16.266Z",
+                                                                  "bids":  [
+
+                                                                           ],
+                                                                  "_count":  {
+                                                                                 "bids":  0,
+                                                                                 "watchlists":  0
+                                                                             }
+                                                              },
+                                                              {
+                                                                  "id":  "cmgtp4nyo0001k0qy18f74xbp",
+                                                                  "title":  "BMW X5 2022 M�zayedesi",
+                                                                  "description":  "M�kemmel durumda BMW X5 2022 model",
+                                                                  "vehicleId":  "cmgtp4av7000d149oe2vd2h77",
+                                                                  "sellerId":  "cmgr5p0v500034t7bes97xwal",
+                                                                  "startingPrice":  "500000",
+                                                                  "currentPrice":  "500000",
+                                                                  "reservePrice":  "600000",
+                                                                  "minBidIncrement":  "5000",
+                                                                  "startTime":  "2025-10-16T16:00:00.000Z",
+                                                                  "endTime":  "2025-10-16T22:30:54.514Z",
+                                                                  "extendedEndTime":  null,
+                                                                  "autoExtendMinutes":  5,
+                                                                  "status":  "ENDED",
+                                                                  "isActive":  false,
+                                                                  "isFeatured":  false,
+                                                                  "totalBids":  0,
+                                                                  "highestBidderId":  null,
+                                                                  "viewCount":  8,
+                                                                  "watchlistCount":  0,
+                                                                  "createdAt":  "2025-10-16T17:30:54.672Z",
+                                                                  "updatedAt":  "2025-10-16T23:55:00.038Z",
+                                                                  "bids":  [
+
+                                                                           ],
+                                                                  "_count":  {
+                                                                                 "bids":  0,
+                                                                                 "watchlists":  0
+                                                                             }
+                                                              },
+                                                              {
+                                                                  "id":  "cmgsmiamz0000fe3u6cml5yn9",
+                                                                  "title":  "Test Auction",
+                                                                  "description":  "Test auction for bid testing",
+                                                                  "vehicleId":  "test-vehicle-123",
+                                                                  "sellerId":  "test-seller-123",
+                                                                  "startingPrice":  "10000",
+                                                                  "currentPrice":  "10000",
+                                                                  "reservePrice":  "15000",
+                                                                  "minBidIncrement":  "100",
+                                                                  "startTime":  "2025-10-16T02:34:45.326Z",
+                                                                  "endTime":  "2025-10-17T02:29:45.326Z",
+                                                                  "extendedEndTime":  null,
+                                                                  "autoExtendMinutes":  5,
+                                                                  "status":  "ENDED",
+                                                                  "isActive":  false,
+                                                                  "isFeatured":  false,
+                                                                  "totalBids":  0,
+                                                                  "highestBidderId":  null,
+                                                                  "viewCount":  0,
+                                                                  "watchlistCount":  0,
+                                                                  "createdAt":  "2025-10-15T23:29:45.563Z",
+                                                                  "updatedAt":  "2025-10-17T03:31:05.269Z",
+                                                                  "bids":  [
+
+                                                                           ],
+                                                                  "_count":  {
+                                                                                 "bids":  0,
+                                                                                 "watchlists":  0
+                                                                             }
+                                                              },
+                                                              {
+                                                                  "id":  "cmgse35j600001nqu9u517yit",
+                                                                  "title":  "Toyota Corolla 2022 Auction",
+                                                                  "description":  "Updated auction description for Toyota Corolla 2022 - Excellent condition",
+                                                                  "vehicleId":  "cmgsdpabd0002ci4cc9eiapic",
+                                                                  "sellerId":  "cmgsdmk700005122k4ii1v1mo",
+                                                                  "startingPrice":  "20000",
+                                                                  "currentPrice":  "20000",
+                                                                  "reservePrice":  "30000",
+                                                                  "minBidIncrement":  "100",
+                                                                  "startTime":  "2025-10-15T19:30:00.000Z",
+                                                                  "endTime":  "2025-10-20T18:00:00.000Z",
+                                                                  "extendedEndTime":  null,
+                                                                  "autoExtendMinutes":  5,
+                                                                  "status":  "ENDED",
+                                                                  "isActive":  false,
+                                                                  "isFeatured":  false,
+                                                                  "totalBids":  0,
+                                                                  "highestBidderId":  null,
+                                                                  "viewCount":  11,
+                                                                  "watchlistCount":  0,
+                                                                  "createdAt":  "2025-10-15T19:34:02.178Z",
+                                                                  "updatedAt":  "2025-11-04T12:10:00.051Z",
+                                                                  "bids":  [
+
+                                                                           ],
+                                                                  "_count":  {
+                                                                                 "bids":  0,
+                                                                                 "watchlists":  0
+                                                                             }
+                                                              }
+                                                          ],
+                                                 "meta":  {
+                                                              "total":  4,
+                                                              "page":  1,
+                                                              "limit":  10,
+                                                              "totalPages":  1
+                                                          }
+                                             }
+                                },
+    "Auth-Login":  {
+                       "Status":  "âŒ",
+                       "Message":  "Uzak sunucu hata döndürdü: (400) Hatalı İstek.",
+                       "StatusCode":  400
+                   },
+    "Payment-Health":  {
+                           "Status":  "âœ…",
+                           "Message":  "Success",
+                           "StatusCode":  200,
+                           "Data":  {
+                                        "status":  "ok",
+                                        "timestamp":  "2025-11-09T12:28:02.371Z",
+                                        "service":  "payment-service"
+                                    }
+                       },
+    "Notification-Notifications-GetById":  {
+                                               "Status":  "âœ…",
+                                               "Message":  "Success",
+                                               "StatusCode":  200,
+                                               "Data":  {
+                                                            "value":  [
+                                                                          {
+                                                                              "id":  "cmhroln5x000110nhx15wm87v",
+                                                                              "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                              "type":  "BID_PLACED",
+                                                                              "title":  "Test Notification",
+                                                                              "message":  "This is a test notification",
+                                                                              "data":  {
+                                                                                           "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                                                           "bidAmount":  150000
+                                                                                       },
+                                                                              "read":  true,
+                                                                              "createdAt":  "2025-11-09T12:20:17.157Z",
+                                                                              "updatedAt":  "2025-11-09T12:20:17.177Z"
+                                                                          },
+                                                                          {
+                                                                              "id":  "cmhro4z87000010nh8x3zzj9z",
+                                                                              "userId":  "cmhr4hweq002f2a2lcali879d",
+                                                                              "type":  "BID_PLACED",
+                                                                              "title":  "Test Notification",
+                                                                              "message":  "This is a test notification",
+                                                                              "data":  {
+                                                                                           "auctionId":  "cmhr27whr0000tfae8h4cjuui",
+                                                                                           "bidAmount":  150000
+                                                                                       },
+                                                                              "read":  true,
+                                                                              "createdAt":  "2025-11-09T12:07:19.640Z",
+                                                                              "updatedAt":  "2025-11-09T12:07:19.660Z"
+                                                                          },
+                                                                          {
+                                                                              "id":  "cmgtrijat0001qv04u5m23poe",
+                                                                              "userId":  "user-test",
+                                                                              "type":  "BID_PLACED",
+                                                                              "title":  "Test Bildirim",
+                                                                              "message":  "Bu bir test bildirimidir",
+                                                                              "data":  {
+                                                                                           "auctionId":  "auction-1",
+                                                                                           "bidAmount":  15000
+                                                                                       },
+                                                                              "read":  false,
+                                                                              "createdAt":  "2025-10-16T18:37:41.045Z",
+                                                                              "updatedAt":  "2025-10-16T18:37:41.045Z"
+                                                                          },
+                                                                          {
+                                                                              "id":  "cmgtr68x20000qv043zsavjix",
+                                                                              "userId":  "user-1",
+                                                                              "type":  "BID_PLACED",
+                                                                              "title":  "Test Notification",
+                                                                              "message":  "This is a test notification",
+                                                                              "data":  {
+                                                                                           "testKey":  "testValue"
+                                                                                       },
+                                                                              "read":  false,
+                                                                              "createdAt":  "2025-10-16T18:28:07.717Z",
+                                                                              "updatedAt":  "2025-10-16T18:28:07.717Z"
+                                                                          }
+                                                                      ],
+                                                            "Count":  4
+                                                        }
+                                           },
+    "Auction-Auctions-GetById":  {
+                                     "Status":  "âœ…",
+                                     "Message":  "Success",
+                                     "StatusCode":  200,
+                                     "Data":  {
+                                                  "id":  "cmhr27whr0000tfae8h4cjuui",
+                                                  "title":  "Updated Test Auction - Toyota Camry",
+                                                  "description":  "Updated description for test auction",
+                                                  "vehicleId":  "cmhr20eym0003vphu3r8sbc2d",
+                                                  "sellerId":  "cmhr1yl8000002a2l6ds3r07i",
+                                                  "startingPrice":  "45000",
+                                                  "currentPrice":  "45000",
+                                                  "reservePrice":  "50000",
+                                                  "minBidIncrement":  "1000",
+                                                  "startTime":  "2025-11-09T05:53:44.459Z",
+                                                  "endTime":  "2025-11-16T04:53:44.463Z",
+                                                  "extendedEndTime":  null,
+                                                  "autoExtendMinutes":  5,
+                                                  "status":  "ACTIVE",
+                                                  "isActive":  true,
+                                                  "isFeatured":  false,
+                                                  "totalBids":  0,
+                                                  "highestBidderId":  null,
+                                                  "viewCount":  19,
+                                                  "watchlistCount":  0,
+                                                  "createdAt":  "2025-11-09T01:53:44.512Z",
+                                                  "updatedAt":  "2025-11-09T12:20:16.266Z",
+                                                  "bids":  [
+
+                                                           ],
+                                                  "_count":  {
+                                                                 "bids":  0,
+                                                                 "watchlists":  0
+                                                             }
+                                              }
+                                 }
+}

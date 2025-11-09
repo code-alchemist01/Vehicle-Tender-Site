@@ -51,8 +51,9 @@ Vehicle Auction Platform için ödeme işlemlerini yöneten mikroservis.
 ```env
 # Temel Yapılandırma
 NODE_ENV=development
-PORT=3003
+PORT=4005
 HOST=localhost
+# Not: Global prefix yok, endpoint'ler direkt /payments ile başlar
 
 # Veritabanı
 DATABASE_URL="postgresql://user:password@localhost:5432/vehicle_auction_payment"
@@ -83,31 +84,35 @@ PAYMENT_TIMEOUT_MINUTES=30
 
 ## 🔌 API Endpoints
 
-### Kimlik Doğrulama Gerektiren Endpoints
-
-| Method | Endpoint | Açıklama |
-|--------|----------|----------|
-| POST | `/payments` | Yeni ödeme oluştur |
-| POST | `/payments/:id/process` | Ödemeyi işle |
-| GET | `/payments/:id` | Ödeme detaylarını getir |
-| GET | `/payments/auction/:auctionId` | Müzayede ödemelerini listele |
-| GET | `/payments/bidder/:bidderId` | Kullanıcı ödemelerini listele |
-| DELETE | `/payments/:id/cancel` | Ödemeyi iptal et |
-| GET | `/payments/statistics` | Ödeme istatistikleri |
+**Not:** Payment Service'de global prefix yoktur. Tüm endpoint'ler direkt `/payments` path'i ile başlar. Port: **4005**
 
 ### Public Endpoints
 
 | Method | Endpoint | Açıklama |
 |--------|----------|----------|
 | GET | `/health` | Servis sağlık kontrolü |
-| POST | `/webhooks/stripe` | Stripe webhook |
-| GET | `/test-stripe` | Stripe bağlantı testi |
+| GET | `/payments/test-stripe` | Stripe bağlantı testi (Route sırası nedeniyle `:id` route'undan önce tanımlanmıştır) |
+
+### Kimlik Doğrulama Gerektiren Endpoints
+
+| Method | Endpoint | Açıklama |
+|--------|----------|----------|
+| POST | `/payments` | Yeni ödeme oluştur |
+| GET | `/payments/statistics` | Ödeme istatistikleri (Query: `bidderId`, `auctionId`) |
+| GET | `/payments/auction/:auctionId` | Müzayede ödemelerini listele |
+| GET | `/payments/bidder/:bidderId` | Kullanıcı ödemelerini listele |
+| GET | `/payments/:id` | Ödeme detaylarını getir |
+| POST | `/payments/:id/process` | Ödemeyi işle |
+| PATCH | `/payments/:id/cancel` | Ödemeyi iptal et |
+
+**Önemli:** Route sırası kritiktir. `test-stripe`, `statistics`, `auction/:auctionId`, `bidder/:bidderId` endpoint'leri `:id` route'undan önce tanımlanmalıdır.
 
 ## 💳 Ödeme Akışı
 
 ### 1. Ödeme Oluşturma
 ```javascript
-POST /api/v1/payments
+POST /payments
+Authorization: Bearer <token>
 {
   "auctionId": "uuid",
   "bidderId": "uuid",
@@ -119,9 +124,10 @@ POST /api/v1/payments
 
 ### 2. Ödeme İşleme
 ```javascript
-POST /api/v1/payments/:id/process
+POST /payments/:id/process
+Authorization: Bearer <token>
 {
-  "paymentMethodId": "pm_...",
+  "stripePaymentMethodId": "pm_...",
   "confirmationToken": "optional"
 }
 ```
@@ -151,7 +157,7 @@ npm run test:e2e
 npm run test:cov
 
 # Stripe bağlantı testi
-curl http://localhost:3003/payments/test-stripe
+curl http://localhost:4005/payments/test-stripe
 ```
 
 ### Test Sonuçları (Son Güncelleme: 2025-01-26)
@@ -195,7 +201,7 @@ curl http://localhost:3003/payments/test-stripe
 
 ### Health Check
 ```bash
-curl http://localhost:3003/health
+curl http://localhost:4005/health
 ```
 
 ### Metrics
@@ -230,7 +236,7 @@ LOG_LEVEL=debug  # debug, info, warn, error
 ### Docker ile
 ```bash
 docker build -t payment-service .
-docker run -p 3003:3003 payment-service
+docker run -p 4005:4005 payment-service
 ```
 
 ### Docker Compose ile

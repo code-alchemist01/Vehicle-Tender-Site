@@ -46,14 +46,6 @@ export class NotificationsController {
     return this.notificationsService.findAll(userId, readBoolean);
   }
 
-  @Get('unread-count/:userId')
-  @ApiOperation({ summary: 'Get unread notification count for a user' })
-  @ApiParam({ name: 'userId', description: 'User ID' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Unread count retrieved successfully' })
-  getUnreadCount(@Param('userId') userId: string) {
-    return this.notificationsService.getUnreadCount(userId);
-  }
-
   @Get('health')
   @ApiOperation({ summary: 'Health check endpoint' })
   @ApiResponse({ status: HttpStatus.OK, description: 'Service is healthy' })
@@ -63,6 +55,14 @@ export class NotificationsController {
       timestamp: new Date().toISOString(),
       service: 'notification-service',
     };
+  }
+
+  @Get('unread-count/:userId')
+  @ApiOperation({ summary: 'Get unread notification count for a user' })
+  @ApiParam({ name: 'userId', description: 'User ID' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Unread count retrieved successfully' })
+  getUnreadCount(@Param('userId') userId: string) {
+    return this.notificationsService.getUnreadCount(userId);
   }
 
   @Get(':id')

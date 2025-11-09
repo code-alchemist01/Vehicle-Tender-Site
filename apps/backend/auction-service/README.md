@@ -29,11 +29,18 @@ Auction Service, araç müzayede platformunun müzayede yönetimi ve teklif işl
 
 ## 📋 API Endpoints
 
+**Not:** Auction Service'de global prefix yoktur. Tüm endpoint'ler direkt `/auctions` path'i ile başlar. API Gateway üzerinden `/api/v1/auctions` olarak erişilebilir.
+
+### Health Check
+```http
+GET /health
+```
+
 ### Müzayede İşlemleri
 
 #### Müzayede Listeleme
 ```http
-GET /api/v1/auctions
+GET /auctions
 ```
 
 **Query Parameters:**
@@ -79,14 +86,19 @@ GET /api/v1/auctions
 }
 ```
 
+#### Müzayede İstatistikleri
+```http
+GET /auctions/stats
+```
+
 #### Müzayede Detayı
 ```http
-GET /api/v1/auctions/:id
+GET /auctions/:id
 ```
 
 #### Müzayede Oluşturma
 ```http
-POST /api/v1/auctions
+POST /auctions
 Authorization: Bearer <token>
 ```
 
@@ -109,13 +121,23 @@ Authorization: Bearer <token>
 
 #### Müzayede Güncelleme
 ```http
-PATCH /api/v1/auctions/:id
+PATCH /auctions/:id
 Authorization: Bearer <token>
 ```
 
 #### Müzayede Silme
 ```http
-DELETE /api/v1/auctions/:id
+DELETE /auctions/:id
+Authorization: Bearer <token>
+```
+
+#### Watchlist İşlemleri
+```http
+POST /auctions/:id/watchlist
+Authorization: Bearer <token>
+Body: { "userId": "user-id" }
+
+DELETE /auctions/:id/watchlist/:userId
 Authorization: Bearer <token>
 ```
 
@@ -123,7 +145,7 @@ Authorization: Bearer <token>
 
 #### Teklif Verme
 ```http
-POST /api/v1/auctions/:id/bids
+POST /auctions/:id/bids
 Authorization: Bearer <token>
 ```
 
@@ -138,15 +160,14 @@ Authorization: Bearer <token>
 
 #### Müzayede Tekliflerini Listeleme
 ```http
-GET /api/v1/auctions/:id/bids
+GET /auctions/:id/bids
 ```
 
 ### Durum Güncellemeleri
 
 #### Manuel Durum Güncelleme
 ```http
-POST /api/v1/auctions/update-statuses
-Authorization: Bearer <admin-token>
+POST /auctions/update-statuses
 ```
 
 ## 🛠️ Kurulum ve Çalıştırma
@@ -197,6 +218,7 @@ npm run start:prod
 # Sunucu Yapılandırması
 PORT=4003
 NODE_ENV=production
+# Not: Global prefix yok, endpoint'ler direkt /auctions ile başlar
 
 # Veritabanı
 DATABASE_URL="postgresql://user:password@localhost:5432/auction_db"
@@ -351,7 +373,7 @@ npm run test:e2e -- --grep "Auction CRUD"
 
 ### Health Check
 ```http
-GET /api/v1/health
+GET /health
 ```
 
 **Response:**

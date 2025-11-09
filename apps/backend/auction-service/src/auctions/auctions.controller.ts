@@ -53,6 +53,13 @@ export class AuctionsController {
     return this.auctionsService.getAuctionStats();
   }
 
+  @Post('update-statuses')
+  @ApiOperation({ summary: 'Manually update auction statuses' })
+  @ApiResponse({ status: 200, description: 'Auction statuses updated successfully' })
+  manualUpdateStatuses() {
+    return this.auctionsService.manualUpdateAuctionStatuses();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get auction by ID' })
   @ApiResponse({ status: 200, description: 'Auction retrieved successfully' })
@@ -69,13 +76,6 @@ export class AuctionsController {
   @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateAuctionDto: UpdateAuctionDto) {
     return this.auctionsService.update(id, updateAuctionDto);
-  }
-
-  @Post('update-statuses')
-  @ApiOperation({ summary: 'Manually update auction statuses' })
-  @ApiResponse({ status: 200, description: 'Auction statuses updated successfully' })
-  manualUpdateStatuses() {
-    return this.auctionsService.manualUpdateAuctionStatuses();
   }
 
   @Delete(':id')

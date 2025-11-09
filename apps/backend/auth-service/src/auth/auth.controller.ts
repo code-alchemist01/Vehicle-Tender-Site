@@ -109,17 +109,6 @@ export class AuthController {
     return new ApiResponseDto(true, result.message);
   }
 
-  @Get('login-history')
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
-  @ApiOperation({ summary: 'Kullanıcı giriş geçmişi' })
-  @ApiResponse({ status: 200, description: 'Giriş geçmişi başarıyla getirildi' })
-  @ApiResponse({ status: 401, description: 'Yetkisiz erişim' })
-  async getLoginHistory(@CurrentUser() user: any) {
-    const history = await this.authService.getLoginHistory(user.id);
-    return new ApiResponseDto(true, 'Giriş geçmişi başarıyla getirildi', history);
-  }
-
   @Get('health')
   @Public()
   @ApiOperation({ summary: 'Servis sağlık kontrolü' })
@@ -131,5 +120,16 @@ export class AuthController {
       service: 'auth-service',
       version: '1.0.0',
     });
+  }
+
+  @Get('login-history')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Kullanıcı giriş geçmişi' })
+  @ApiResponse({ status: 200, description: 'Giriş geçmişi başarıyla getirildi' })
+  @ApiResponse({ status: 401, description: 'Yetkisiz erişim' })
+  async getLoginHistory(@CurrentUser() user: any) {
+    const history = await this.authService.getLoginHistory(user.id);
+    return new ApiResponseDto(true, 'Giriş geçmişi başarıyla getirildi', history);
   }
 }

@@ -25,90 +25,37 @@ Araç müzayede platformu için bildirim yönetim servisi. Bu servis, kullanıc�
 
 ## 📋 API Endpoints
 
+**Not:** Notification Service'de global prefix yoktur. Tüm endpoint'ler direkt `/notifications` path'i ile başlar. Port: **4006**
+
+### Health Check
+```
+GET    /notifications/health      # Servis sağlık kontrolü
+```
+
 ### Temel Bildirim İşlemleri
 ```
-GET    /health                    # Servis sağlık kontrolü
-GET    /notifications             # Kullanıcı bildirimlerini getir
-GET    /notifications/unread      # Okunmamış bildirimleri getir
-GET    /notifications/count       # Bildirim sayısını getir
+GET    /notifications             # Kullanıcı bildirimlerini getir (Query: userId, read)
+GET    /notifications/unread-count/:userId  # Okunmamış bildirim sayısını getir
 GET    /notifications/:id         # Belirli bildirimi getir
 POST   /notifications             # Yeni bildirim oluştur
-POST   /notifications/:id/read    # Bildirimi okundu olarak işaretle
-POST   /notifications/mark-all-read # Tüm bildirimleri okundu işaretle
+PATCH  /notifications/:id/read    # Bildirimi okundu olarak işaretle
+PATCH  /notifications/user/:userId/read-all # Tüm bildirimleri okundu işaretle
+PATCH  /notifications/:id         # Bildirimi güncelle
 DELETE /notifications/:id         # Bildirimi sil
-DELETE /notifications/clear-all   # Tüm bildirimleri temizle
 ```
 
-### Bildirim Tercihleri
+### E-posta Gönderimi
 ```
-GET    /notifications/preferences        # Bildirim tercihlerini getir
-PUT    /notifications/preferences        # Bildirim tercihlerini güncelle
-POST   /notifications/preferences/reset  # Varsayılan tercihlere sıfırla
-```
-
-### Push Bildirim Yönetimi
-```
-POST   /notifications/push/subscribe     # Push bildirimlerine abone ol
-POST   /notifications/push/unsubscribe   # Push bildirimlerinden çık
-GET    /notifications/push/status        # Push bildirim durumunu getir
-```
-
-### E-posta Yönetimi
-```
-POST   /notifications/email/subscribe    # E-posta bildirimlerine abone ol
-POST   /notifications/email/unsubscribe  # E-posta bildirimlerinden çık
-GET    /notifications/email/status       # E-posta bildirim durumunu getir
 POST   /notifications/email/send         # E-posta gönder
 ```
 
-### SMS Yönetimi
+### Toplu Bildirimler
 ```
-POST   /notifications/sms/subscribe      # SMS bildirimlerine abone ol
-POST   /notifications/sms/unsubscribe    # SMS bildirimlerinden çık
-GET    /notifications/sms/status         # SMS bildirim durumunu getir
-POST   /notifications/sms/verify-phone   # Telefon numarasını doğrula
+POST   /notifications/bulk/auction-created  # Müzayede oluşturulduğunda bildirim gönder
+POST   /notifications/bulk/bid-placed       # Teklif verildiğinde bildirim gönder
 ```
 
-### Gerçek Zamanlı Bildirimler
-```
-GET    /notifications/realtime           # WebSocket bağlantısı
-```
-
-### Şablon Yönetimi (Satıcı/Admin)
-```
-GET    /notifications/templates          # Bildirim şablonlarını getir
-GET    /notifications/templates/:id      # Belirli şablonu getir
-```
-
-### Özel Bildirimler (Satıcı)
-```
-POST   /notifications/custom/send        # Özel bildirim gönder
-GET    /notifications/custom/history     # Özel bildirim geçmişi
-```
-
-### Admin İşlemleri
-```
-GET    /notifications/admin/all          # Tüm bildirimleri getir
-GET    /notifications/admin/stats        # Bildirim istatistikleri
-POST   /notifications/admin/broadcast    # Tüm kullanıcılara bildirim gönder
-POST   /notifications/admin/send-to-users # Belirli kullanıcılara gönder
-GET    /notifications/admin/templates    # Tüm şablonları getir
-POST   /notifications/admin/templates    # Şablon oluştur
-PUT    /notifications/admin/templates/:id # Şablonu güncelle
-DELETE /notifications/admin/templates/:id # Şablonu sil
-```
-
-### Analitik
-```
-GET    /notifications/analytics/delivery-stats # Teslimat istatistikleri
-GET    /notifications/analytics/engagement     # Etkileşim istatistikleri
-```
-
-### Webhook Endpoints
-```
-POST   /notifications/webhooks/email-status    # E-posta durum webhook'u
-POST   /notifications/webhooks/sms-status      # SMS durum webhook'u
-```
+**Not:** Yukarıdaki endpoint'ler implementasyonda mevcuttur. Diğer endpoint'ler (preferences, push, SMS, admin, analytics, webhooks) henüz implementasyonda yoktur.
 
 ## 🛠️ Kurulum
 
@@ -139,7 +86,8 @@ npx prisma db seed
 ```env
 # Uygulama
 NODE_ENV=development
-PORT=3004
+PORT=4006
+# Not: Global prefix yok, endpoint'ler direkt /notifications ile başlar
 
 # Veritabanı
 DATABASE_URL="postgresql://username:password@localhost:5432/notification_db"
@@ -266,7 +214,7 @@ npm run test:cov
 
 ### Health Check
 ```bash
-curl http://localhost:3004/health
+curl http://localhost:4006/notifications/health
 ```
 
 ### Metrics
@@ -312,7 +260,7 @@ services:
 
 ## 📝 API Dokümantasyonu
 
-Swagger UI: `http://localhost:3004/api`
+Swagger UI: `http://localhost:4006/api`
 
 ## 🤝 Katkıda Bulunma
 

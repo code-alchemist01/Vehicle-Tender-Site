@@ -25,5 +25,5 @@ export class CreateAutoBidDto {
   @IsNumber()
   @Type(() => Number)
   @Min(0)
-  incrementAmount: number;
+  increment: number;
 }

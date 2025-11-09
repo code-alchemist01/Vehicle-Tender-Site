@@ -11,6 +11,7 @@ datasource db {
 model Category {
   id          String    @id @default(cuid())
   name        String    @unique @db.VarChar(100)
+  slug        String    @unique @db.VarChar(100)
   description String?   @db.Text
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
@@ -19,6 +20,7 @@ model Category {
 
   @@index([isActive])
   @@index([name])
+  @@index([slug])
   @@map("categories")
 }
 

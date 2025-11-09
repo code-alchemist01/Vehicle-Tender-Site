@@ -55,7 +55,9 @@ export class BidValidationService {
     }
 
     // Check minimum bid amount
-    const minBidAmount = auction.currentPrice + auction.minBidIncrement;
+    const currentPrice = parseFloat(auction.currentPrice) || 0;
+    const minBidIncrement = parseFloat(auction.minBidIncrement) || 100;
+    const minBidAmount = currentPrice + minBidIncrement;
     if (amount < minBidAmount) {
       throw new BadRequestException(
         `Bid amount must be at least ${minBidAmount}`,
@@ -80,7 +82,7 @@ export class BidValidationService {
   private async getAuctionDetails(auctionId: string): Promise<any> {
     try {
       const auctionServiceUrl = process.env.AUCTION_SERVICE_URL || 'http://localhost:4003';
-      const fullUrl = `${auctionServiceUrl}/api/v1/auctions/${auctionId}`;
+      const fullUrl = `${auctionServiceUrl}/auctions/${auctionId}`;
       
       console.log(`[BID-VALIDATION] Fetching auction details from: ${fullUrl}`);
       console.log(`[BID-VALIDATION] Environment AUCTION_SERVICE_URL: ${process.env.AUCTION_SERVICE_URL}`);
@@ -96,7 +98,7 @@ export class BidValidationService {
     } catch (error) {
       console.error(`[BID-VALIDATION] Error fetching auction details for ID ${auctionId}:`, error.message);
       console.error(`[BID-VALIDATION] Error details:`, {
-        url: `${process.env.AUCTION_SERVICE_URL || 'http://localhost:4003'}/api/v1/auctions/${auctionId}`,
+        url: `${process.env.AUCTION_SERVICE_URL || 'http://localhost:4003'}/auctions/${auctionId}`,
         status: error.response?.status,
         statusText: error.response?.statusText,
         data: error.response?.data
@@ -146,20 +148,7 @@ export class BidValidationService {
       throw new BadRequestException('Too many bids in a short time period');
     }
 
-    // Log validation for audit
-    await this.prisma.bidValidation.create({
-      data: {
-        bidId: '', // This should be set after bid creation
-        auctionId,
-        bidderId,
-        validations: {
-          bidLimit: 'PASSED',
-          suspiciousBidding: 'PASSED',
-          amountValidation: 'PASSED',
-        },
-        isValid: true,
-        errors: [],
-      },
-    });
+    // Note: Bid validation logging is moved to bid creation phase
+    // to avoid unique constraint issues and to have the actual bidId
   }
 }

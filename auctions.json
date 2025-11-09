@@ -1,0 +1,134 @@
+﻿{
+    "data":  [
+                 {
+                     "id":  "cmhr27whr0000tfae8h4cjuui",
+                     "title":  "Updated Test Auction - Toyota Camry",
+                     "description":  "Updated description for test auction",
+                     "vehicleId":  "cmhr20eym0003vphu3r8sbc2d",
+                     "sellerId":  "cmhr1yl8000002a2l6ds3r07i",
+                     "startingPrice":  "45000",
+                     "currentPrice":  "45000",
+                     "reservePrice":  "50000",
+                     "minBidIncrement":  "1000",
+                     "startTime":  "2025-11-09T05:53:44.459Z",
+                     "endTime":  "2025-11-16T04:53:44.463Z",
+                     "extendedEndTime":  null,
+                     "autoExtendMinutes":  5,
+                     "status":  "ACTIVE",
+                     "isActive":  true,
+                     "isFeatured":  false,
+                     "totalBids":  0,
+                     "highestBidderId":  null,
+                     "viewCount":  4,
+                     "watchlistCount":  0,
+                     "createdAt":  "2025-11-09T01:53:44.512Z",
+                     "updatedAt":  "2025-11-09T09:10:04.227Z",
+                     "bids":  [
+
+                              ],
+                     "_count":  {
+                                    "bids":  0,
+                                    "watchlists":  0
+                                }
+                 },
+                 {
+                     "id":  "cmgtp4nyo0001k0qy18f74xbp",
+                     "title":  "BMW X5 2022 M�zayedesi",
+                     "description":  "M�kemmel durumda BMW X5 2022 model",
+                     "vehicleId":  "cmgtp4av7000d149oe2vd2h77",
+                     "sellerId":  "cmgr5p0v500034t7bes97xwal",
+                     "startingPrice":  "500000",
+                     "currentPrice":  "500000",
+                     "reservePrice":  "600000",
+                     "minBidIncrement":  "5000",
+                     "startTime":  "2025-10-16T16:00:00.000Z",
+                     "endTime":  "2025-10-16T22:30:54.514Z",
+                     "extendedEndTime":  null,
+                     "autoExtendMinutes":  5,
+                     "status":  "ENDED",
+                     "isActive":  false,
+                     "isFeatured":  false,
+                     "totalBids":  0,
+                     "highestBidderId":  null,
+                     "viewCount":  8,
+                     "watchlistCount":  0,
+                     "createdAt":  "2025-10-16T17:30:54.672Z",
+                     "updatedAt":  "2025-10-16T23:55:00.038Z",
+                     "bids":  [
+
+                              ],
+                     "_count":  {
+                                    "bids":  0,
+                                    "watchlists":  0
+                                }
+                 },
+                 {
+                     "id":  "cmgsmiamz0000fe3u6cml5yn9",
+                     "title":  "Test Auction",
+                     "description":  "Test auction for bid testing",
+                     "vehicleId":  "test-vehicle-123",
+                     "sellerId":  "test-seller-123",
+                     "startingPrice":  "10000",
+                     "currentPrice":  "10000",
+                     "reservePrice":  "15000",
+                     "minBidIncrement":  "100",
+                     "startTime":  "2025-10-16T02:34:45.326Z",
+                     "endTime":  "2025-10-17T02:29:45.326Z",
+                     "extendedEndTime":  null,
+                     "autoExtendMinutes":  5,
+                     "status":  "ENDED",
+                     "isActive":  false,
+                     "isFeatured":  false,
+                     "totalBids":  0,
+                     "highestBidderId":  null,
+                     "viewCount":  0,
+                     "watchlistCount":  0,
+                     "createdAt":  "2025-10-15T23:29:45.563Z",
+                     "updatedAt":  "2025-10-17T03:31:05.269Z",
+                     "bids":  [
+
+                              ],
+                     "_count":  {
+                                    "bids":  0,
+                                    "watchlists":  0
+                                }
+                 },
+                 {
+                     "id":  "cmgse35j600001nqu9u517yit",
+                     "title":  "Toyota Corolla 2022 Auction",
+                     "description":  "Updated auction description for Toyota Corolla 2022 - Excellent condition",
+                     "vehicleId":  "cmgsdpabd0002ci4cc9eiapic",
+                     "sellerId":  "cmgsdmk700005122k4ii1v1mo",
+                     "startingPrice":  "20000",
+                     "currentPrice":  "20000",
+                     "reservePrice":  "30000",
+                     "minBidIncrement":  "100",
+                     "startTime":  "2025-10-15T19:30:00.000Z",
+                     "endTime":  "2025-10-20T18:00:00.000Z",
+                     "extendedEndTime":  null,
+                     "autoExtendMinutes":  5,
+                     "status":  "ENDED",
+                     "isActive":  false,
+                     "isFeatured":  false,
+                     "totalBids":  0,
+                     "highestBidderId":  null,
+                     "viewCount":  11,
+                     "watchlistCount":  0,
+                     "createdAt":  "2025-10-15T19:34:02.178Z",
+                     "updatedAt":  "2025-11-04T12:10:00.051Z",
+                     "bids":  [
+
+                              ],
+                     "_count":  {
+                                    "bids":  0,
+                                    "watchlists":  0
+                                }
+                 }
+             ],
+    "meta":  {
+                 "total":  4,
+                 "page":  1,
+                 "limit":  10,
+                 "totalPages":  1
+             }
+}

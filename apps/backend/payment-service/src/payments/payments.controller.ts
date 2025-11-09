@@ -36,35 +36,17 @@ export class PaymentsController {
     return this.stripeService.testStripeConnection();
   }
 
-  @Post()
-  @ApiOperation({ summary: 'Create a new payment' })
-  @ApiResponse({ status: 201, description: 'Payment created successfully' })
-  @ApiResponse({ status: 400, description: 'Bad request' })
+  @Get('statistics')
+  @ApiOperation({ summary: 'Get payment statistics' })
+  @ApiQuery({ name: 'bidderId', required: false, description: 'Filter by bidder ID' })
+  @ApiQuery({ name: 'auctionId', required: false, description: 'Filter by auction ID' })
+  @ApiResponse({ status: 200, description: 'Payment statistics' })
   @ApiBearerAuth()
-  async createPayment(@Body() createPaymentDto: CreatePaymentDto) {
-    return this.paymentsService.createPayment(createPaymentDto);
-  }
-
-  @Post(':id/process')
-  @ApiOperation({ summary: 'Process a payment' })
-  @ApiResponse({ status: 200, description: 'Payment processed successfully' })
-  @ApiResponse({ status: 400, description: 'Bad request' })
-  @ApiResponse({ status: 404, description: 'Payment not found' })
-  @ApiBearerAuth()
-  async processPayment(
-    @Param('id') id: string,
-    @Body('stripePaymentMethodId') stripePaymentMethodId: string,
+  async getPaymentStatistics(
+    @Query('bidderId') bidderId?: string,
+    @Query('auctionId') auctionId?: string,
   ) {
-    return this.paymentsService.processPayment(id, stripePaymentMethodId);
-  }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Get payment by ID' })
-  @ApiResponse({ status: 200, description: 'Payment found' })
-  @ApiResponse({ status: 404, description: 'Payment not found' })
-  @ApiBearerAuth()
-  async getPayment(@Param('id') id: string) {
-    return this.paymentsService.findPaymentById(id);
+    return this.paymentsService.getPaymentStatistics(bidderId, auctionId);
   }
 
   @Get('auction/:auctionId')
@@ -83,6 +65,37 @@ export class PaymentsController {
     return this.paymentsService.findPaymentsByBidder(bidderId);
   }
 
+  @Post()
+  @ApiOperation({ summary: 'Create a new payment' })
+  @ApiResponse({ status: 201, description: 'Payment created successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiBearerAuth()
+  async createPayment(@Body() createPaymentDto: CreatePaymentDto) {
+    return this.paymentsService.createPayment(createPaymentDto);
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get payment by ID' })
+  @ApiResponse({ status: 200, description: 'Payment found' })
+  @ApiResponse({ status: 404, description: 'Payment not found' })
+  @ApiBearerAuth()
+  async getPayment(@Param('id') id: string) {
+    return this.paymentsService.findPaymentById(id);
+  }
+
+  @Post(':id/process')
+  @ApiOperation({ summary: 'Process a payment' })
+  @ApiResponse({ status: 200, description: 'Payment processed successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 404, description: 'Payment not found' })
+  @ApiBearerAuth()
+  async processPayment(
+    @Param('id') id: string,
+    @Body('stripePaymentMethodId') stripePaymentMethodId: string,
+  ) {
+    return this.paymentsService.processPayment(id, stripePaymentMethodId);
+  }
+
   @Patch(':id/cancel')
   @ApiOperation({ summary: 'Cancel a payment' })
   @ApiResponse({ status: 200, description: 'Payment cancelled successfully' })
@@ -91,18 +104,5 @@ export class PaymentsController {
   @ApiBearerAuth()
   async cancelPayment(@Param('id') id: string) {
     return this.paymentsService.cancelPayment(id);
-  }
-
-  @Get('statistics')
-  @ApiOperation({ summary: 'Get payment statistics' })
-  @ApiQuery({ name: 'bidderId', required: false, description: 'Filter by bidder ID' })
-  @ApiQuery({ name: 'auctionId', required: false, description: 'Filter by auction ID' })
-  @ApiResponse({ status: 200, description: 'Payment statistics' })
-  @ApiBearerAuth()
-  async getPaymentStatistics(
-    @Query('bidderId') bidderId?: string,
-    @Query('auctionId') auctionId?: string,
-  ) {
-    return this.paymentsService.getPaymentStatistics(bidderId, auctionId);
   }
 }

@@ -11,7 +11,7 @@ import {
   HttpStatus,
   Req,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { BidsService } from './bids.service';
@@ -48,6 +48,14 @@ export class BidsController {
     }
   }
 
+  @Get('statistics')
+  @ApiOperation({ summary: 'Get bid statistics' })
+  @ApiQuery({ name: 'auctionId', required: false, description: 'Filter by auction ID' })
+  @ApiResponse({ status: 200, description: 'Statistics retrieved successfully' })
+  async getBidStatistics(@Query('auctionId') auctionId?: string) {
+    return this.bidsService.getBidStatistics(auctionId);
+  }
+
   @Get()
   @ApiOperation({ summary: 'Get all bids with pagination and filtering' })
   @ApiResponse({ status: 200, description: 'Bids retrieved successfully' })
@@ -63,6 +71,13 @@ export class BidsController {
     return this.bidsService.getBidById(id);
   }
 
+  @Get('auction/:auctionId/highest')
+  @ApiOperation({ summary: 'Get highest bid for an auction' })
+  @ApiResponse({ status: 200, description: 'Highest bid retrieved successfully' })
+  async getHighestBid(@Param('auctionId') auctionId: string) {
+    return this.bidsService.getHighestBid(auctionId);
+  }
+
   @Get('auction/:auctionId')
   @ApiOperation({ summary: 'Get bids for a specific auction' })
   @ApiResponse({ status: 200, description: 'Auction bids retrieved successfully' })
@@ -71,13 +86,6 @@ export class BidsController {
     @Query() query: BidQueryDto,
   ) {
     return this.bidsService.getAuctionBids(auctionId, query);
-  }
-
-  @Get('auction/:auctionId/highest')
-  @ApiOperation({ summary: 'Get highest bid for an auction' })
-  @ApiResponse({ status: 200, description: 'Highest bid retrieved successfully' })
-  async getHighestBid(@Param('auctionId') auctionId: string) {
-    return this.bidsService.getHighestBid(auctionId);
   }
 
   @Get('user/:bidderId')
@@ -99,13 +107,6 @@ export class BidsController {
     @Param('bidderId') bidderId: string,
   ) {
     return this.bidsService.cancelBid(bidId, bidderId);
-  }
-
-  @Get('statistics/:auctionId?')
-  @ApiOperation({ summary: 'Get bid statistics' })
-  @ApiResponse({ status: 200, description: 'Statistics retrieved successfully' })
-  async getBidStatistics(@Param('auctionId') auctionId?: string) {
-    return this.bidsService.getBidStatistics(auctionId);
   }
 
   // Auto Bid Endpoints

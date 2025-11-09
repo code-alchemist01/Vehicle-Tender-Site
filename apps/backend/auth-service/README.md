@@ -30,7 +30,8 @@ POST /api/v1/auth/refresh
 ### Profil Yönetimi
 ```http
 GET /api/v1/auth/profile
-PUT /api/v1/auth/profile
+POST /api/v1/auth/change-password
+GET /api/v1/auth/login-history
 ```
 
 ### Kullanıcı Yönetimi (Admin)

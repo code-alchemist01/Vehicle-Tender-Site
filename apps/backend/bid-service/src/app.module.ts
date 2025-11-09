@@ -33,11 +33,32 @@ import { JwtStrategy } from './common/strategies/jwt.strategy';
       },
     ]),
     ScheduleModule.forRoot(),
-    BullModule.forRoot({
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        const redisUrl = configService.get<string>('REDIS_URL');
+        if (redisUrl && redisUrl.startsWith('redis://')) {
+          // Parse Redis URL (e.g., redis://redis:6379)
+          try {
+            const url = new URL(redisUrl);
+            return {
+              redis: {
+                host: url.hostname,
+                port: parseInt(url.port) || 6379,
+              },
+            };
+          } catch (e) {
+            // Fallback to default if URL parsing fails
+          }
+        }
+        return {
       redis: {
-        host: process.env.REDIS_HOST || 'localhost',
-        port: parseInt(process.env.REDIS_PORT) || 6379,
+            host: configService.get<string>('REDIS_HOST') || 'redis',
+            port: parseInt(configService.get<string>('REDIS_PORT') || '6379'),
       },
+        };
+      },
+      inject: [ConfigService],
     }),
     DatabaseModule,
     BidsModule,

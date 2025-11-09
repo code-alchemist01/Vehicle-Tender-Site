@@ -197,6 +197,9 @@ services:
       - PORT=4004
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_bid
       - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=your-super-secret-jwt-key-here
+      - AUCTION_SERVICE_URL=http://auction-service:4003
+      - NOTIFICATION_SERVICE_URL=http://notification-service:4006
     ports:
       - "4004:4004"
     networks:
@@ -206,6 +209,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      auction-service:
+        condition: service_started
 
   # Payment Service
   payment-service:
@@ -219,7 +224,10 @@ services:
       - PORT=4005
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_payment
       - REDIS_URL=redis://redis:6379
-      - STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key_here
+      - STRIPE_SECRET_KEY=sk_test_51SIwYVDmcjqWKmiPEnyfv4F7x0bpoxH3xUZQggCcdtCGuMhozqT4i9Hktz6IU8wJoQDA7bgMwnCBUGH3y8pdg8kU00Vu1HMNMb
+      - STRIPE_PUBLISHABLE_KEY=pk_test_51SIwYVDmcjqWKmiPJWr8N7xOxpnB8FKs1pRRmylcJdfZEYXLAhsWYr2TEiGsJlAmgnF2ccisZU7Q3lYGH33jVAjL00S7gVZt
+      - STRIPE_WEBHOOK_SECRET=whsec_2ccd5a3a7c3df29e36fde826951299431aa30cfe4c37e870975c17b6f03ea5c8
+      - STRIPE_API_VERSION=2025-09-30.yonca
     ports:
       - "4005:4005"
     networks:

@@ -26,9 +26,12 @@ Vehicle Service, araç açık artırma platformunun araç yönetimi işlemlerini
 
 ### Araçlar
 - `GET /api/v1/vehicles` - Araçları listele (filtreleme ve sayfalama ile)
+- `GET /api/v1/vehicles/search` - Araçları arama sorgusu ile ara
+- `GET /api/v1/vehicles/my-vehicles` - Kullanıcının kendi araçlarını listele (Kimlik doğrulama gerekli)
 - `GET /api/v1/vehicles/:id` - Araç detaylarını getir
 - `POST /api/v1/vehicles` - Yeni araç oluştur (Kimlik doğrulama gerekli)
 - `PATCH /api/v1/vehicles/:id` - Araç güncelle (Sahip veya Admin)
+- `PATCH /api/v1/vehicles/:id/status` - Araç durumunu güncelle (Sahip veya Admin)
 - `DELETE /api/v1/vehicles/:id` - Araç sil (Sahip veya Admin)
 
 ## 🛠️ Kurulum ve Çalıştırma
