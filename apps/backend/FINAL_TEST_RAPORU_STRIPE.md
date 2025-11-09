@@ -111,9 +111,9 @@
 ```yaml
 payment-service:
   environment:
-    - STRIPE_SECRET_KEY=sk_test_51SIwYVDmcjqWKmiPEnyfv4F7x0bpoxH3xUZQggCcdtCGuMhozqT4i9Hktz6IU8wJoQDA7bgMwnCBUGH3y8pdg8kU00Vu1HMNMb
-    - STRIPE_PUBLISHABLE_KEY=pk_test_51SIwYVDmcjqWKmiPJWr8N7xOxpnB8FKs1pRRmylcJdfZEYXLAhsWYr2TEiGsJlAmgnF2ccisZU7Q3lYGH33jVAjL00S7gVZt
-    - STRIPE_WEBHOOK_SECRET=whsec_2ccd5a3a7c3df29e36fde826951299431aa30cfe4c37e870975c17b6f03ea5c8
+    - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY:-your-stripe-secret-key-here}
+    - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY:-your-stripe-publishable-key-here}
+    - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET:-your-stripe-webhook-secret-here}
     - STRIPE_API_VERSION=2025-09-30.yonca
 ```
 

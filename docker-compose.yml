@@ -118,6 +118,8 @@ services:
       - JWT_SECRET=your-super-secret-jwt-key-here
       - JWT_EXPIRES_IN=7d
       - REDIS_URL=redis://redis:6379
+      - CORS_ORIGIN=http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001
+      - FRONTEND_URL=http://localhost:3001
     ports:
       - "4001:4001"
     networks:
@@ -147,6 +149,7 @@ services:
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_vehicles
       - REDIS_URL=redis://redis:6379
       - JWT_SECRET=your-super-secret-jwt-key-here
+      - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001
     ports:
       - "4002:4002"
     networks:
@@ -175,6 +178,7 @@ services:
       - PORT=4003
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_auction
       - REDIS_URL=redis://redis:6379
+      - TZ=Europe/Istanbul
     ports:
       - "4003:4003"
     networks:
@@ -224,9 +228,9 @@ services:
       - PORT=4005
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/vehicle_auction_payment
       - REDIS_URL=redis://redis:6379
-      - STRIPE_SECRET_KEY=sk_test_51SIwYVDmcjqWKmiPEnyfv4F7x0bpoxH3xUZQggCcdtCGuMhozqT4i9Hktz6IU8wJoQDA7bgMwnCBUGH3y8pdg8kU00Vu1HMNMb
-      - STRIPE_PUBLISHABLE_KEY=pk_test_51SIwYVDmcjqWKmiPJWr8N7xOxpnB8FKs1pRRmylcJdfZEYXLAhsWYr2TEiGsJlAmgnF2ccisZU7Q3lYGH33jVAjL00S7gVZt
-      - STRIPE_WEBHOOK_SECRET=whsec_2ccd5a3a7c3df29e36fde826951299431aa30cfe4c37e870975c17b6f03ea5c8
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY:-your-stripe-secret-key-here}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY:-your-stripe-publishable-key-here}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET:-your-stripe-webhook-secret-here}
       - STRIPE_API_VERSION=2025-09-30.yonca
     ports:
       - "4005:4005"
