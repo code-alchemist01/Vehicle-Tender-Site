@@ -12,10 +12,18 @@ export default function Auctions() {
     const fetchAuctions = async () => {
       try {
         setLoading(true)
+        setError('')
         const response = await auctionApi.getAll()
-        setAuctions(response.data || [])
+        console.log('[Auctions] Response:', response)
+        // Backend returns: { data: [...], meta: {...} }
+        const auctionsData = response.data || []
+        console.log('[Auctions] Auctions data:', auctionsData)
+        setAuctions(Array.isArray(auctionsData) ? auctionsData : [])
       } catch (err: any) {
-        setError(err.response?.data?.message || 'Açık artırmalar yüklenemedi')
+        console.error('[Auctions] Error:', err)
+        console.error('[Auctions] Error response:', err.response)
+        const errorMessage = err.response?.data?.message || err.message || 'Açık artırmalar yüklenemedi'
+        setError(errorMessage)
       } finally {
         setLoading(false)
       }

@@ -67,11 +67,21 @@ export const auctionApi = {
     status?: string
     search?: string
   }): Promise<AuctionListResponse> => {
-    const response = await apiClient.get(`${API_BASE_URLS.auction}/auctions`, {
-      params,
-    })
-    // Backend returns: { data: [...], meta: {...} }
-    return response.data
+    try {
+      const response = await apiClient.get(`${API_BASE_URLS.auction}/auctions`, {
+        params,
+      })
+      // Backend returns: { data: [...], meta: {...} }
+      console.log('[Auction API] getAll response:', response.data)
+      return response.data
+    } catch (error: any) {
+      console.error('[Auction API] getAll error:', error)
+      // Re-throw with more context
+      if (!error.response) {
+        throw new Error(`Network error: Could not connect to auction service at ${API_BASE_URLS.auction}`)
+      }
+      throw error
+    }
   },
 
   // Get auction by ID

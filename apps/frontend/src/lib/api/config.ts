@@ -19,25 +19,48 @@ export const apiClient = axios.create({
   withCredentials: false, // CORS için
 })
 
-// Request interceptor - Add auth token
+// Request interceptor - Add auth token and logging
 apiClient.interceptors.request.use(
   (config) => {
+    // Add auth token
     const token = localStorage.getItem('accessToken')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
+    // Log request for debugging
+    console.log(`[API] ${config.method?.toUpperCase()} ${config.url}`, config.params || config.data || '')
     return config
   },
   (error) => {
+    console.error('[API] Request error:', error)
     return Promise.reject(error)
   }
 )
 
 // Response interceptor - Handle errors
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log(`[API] ${response.config.method?.toUpperCase()} ${response.config.url} - Success:`, response.status)
+    return response
+  },
   async (error) => {
     const originalRequest = error.config
+
+    // Log network errors
+    if (!error.response) {
+      console.error('[API] Network Error:', {
+        message: error.message,
+        code: error.code,
+        url: originalRequest?.url,
+        method: originalRequest?.method,
+      })
+    } else {
+      console.error(`[API] ${originalRequest?.method?.toUpperCase()} ${originalRequest?.url} - Error:`, {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data,
+      })
+    }
 
     // Handle 401 Unauthorized - Token expired
     if (error.response?.status === 401 && !originalRequest._retry) {

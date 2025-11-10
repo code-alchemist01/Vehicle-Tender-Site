@@ -13,6 +13,8 @@ export default function Vehicles() {
       try {
         setLoading(true)
         const response = await vehicleApi.getAll()
+        // Response is already parsed by vehicleApi.getAll()
+        // It returns { data: [...], meta: {...} }
         setVehicles(response.data || [])
       } catch (err: any) {
         setError(err.response?.data?.message || 'Araçlar yüklenemedi')

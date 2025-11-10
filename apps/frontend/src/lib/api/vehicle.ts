@@ -77,7 +77,12 @@ export const vehicleApi = {
     const response = await apiClient.get(`${API_BASE_URLS.vehicle}/vehicles`, {
       params,
     })
-    // Backend returns: { data: [...], meta: {...} }
+    // Backend returns: { success: true, data: { data: [...], meta: {...} } }
+    // Extract the nested data structure
+    if (response.data?.success && response.data?.data) {
+      return response.data.data
+    }
+    // Fallback for direct data format
     return response.data
   },
 
